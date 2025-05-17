@@ -146,6 +146,17 @@
                             <button type="button" onclick="filtrar()">Filtrar <span class="fa-solid fa-magnifying-glass"></span></button>
                         </form>
                     <?php endif; ?>
+
+                    <!-- Breadcrumbs -->
+                    <div class="breadcrumbs_header">
+                        <div class="breadcrumbs">
+                            <?php
+                            if (!is_front_page() && function_exists('yoast_breadcrumb')) {
+                                yoast_breadcrumb('<nav aria-label="breadcrumb"><ol class="breadcrumb">', '</ol></nav>');
+                            }
+                            ?>
+                        </div>
+                    </div>
                 </header>
             <?php endif; ?>
         </section>

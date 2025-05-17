@@ -21,13 +21,10 @@
 	background-color: #0e2c70;
 }
 .header_secciones header h1 {
-	z-index: 1;
 	color: var(--color-bg);
-	// font-size: 70px;
 	font-size: clamp(45px, 8vw, 70px);
 	font-weight: lighter;
 	text-align: center;
-	line-height: 1;
 }
 .header_secciones header span {
 	color: var(--color-secondary);
