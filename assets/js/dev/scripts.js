@@ -1,16 +1,3 @@
-AOS.init();
-// ------
-
-// EFECTO PARA MENU
-window.addEventListener("scroll", function () {
-	var header = document.getElementById("header");
-	if (window.scrollY > 30) {
-		header.classList.add("header_bg");
-	} else {
-		header.classList.remove("header_bg");
-	}
-});
-
 //Menu Icon
 document.addEventListener("DOMContentLoaded", function () {
 	var barsIcon = document.querySelector(".fa-bars");

@@ -79,8 +79,7 @@ function ama_theme_scripts()
 {
     $theme_version = wp_get_theme()->get('Version');
 
-    // Registrando scripts    
-    wp_register_script('ama_scripts_aos', 'https://unpkg.com/aos@2.3.1/dist/aos.js', false, $theme_version, true);
+    // Registrando scripts
     wp_register_script('ama_scripts', get_template_directory_uri() . '/assets/js/dist/scripts.min.js', false, $theme_version, true);
 
     // Cola de scripts
