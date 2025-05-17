@@ -1,0 +1,20 @@
+{
+	"name": "amarufs",
+	"version": "1.0.0",
+	"description": "Bienvenidos al repositorio de **AmaruFS Inmobiliaria**, una empresa dedicada a la compra, venta y alquiler de propiedades en diversas ubicaciones. Aquí encontrarás el código fuente de nuestro sitio web, el cual fue creado para ofrecer una experiencia eficiente y amigable para nuestros clientes.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"gulp": "^5.0.0",
+		"gulp-clean-css": "^4.3.0",
+		"gulp-concat": "^2.6.1",
+		"gulp-rename": "^2.0.0",
+		"gulp-sass": "^6.0.1",
+		"gulp-uglify": "^3.0.2",
+		"sass": "^1.89.0"
+	}
+}

@@ -19,30 +19,30 @@ function ama_theme_styles()
 
     // Registrando estilos
     wp_register_style('ama_styles_fontawesome', get_template_directory_uri() . '/assets/fontawesome/css/all.min.css', false, $theme_version);
-    wp_register_style('ama_styles', get_stylesheet_uri(), false, $theme_version);
+    wp_register_style('ama_styles', get_template_directory_uri() . '/assets/styles/styles.min.css', false, $theme_version);
 
     // Cola de estilos
     wp_enqueue_style('ama_styles_fontawesome');
     wp_enqueue_style('ama_styles');
 
     if (is_front_page()) {
-        wp_enqueue_style('singlePost-style', get_template_directory_uri() . '/styles/inicio.css', false, $theme_version);
+        wp_enqueue_style('singlePost-style', get_template_directory_uri() . '/assets/styles/inicio.min.css', false, $theme_version);
     }
 
     if (is_page_template('template-parts/template-lista-inmuebles.php')) {
-        wp_enqueue_style('lista-inmueble-style', get_template_directory_uri() . '/styles/lista-inmuebles.css', false, $theme_version);
+        wp_enqueue_style('lista-inmueble-style', get_template_directory_uri() . '/assets/styles/lista-inmuebles.min.css', false, $theme_version);
     }
     if (is_page_template('template-parts/template-inmueble.php')) {
-        wp_enqueue_style('inmueble-style', get_template_directory_uri() . '/styles/inmueble.css', false, $theme_version);
+        wp_enqueue_style('inmueble-style', get_template_directory_uri() . '/assets/styles/inmueble.min.css', false, $theme_version);
     }
 
 
     // BLOG
     if (is_single()) {
-        wp_enqueue_style('singlePost-style', get_template_directory_uri() . '/styles/single.css', false, $theme_version);
+        wp_enqueue_style('singlePost-style', get_template_directory_uri() . '/asset/styles/single.min.css', false, $theme_version);
     }
     if (is_home() || is_page('blog') || is_category() || is_tag() || is_search() || is_day() || is_month() || is_year() || is_author() || is_year()) {
-        wp_enqueue_style('blog-style', get_template_directory_uri() . '/styles/blog.css', false, $theme_version);
+        wp_enqueue_style('blog-style', get_template_directory_uri() . '/asset/styles/blog.min.css', false, $theme_version);
     }
 
     if (is_archive()) {
@@ -68,20 +68,20 @@ function ama_theme_scripts()
 
     // Registrando scripts    
     wp_register_script('ama_scripts_aos', 'https://unpkg.com/aos@2.3.1/dist/aos.js', false, $theme_version, true);
-    wp_register_script('ama_scripts', get_template_directory_uri() . '/js/scripts.js', false, $theme_version, true);
+    wp_register_script('ama_scripts', get_template_directory_uri() . '/assets/js/dist/scripts.min.js', false, $theme_version, true);
 
     // Cola de scripts
     wp_enqueue_script('ama_scripts_aos');
     wp_enqueue_script('ama_scripts');
 
     if (is_page_template('template-parts/template-lista-inmuebles.php')) {
-        wp_enqueue_script('filtro-js', get_template_directory_uri() . '/js/filtro-inmuebles.js', false, $theme_version, true);
+        wp_enqueue_script('filtro-js', get_template_directory_uri() . '/assets/js/dist/filtro-inmuebles.min.js', false, $theme_version, true);
 
         // Configura los scripts para que se carguen de forma asíncrona
         wp_script_add_data('filtro-js', 'async', true);
     }
     if (is_page_template('template-parts/template-inmueble.php')) {
-        wp_enqueue_script('inmueble-js', get_template_directory_uri() . '/js/inmueble.js', false, $theme_version, true);
+        wp_enqueue_script('inmueble-js', get_template_directory_uri() . '/assets/js/dist/inmueble.min.js', false, $theme_version, true);
 
         // Configura los scripts para que se carguen de forma asíncrona
         wp_script_add_data('inmueble-js', 'async', true);
@@ -99,7 +99,7 @@ add_action('wp_enqueue_scripts', 'ama_theme_scripts');
 function enqueue_infinite_scroll_script()
 {
     if (is_page_template('template-parts/blog.php')) {
-        wp_enqueue_script('infinite-scroll', get_template_directory_uri() . '/js/infinite-scroll.js', array('jquery'), null, true);
+        wp_enqueue_script('infinite-scroll', get_template_directory_uri() . '/assets/js/dist/infinite-scroll.min.js', array('jquery'), null, true);
         wp_localize_script('infinite-scroll', 'ajax_params', array(
             'ajax_url' => admin_url('admin-ajax.php'),
         ));
