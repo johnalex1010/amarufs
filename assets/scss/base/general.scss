@@ -53,16 +53,7 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
 	-webkit-text-fill-color: #000 !important;
 }
-@keyframes show {
-	from {
-		opacity: 0;
-		scale: 25%;
-	}
-	to {
-		opacity: 1;
-		scale: 100%;
-	}
-}
+
 hr {
 	max-width: 500px;
 	margin: 0 auto 100px;
@@ -86,15 +77,6 @@ img {
 	object-fit: cover;
 	object-position: center;
 	border-radius: 3px;
-
-	view-timeline-name: --image;
-	view-timeline-axis: block;
-
-	animation-timeline: --image;
-	animation-name: show;
-
-	animation-range: entry 0% cover 30%;
-	animation-fill-mode: both;
 }
 h1,
 h2,

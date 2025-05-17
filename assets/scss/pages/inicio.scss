@@ -4,7 +4,7 @@
 	background-size: cover;
 	background-attachment: fixed;
 	width: 100%;
-	min-height: 100vh;
+	height: 100dvh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -23,16 +23,15 @@
 .inicio header h2 {
 	z-index: 1;
 	color: var(--color-bg);
-	font-size: 100px;
+	font-size: clamp(50px, 8vw, 100px);
 	font-weight: lighter;
 	text-align: center;
-	line-height: 67px;
 }
 .inicio header h2 strong {
 	display: block;
 	color: var(--color-secondary);
-	font-size: 70px;
-	margin-top: 20px;
+	font-size: clamp(30px, 8vw, 70px);
+	// margin-top: 20px;
 }
 .inicio header span {
 	color: var(--color-secondary);
@@ -225,11 +224,6 @@
 .btn_mas_inmuebles:hover span {
 	top: 0px;
 }
-@media screen and (max-width: 1150px) {
-	.inicio header h2 {
-		line-height: 105px;
-	}
-}
 
 @media screen and (max-width: 910px) {
 	.info_content,
@@ -245,13 +239,6 @@
 		flex-direction: column-reverse;
 		padding: 50px;
 	}
-	.inicio header h2 {
-		font-size: 70px;
-		line-height: 70px;
-	}
-	.inicio header h2 strong {
-		font-size: 44px;
-	}
 	.inmuebles,
 	.propiedades {
 		margin-top: 40px;
@@ -263,8 +250,5 @@
 @media screen and (max-width: 390px) {
 	.inicio header h2 {
 		font-size: 50px;
-	}
-	.inicio header h2 strong {
-		font-size: 35px;
 	}
 }
