@@ -1,15 +1,12 @@
 /* FOOTER */
 footer {
-	background-color: var(--color-primary);
+	background-color: #0e2c70;
 }
 .footer_info {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	padding: 30px 0;
-}
-.footer_info_img {
-	/* width: 350px; */
 }
 
 .footer_info_text ul,
