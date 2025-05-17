@@ -38,10 +38,12 @@ function ama_theme_styles()
     }
 
     if (is_page_template('template-parts/template-lista-inmuebles.php')) {
-        wp_enqueue_style('lista-inmueble-style', get_template_directory_uri() . '/assets/styles/pages/lista-inmuebles.min.css', false, $theme_version);
+        wp_enqueue_style('lista-inmueble-style', get_template_directory_uri() . '/assets/styles/components/filtro.min.css', false, $theme_version);
+        wp_enqueue_style('card_style', get_template_directory_uri() . '/assets/styles/components/card.min.css', false, $theme_version);
+        wp_enqueue_style('tags_style', get_template_directory_uri() . '/assets/styles/components/tags.min.css', false, $theme_version);
     }
     if (is_page_template('template-parts/template-inmueble.php')) {
-        wp_enqueue_style('inmueble-style', get_template_directory_uri() . '/assets/styles/pages/inmueble.min.css', false, $theme_version);
+        wp_enqueue_style('inmueble-style', get_template_directory_uri() . '/assets/styles/components/inmueble.min.css', false, $theme_version);
     }
 
 

@@ -96,12 +96,8 @@
     <?php if (!is_front_page()) : ?>
         <!-- header_secciones -->
         <section class="header_secciones">
-            <?php
-            // Obtiene la URL de la imagen destacada del header_secciones
-            $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
-            ?>
             <?php if (!is_single()) : ?>
-                <header style="background-image: url('<?php echo $featured_img_url; ?>');">
+                <header class="header_secciones_header">
                     <div class="header_bg"></div>
                     <h1 class="wp-block-heading"><?php the_title(); ?></h1>
                     <?php if (is_page("inmuebles")) : ?>
