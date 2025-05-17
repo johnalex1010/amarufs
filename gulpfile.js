@@ -55,25 +55,3 @@ exports.styles = styles;
 exports.scripts = scripts;
 exports.watch = watch;
 exports.default = gulp.series(styles, scripts, watch);
-
-// const gulp = require("gulp"); // Solo una vez al inicio
-const zip = require("gulp-zip");
-
-// Tarea para comprimir el proyecto
-gulp.task("zip-project", function () {
-	return gulp
-		.src(
-			[
-				"./**/*",
-				"!./node_modules/**",
-				"!./.git/**",
-				"!./scss/**",
-				"!./gulpfile.js",
-				"!./package-lock.json",
-				"!./*.zip",
-			],
-			{ dot: true },
-		)
-		.pipe(zip("backup.zip"))
-		.pipe(gulp.dest("./dist"));
-});
