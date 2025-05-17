@@ -144,6 +144,7 @@
                             </div>
                             <button type="button" onclick="filtrar()">Filtrar <span class="fa-solid fa-magnifying-glass"></span></button>
                         </form>
+                        <br>
                     <?php endif; ?>
 
                     <!-- Breadcrumbs -->

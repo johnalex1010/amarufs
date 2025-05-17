@@ -216,7 +216,7 @@
 	top: 0px;
 }
 
-@media screen and (max-width: 910px) {
+@media screen and (width < 910px) {
 	.info_content,
 	.info:nth-child(even) .info_content {
 		padding: 50px;
@@ -224,12 +224,14 @@
 	.inicio header h2 {
 	}
 }
-@media screen and (max-width: 650px) {
+@media screen and (width < 765px) {
 	.info_content,
 	.info:nth-child(even) .info_content {
 		flex-direction: column-reverse;
-		padding: 50px;
+		padding: 50px 0;
 	}
+}
+@media screen and (width < 650px) {
 	.inmuebles,
 	.propiedades {
 		margin-top: 40px;
@@ -238,7 +240,7 @@
 		font-size: 40px;
 	}
 }
-@media screen and (max-width: 390px) {
+@media screen and (width < 390px) {
 	.inicio header h2 {
 		font-size: 50px;
 	}
