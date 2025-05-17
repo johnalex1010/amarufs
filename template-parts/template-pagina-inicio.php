@@ -38,7 +38,7 @@
     </article>
 </section>
 
-<!-- Info -->
+<!-- Info Left-->
 <section class="info ">
     <article class="info_content">
         <div class="info_text">
@@ -55,6 +55,8 @@
         </div>
     </article>
 </section>
+
+<!-- Info Right-->
 <section class="info">
     <article class="info_content">
         <div class="info_text">
@@ -93,17 +95,7 @@
 
         if ($subpaginas->have_posts()) :
             while ($subpaginas->have_posts()) : $subpaginas->the_post();
-                // Obtener la imagen destacada (thumbnail) de tamaño personalizado (300x300)
-                $imagen_destacada = get_the_post_thumbnail(get_the_ID(), array(300, 300));
-                // Obtener la categoría
-                // $categorias = get_the_category();
-                // $categoria = !empty($categorias) ? $categorias[0]->name : '';
-
-                // // $tags = get_the_tags();
-                // // $tags = !empty($tags) ? $tags[0]->name : '';
-
-                // $tags = get_the_tags();
-                // $tag = $tags[0];
+                $imagen_destacada = get_the_post_thumbnail(get_the_ID(), "medium");
 
                 if (have_rows('grupo_detalle')) :
                     while (have_rows('grupo_detalle')) : the_row();

@@ -1,0 +1,40 @@
+/* TAG */
+.tag {
+	position: absolute;
+	left: 30px;
+	top: 30px;
+	z-index: 1;
+}
+.tag a {
+	background-color: #00e1ad;
+	text-decoration: none;
+	font-size: 13px;
+	padding: 5px;
+	border-radius: 3px;
+}
+.tag a.Venta {
+	background-color: #007b83;
+	color: var(--color-bg);
+}
+.tag a.Arriendo {
+	background-color: #fbce00;
+}
+.tag a.Local {
+	background-color: #e37474;
+}
+.tag a.Oficina {
+	background-color: #2a5779;
+	color: var(--color-bg);
+}
+.tag a.Lote {
+	background-color: #9854bb;
+	color: var(--color-bg);
+}
+.tag a.Apartamento {
+	background-color: #333c82;
+	color: var(--color-bg);
+}
+.tag a.Casa {
+	background-color: #eba04b;
+	color: var(--color-text);
+}
