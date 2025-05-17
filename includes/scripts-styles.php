@@ -52,10 +52,10 @@ function ama_theme_styles()
 
     // BLOG
     if (is_single()) {
-        wp_enqueue_style('singlePost-style', get_template_directory_uri() . '/asset/styles/single.min.css', false, $theme_version);
+        wp_enqueue_style('singlePost-style', get_template_directory_uri() . '/assets/styles/pages/single.min.css', false, $theme_version);
     }
     if (is_home() || is_page('blog') || is_category() || is_tag() || is_search() || is_day() || is_month() || is_year() || is_author() || is_year()) {
-        wp_enqueue_style('blog-style', get_template_directory_uri() . '/asset/styles/blog.min.css', false, $theme_version);
+        wp_enqueue_style('blog-style', get_template_directory_uri() . '/assets/styles/pages/blog.min.css', false, $theme_version);
     }
 
     if (is_archive()) {

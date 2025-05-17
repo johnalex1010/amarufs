@@ -98,7 +98,6 @@
         <section class="header_secciones">
             <?php if (!is_single()) : ?>
                 <header class="header_secciones_header">
-                    <div class="header_bg"></div>
                     <h1 class="wp-block-heading"><?php the_title(); ?></h1>
                     <?php if (is_page("inmuebles")) : ?>
                         <form action="" class="filtro_inmuebles">

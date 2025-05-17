@@ -31,9 +31,9 @@
 
                         </div>
                         <div class="blog_item_text">
-                            <div class="blog_item_text_title">
+                            <!-- <div class="blog_item_text_title">
                                 <h2><?php the_title(); ?></h2>
-                            </div>
+                            </div> -->
                             <div class="blog_item_text_paragraph">
                                 <?php the_excerpt(); ?>
                             </div>

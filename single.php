@@ -40,9 +40,9 @@
                                 <img src="<?php echo esc_url($imagen_destacada_url); ?>" alt="<?php echo esc_attr($entrada['post_title']) ?>" title="<?php echo esc_attr($entrada['post_title']) ?>">
                             </div>
                             <div class="blog_item_text">
-                                <div class="blog_item_text_title">
+                                <!-- <div class="blog_item_text_title">
                                     <h3><?php echo esc_html($entrada['post_title']) ?></h3>
-                                </div>
+                                </div> -->
                                 <div class="blog_item_text_paragraph">
                                     <p><?php echo esc_html($entrada['post_excerpt']) ?></p>
                                 </div>

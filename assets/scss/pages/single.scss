@@ -1,11 +1,7 @@
-.header {
-	background-color: #1a3b89;
-	/* display: none; */
-}
 .single_page {
 	max-width: 1000px;
 	width: 90%;
-	margin: 150px auto 50px;
+	margin: 50px auto 50px;
 }
 .single_page .fecha {
 	font-size: 12px;
@@ -54,7 +50,9 @@
 	border-radius: 20px;
 }
 .single_page img {
-	border: 1px solid var(--color-btn);
+	display: block;
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 .single_page a {
 	color: var(--color-btn);
@@ -73,6 +71,9 @@
 }
 
 /* Más blogs */
+.blog {
+	margin-top: 100px;
+}
 .blog_title h2 {
 	font-size: 30px;
 	text-align: center;
