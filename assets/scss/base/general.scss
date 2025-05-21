@@ -268,15 +268,15 @@ aside h2 {
 }
 @media screen and (max-width: 650px) {
 	.row {
-		width: 400px;
+		width: 90%;
 	}
 
 	.social_media {
 		align-items: center;
 	}
 }
-@media screen and (max-width: 450px) {
-	.row {
-		width: 300px;
-	}
-}
+// @media screen and (max-width: 450px) {
+// 	// .row {
+// 	// 	width: 300px;
+// 	// }
+// }
