@@ -5,8 +5,6 @@
 
 <!-- Filtro -->
 <section class=" filtro row">
-
-
     <section class="propiedades">
         <?php
         // Obtener las subpáginas directas de la página actual utilizando WP_Query
@@ -16,7 +14,7 @@
             'posts_per_page'    => -1, // Obtener todas las subpáginas
             'orderby'           => 'date',
             'order'             => 'DESC'
-			
+
         );
         $subpaginas = new WP_Query($args);
 
@@ -99,8 +97,6 @@
         endif;
         ?>
     </section>
-
-
     <div id="mensaje" class="no_coincdencias">No se encontraron resultados</div>
 </section>
 

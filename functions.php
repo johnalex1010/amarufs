@@ -102,13 +102,16 @@ function agregar_meta_descripcion()
 add_action('wp_head', 'agregar_meta_descripcion');
 
 /* Cargando hojas de estilos */
-require_once('includes/scripts-styles.php');
+require_once get_template_directory() . '/includes/scripts-styles.php';
 
 /* Cargando items menus */
-require_once('includes/menus.php');
+require_once get_template_directory() . '/includes/menus.php';
 
 /* Cargando Widgets */
-require_once('includes/sidebars.php');
+require_once get_template_directory() . '/includes/sidebars.php';
 
 /* Cargando Personzalizador Tema */
-require_once('includes/personalizador-tema.php');
+require_once get_template_directory() . '/includes/personalizador-tema.php';
+
+// === Rich Snippets (SEO estructurado) ===
+require_once get_template_directory() . '/includes/rich-snippets/rich-functions.php';
