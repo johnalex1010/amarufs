@@ -55,22 +55,13 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KD689NQ6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <?php
-    $options = get_theme_mod('ama_settings');
-
-    //Logo
-    if (!empty($options['logo'])) {
-        $logo = $options['logo'];
-    }
-    ?>
 
     <!-- NAV -->
     <header id="header" class="header">
         <nav class="nav row">
-            <div class="logo" id="logo">
-                <!-- <img src="<?php echo $logo ?>" alt="<?php bloginfo('name'); ?>" title="<?php bloginfo('name'); ?>"> -->
+            <a href="<?php home_url() ?>" class="logo" id="logo">
                 <img src="<?php echo IMAGES ?>/logo.webp" alt="Logo Amaru FS Inmobiliaria" title="Logo Amaru FS Inmobiliaria">
-            </div>
+            </a>
 
             <!-- Menú -->
             <div class="content_nav">

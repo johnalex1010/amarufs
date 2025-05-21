@@ -86,7 +86,7 @@
 	background-color: #fff;
 	border-radius: 10px;
 	width: 300px;
-	min-height: 250px;
+	height: 250px;
 	padding: 30px;
 	display: flex;
 	justify-content: center;
@@ -157,7 +157,6 @@
 .info_text_parrafo p {
 	margin-top: 20px;
 	margin-bottom: 20px;
-	font-size: 18px;
 }
 .info:nth-child(even) {
 	background-color: #f8fafb;

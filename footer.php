@@ -17,9 +17,9 @@
 <footer>
     <div class="footer row">
         <nav class="footer_info">
-            <div class="footer_info_img">
+            <a href="<?php home_url() ?>" class="footer_info_img">
                 <img src="<?php echo IMAGES ?>/logo.webp" alt="Logo Amaru FS Inmobiliaria" title="Logo Amaru FS Inmobiliaria">
-            </div>
+            </a>
 
             <div class="footer_info_text">
                 <ul>
