@@ -12,6 +12,10 @@
 .icon {
 	display: none;
 }
+.current-menu-item a {
+	// border-bottom: 2px solid var(--color-secondary) !important;
+	color: var(--color-secondary) !important;
+}
 .nav_items {
 	display: flex;
 	justify-content: flex-end;
@@ -105,7 +109,7 @@
 	}
 	.nav .nav_items li a:hover {
 		background-color: var(--color-secondary);
-		color: var(--color-primary);
+		color: var(--color-primary) !important	;
 	}
 }
 @media screen and (max-width: 850px) {
