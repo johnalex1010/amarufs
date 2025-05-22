@@ -203,63 +203,6 @@ aside h2 {
 	.row {
 		width: 800px;
 	}
-	.icon {
-		display: block;
-		width: 40px;
-		height: 40px;
-		line-height: 40px;
-		text-align: center;
-		background-color: var(--color-bg);
-		color: #fff;
-		font-size: 18px;
-		border-radius: 5px;
-		cursor: pointer;
-	}
-	.nav .content_nav {
-		position: relative;
-	}
-	.nav .content_nav span {
-		line-height: 40px;
-	}
-
-	.nav .content_nav span.fa-xmark {
-		display: none;
-	}
-	.nav_items {
-		display: none;
-	}
-	.nav .content_nav .nav_items {
-		display: none;
-		position: absolute;
-		background-color: var(--color-primary);
-		right: 0px;
-		top: 70px;
-		width: 800px;
-		padding: 20px;
-		border-top: 1px solid var(--color-primary);
-		border-radius: 0 0 5px 5px;
-	}
-	.nav .content_nav .nav_items li a {
-		color: #fff;
-	}
-	.nav .nav_items {
-		flex-direction: column;
-	}
-	.nav .nav_items li {
-		margin: 5px 0;
-	}
-	.nav .nav_items li a {
-		padding: 10px;
-		display: block;
-		width: 100%;
-		border-radius: 3px;
-		text-align: left;
-		text-decoration: none;
-	}
-	.nav .nav_items li a:hover {
-		background-color: var(--color-secondary);
-		color: var(--color-primary);
-	}
 }
 @media screen and (max-width: 850px) {
 	.row {
@@ -275,8 +218,3 @@ aside h2 {
 		align-items: center;
 	}
 }
-// @media screen and (max-width: 450px) {
-// 	// .row {
-// 	// 	width: 300px;
-// 	// }
-// }

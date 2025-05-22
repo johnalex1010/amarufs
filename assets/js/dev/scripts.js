@@ -7,16 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
 	barsIcon.addEventListener("click", function () {
 		// Ocultar barsIcon y mostrar xMarkIcon
 		barsIcon.style.display = "none";
-		xMarkIcon.style.display = "block";
+		xMarkIcon.style.display = "flex";
 
 		// Mostrar navItems
-		navItems.style.display = "block";
+		navItems.style.display = "flex";
 	});
 
 	xMarkIcon.addEventListener("click", function () {
 		// Ocultar xMarkIcon y mostrar barsIcon
 		xMarkIcon.style.display = "none";
-		barsIcon.style.display = "block";
+		barsIcon.style.display = "flex";
 
 		// Ocultar navItems
 		navItems.style.display = "none";

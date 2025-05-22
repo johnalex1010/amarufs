@@ -56,15 +56,16 @@
     <!-- End Google Tag Manager (noscript) -->
 
 
-    <!-- NAV -->
+    <!-- HEADER TOP -->
     <header id="header" class="header">
-        <nav class="nav row">
+        <div class="row container_header">
+            <!-- LOOG  -->
             <a href="<?php home_url() ?>" class="logo" id="logo">
                 <img src="<?php echo IMAGES ?>/logo.webp" alt="Logo Amaru FS Inmobiliaria" title="Logo Amaru FS Inmobiliaria">
             </a>
 
-            <!-- Menú -->
-            <div class="content_nav">
+            <!-- NAV -->
+            <nav class="nav">
                 <div class="icon">
                     <span class="fa-solid fa-bars"></span>
                     <span class="fa-solid fa-xmark"></span>
@@ -74,13 +75,20 @@
                     'menu_class' => 'nav_items', //La clase del menú para css
                     'menu_id' => 'idmenu', //EL ID del menú para css/javascript
                 )); ?>
-                <div class="cta">
-                    <a id="cta_menu_whatsapp" href="https://api.whatsapp.com/send?phone=573158774545&text=%C2%A1Hola!%20Estoy%20interesado%2Fa%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20inmuebles.%20%C2%BFPodr%C3%ADas%20proporcionarme%20detalles%20adicionales%2C%20por%20favor%3F" target="_blank" title="Whastapp"><i class="fa-brands fa-whatsapp"></i> Contáctanos</a>
-                </div>
+            </nav>
+
+            <!-- CTA y BUSCADOR -->
+            <div class="search_cta">
+                <!-- Buscador -->
+                <?php get_search_form(); ?>
+
+                <!-- CTA -->
+                <a id="cta_menu_whatsapp" class="cta" href="https://api.whatsapp.com/send?phone=573158774545&text=%C2%A1Hola!%20Estoy%20interesado%2Fa%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20inmuebles.%20%C2%BFPodr%C3%ADas%20proporcionarme%20detalles%20adicionales%2C%20por%20favor%3F" target="_blank" title="Whastapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>Contáctanos</span>
+                </a>
             </div>
-
-
-        </nav>
+        </div>
     </header>
 
 
