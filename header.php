@@ -83,75 +83,62 @@
         </nav>
     </header>
 
-    <!-- Solo se muestra en las internas -->
-    <?php if (!is_front_page()) : ?>
-        <!-- header_secciones -->
+    <?php if (is_page() && !is_front_page()) : ?>
         <section class="header_secciones">
-            <?php if (!is_single()) : ?>
-                <header class="header_secciones_header">
-                    <h1 class="wp-block-heading"><?php the_title(); ?></h1>
-                    <?php if (is_page("inmuebles")) : ?>
-                        <form action="" class="filtro_inmuebles">
-                            <div>
-                                <label for="Tipo">Tipo</label>
-                                <select name="" id="Tipo">
-                                    <option value="">Todos</option>
-                                    <?php
-                                    // Obtener el ID de la categoría padre llamada "tipo"
-                                    $parent_category_id = get_cat_ID('tipo-inmueble');
+            <header class="header_secciones_header">
+                <h1 class="wp-block-heading"><?php the_title(); ?></h1>
 
-                                    // Obtener todas las subcategorías de la categoría padre "tipo"
-                                    $category_args = array(
-                                        'child_of' => $parent_category_id,
-                                    );
+                <?php if (is_page("inmuebles")) : ?>
+                    <form action="" class="filtro_inmuebles">
+                        <div>
+                            <label for="Tipo">Tipo</label>
+                            <select name="tipo_inmueble" id="Tipo">
+                                <option value="">Todos</option>
+                                <?php
+                                $parent_category_id = get_cat_ID('tipo-inmueble');
+                                $categories = get_categories(['child_of' => $parent_category_id]);
 
-                                    $categories = get_categories($category_args);
-
-                                    foreach ($categories as $category) {
-                                        if ($category->count > 0 && $category->slug !== 'sin-categoria') {
-                                            echo '<option value="' . $category->name . '">' . $category->name . '</option>';
-                                        }
+                                foreach ($categories as $category) {
+                                    if ($category->count > 0 && $category->slug !== 'sin-categoria') {
+                                        echo '<option value="' . esc_attr($category->name) . '">' . esc_html($category->name) . '</option>';
                                     }
-                                    ?>
-
-
-                                </select>
-                            </div>
-                            <div>
-                                <label for="Inmueble">Inmueble</label>
-                                <select name="" id="Inmueble">
-                                    <option value="">Todos</option>
-                                    <?php
-                                    $tags = get_tags();
-                                    foreach ($tags as $tag) {
-                                        if ($tag->count > 0) {
-                                            echo '<option value="' . $tag->name . '">' . $tag->name . '</option>';
-                                        }
-                                    }
-                                    ?>
-                                </select>
-
-
-                            </div>
-                            <button type="button" onclick="filtrar()">Filtrar <span class="fa-solid fa-magnifying-glass"></span></button>
-                        </form>
-                        <br>
-                    <?php endif; ?>
-
-                    <!-- Breadcrumbs -->
-                    <div class="breadcrumbs_header">
-                        <div class="breadcrumbs">
-                            <?php
-                            if (!is_front_page() && function_exists('yoast_breadcrumb')) {
-                                yoast_breadcrumb('<nav aria-label="breadcrumb"><ol class="breadcrumb">', '</ol></nav>');
-                            }
-                            ?>
+                                }
+                                ?>
+                            </select>
                         </div>
+                        <div>
+                            <label for="Inmueble">Inmueble</label>
+                            <select name="inmueble_tag" id="Inmueble">
+                                <option value="">Todos</option>
+                                <?php
+                                $tags = get_tags();
+                                foreach ($tags as $tag) {
+                                    if ($tag->count > 0) {
+                                        echo '<option value="' . esc_attr($tag->name) . '">' . esc_html($tag->name) . '</option>';
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+                        <button type="button" onclick="filtrar()">Filtrar <span class="fa-solid fa-magnifying-glass"></span></button>
+                    </form>
+                    <br>
+                <?php endif; ?>
+
+                <div class="breadcrumbs_header">
+                    <div class="breadcrumbs">
+                        <?php
+                        if (function_exists('yoast_breadcrumb')) {
+                            yoast_breadcrumb('<nav aria-label="breadcrumb"><ol class="breadcrumb">', '</ol></nav>');
+                        }
+                        ?>
                     </div>
-                </header>
-            <?php endif; ?>
+                </div>
+            </header>
         </section>
     <?php endif; ?>
+
+
 
     <!-- Boton Flotante -->
     <a id="cta_flotante_whatsapp" href='https://api.whatsapp.com/send?phone=573158774545&text=%C2%A1Hola!%20Estoy%20interesado%2Fa%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20inmuebles.%20%C2%BFPodr%C3%ADas%20proporcionarme%20detalles%20adicionales%2C%20por%20favor%3F' title='Whatsapp' target="_blank"><span class='fa-brands fa-whatsapp float_btn'></span></a>
