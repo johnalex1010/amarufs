@@ -18,7 +18,7 @@
             <li>Si crees que esto es un error, no dudes en contactarnos.</li>
         </ul>
         <p>Gracias por tu comprensión. Estamos trabajando para que tu experiencia sea cada vez mejor.</p>
-        <a href="<?php  ?>">Ir al inicio <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="<?php echo esc_url(home_url('/')); ?>">Ir al inicio <i class="fa-solid fa-arrow-right"></i></a>
     </div>
 </section>
 
