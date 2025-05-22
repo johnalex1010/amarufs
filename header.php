@@ -83,10 +83,14 @@
         </nav>
     </header>
 
+
     <?php if (is_page() && !is_front_page()) : ?>
         <section class="header_secciones">
             <header class="header_secciones_header">
+
                 <h1 class="wp-block-heading"><?php the_title(); ?></h1>
+
+
 
                 <?php if (is_page("inmuebles")) : ?>
                     <form action="" class="filtro_inmuebles">
@@ -137,6 +141,24 @@
             </header>
         </section>
     <?php endif; ?>
+
+    <?php if (is_404()) : ?>
+        <section class="header_secciones">
+            <header class="header_secciones_header">
+                <h1 class="wp-block-heading">Página no encontrada</h1>
+                <div class="breadcrumbs_header">
+                    <div class="breadcrumbs">
+                        <?php
+                        if (function_exists('yoast_breadcrumb')) {
+                            yoast_breadcrumb('<nav aria-label="breadcrumb"><ol class="breadcrumb">', '</ol></nav>');
+                        }
+                        ?>
+                    </div>
+                </div>
+            </header>
+        </section>
+    <?php endif; ?>
+
 
 
 
