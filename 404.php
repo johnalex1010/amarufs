@@ -8,7 +8,7 @@
 </div>
 <section class="error_404">
     <div class="error_404_image">
-        <img src="https://www.amarufs.co/wp-content/uploads/2025/05/404.webp" alt="Página no encontrada">
+        <img loading="lazy" src="https://www.amarufs.co/wp-content/uploads/2025/05/404.webp" alt="Página no encontrada">
     </div>
     <div class="error_404_text">
         <p> Es posible que el enlace esté roto, la página haya sido movida o ya no exista. Pero no te preocupes, estamos aquí para ayudarte a retomar el camino.</p>

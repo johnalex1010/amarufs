@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="info_image">
-            <img src="<?php echo IMAGES ?>/item1.svg" alt="Experiencia Local y Conocimiento del Mercado" title="Experiencia Local y Conocimiento del Mercado">
+            <img loading="lazy" src="<?php echo IMAGES ?>/item1.svg" alt="Experiencia Local y Conocimiento del Mercado" title="Experiencia Local y Conocimiento del Mercado">
         </div>
     </article>
 </section>
@@ -70,7 +70,7 @@
             </div>
         </div>
         <div class="info_image">
-            <img src="<?php echo IMAGES ?>/item2.svg" alt="Atención Personalizada y Servicios Integrados" title="Atención Personalizada y Servicios Integrados">
+            <img loading="lazy" src="<?php echo IMAGES ?>/item2.svg" alt="Atención Personalizada y Servicios Integrados" title="Atención Personalizada y Servicios Integrados">
         </div>
     </article>
 </section>

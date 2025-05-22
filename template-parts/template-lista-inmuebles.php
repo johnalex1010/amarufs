@@ -24,6 +24,7 @@
                 $imagen_destacada = get_the_post_thumbnail(get_the_ID(), array(300, 300), array(
                     'title' => get_the_title(), // Título del post como title
                     'alt'   => get_the_title(), // Título del post como alt
+                    'loading' => 'lazy', // Carga diferida
                 ));
                 // Obtener todas las categorías y etiquetas
                 $categorias = get_the_category();

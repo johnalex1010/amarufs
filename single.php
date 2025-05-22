@@ -37,7 +37,7 @@
                                 $imagen_destacada_info = wp_get_attachment_image_src(get_post_thumbnail_id($entrada['ID']), 'full');
                                 $imagen_destacada_url = $imagen_destacada_info[0];
                                 ?>
-                                <img src="<?php echo esc_url($imagen_destacada_url); ?>" alt="<?php echo esc_attr($entrada['post_title']) ?>" title="<?php echo esc_attr($entrada['post_title']) ?>">
+                                <img loading="lazy" src="<?php echo esc_url($imagen_destacada_url); ?>" alt="<?php echo esc_attr($entrada['post_title']) ?>" title="<?php echo esc_attr($entrada['post_title']) ?>">
                             </div>
                             <div class="blog_item_text">
                                 <!-- <div class="blog_item_text_title">

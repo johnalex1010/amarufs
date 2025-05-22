@@ -10,7 +10,14 @@
                     <article class="blog_card">
                         <?php if (has_post_thumbnail()) : ?>
                             <div class="blog_item_image">
-                                <?php the_post_thumbnail('medium'); ?>
+                                <?php
+                                if (has_post_thumbnail()) {
+                                    the_post_thumbnail('medium', [
+                                        'loading' => 'lazy'
+                                    ]);
+                                }
+                                ?>
+
                             </div>
                         <?php endif; ?>
                         <div class="blog_item_text">

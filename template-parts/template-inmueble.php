@@ -37,7 +37,7 @@
                     $imagen = get_sub_field('url_imagen_' . $i);
                     if ($imagen) {
                         echo '<div class="div' . $i . '">';
-                        echo '<img src="' . $imagen . '" alt="Imagen ' . $i . '" title="Imagen ' . $i . '">';
+                        echo '<img loading="lazy" src="' . $imagen . '" alt="Imagen ' . $i . '" title="Imagen ' . $i . '">';
                         echo '</div>';
                     }
                 }
@@ -51,7 +51,7 @@
     <div id="myModalGallery" class="modal_gallery">
         <span class="close">&times;</span>
         <div class="modal_content_image">
-            <img class="modal-content" id="modalImage" />
+            <img loading="lazy" class="modal-content" id="modalImage" />
         </div>
         <a class="prev">&#10094;</a>
         <a class="next">&#10095;</a>
@@ -219,7 +219,7 @@
                             for ($i = 1; $i <= 10; $i++) {
                                 $zona = get_sub_field('zonas_aledanas_' . $i);
                                 if ($zona) {
-                                    // echo '<img src="' . $zona . '" alt="Imagen ' . $i . '" title="Imagen ' . $i . '">';
+                                    // echo '<img loading="lazy" src="' . $zona . '" alt="Imagen ' . $i . '" title="Imagen ' . $i . '">';
                                     echo '<li><span class="fa-regular fa-circle-check"></span> ' . $zona . '</li>';
                                 }
                             }
