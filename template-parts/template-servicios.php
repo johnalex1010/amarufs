@@ -9,8 +9,8 @@
             <h2>Gestión de <strong>Propiedades</strong></h2>
             <p>Ofrecemos un servicio completo de gestión de propiedades que garantiza tranquilidad y rentabilidad a los propietarios. Nos encargamos de todo el proceso operativo y administrativo.</p>
             <div class="btns">
-                <a href="" class="boton">¿Tienes una propiedad para rentar?</a>
-                <a href="" class="boton_secondary">Contáctanos para una asesoría gratuita</a>
+                <a href='https://api.whatsapp.com/send?phone=573158774545&text=%C2%A1Hola!%20Estoy%20interesado%2Fa%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20inmuebles.%20%C2%BFPodr%C3%ADas%20proporcionarme%20detalles%20adicionales%2C%20por%20favor%3F' title='Whatsapp' target="_blank" class="boton">¿Tienes una propiedad para rentar?</a>
+                <a href='https://api.whatsapp.com/send?phone=573158774545&text=%C2%A1Hola!%20Estoy%20interesado%2Fa%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20inmuebles.%20%C2%BFPodr%C3%ADas%20proporcionarme%20detalles%20adicionales%2C%20por%20favor%3F' title='Whatsapp' target="_blank" class="boton_secondary">Contáctanos para una asesoría gratuita</a>
             </div>
         </div>
         <div class="servicio_items">
@@ -31,8 +31,8 @@
             <h2>Ventas de <strong>Inmuebles</strong></h2>
             <p>Nos especializamos en facilitar todo el proceso de venta de inmuebles, desde la valoración hasta el cierre. Nuestra estrategia combina experiencia local y técnicas de marketing modernas.</p>
             <div class="btns">
-                <a href="" class="boton">¿Quieres vender tu propiedad?</a>
-                <a href="" class="boton_secondary">Agenda una reunión con nuestros asesores</a>
+                <a href='https://api.whatsapp.com/send?phone=573158774545&text=%C2%A1Hola!%20Estoy%20interesado%2Fa%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20inmuebles.%20%C2%BFPodr%C3%ADas%20proporcionarme%20detalles%20adicionales%2C%20por%20favor%3F' title='Whatsapp' target="_blank" class="boton">¿Quieres vender tu propiedad?</a>
+                <a href='https://api.whatsapp.com/send?phone=573158774545&text=%C2%A1Hola!%20Estoy%20interesado%2Fa%20en%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20inmuebles.%20%C2%BFPodr%C3%ADas%20proporcionarme%20detalles%20adicionales%2C%20por%20favor%3F' title='Whatsapp' target="_blank" class="boton_secondary">Agenda una reunión con nuestros asesores</a>
             </div>
         </div>
         <div class="servicio_items">
