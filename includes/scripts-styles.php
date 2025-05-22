@@ -59,6 +59,9 @@ function ama_theme_styles()
     if (is_search()) {
         // wp_enqueue_style('search-style', get_template_directory_uri() . '/assets/production/mincss/search.min.css', false, $theme_version);
     }
+    if (is_404()) {
+        wp_enqueue_style('404-style', get_template_directory_uri() . '/assets/styles/layout/404.min.css', false, $theme_version);
+    }
 }
 
 

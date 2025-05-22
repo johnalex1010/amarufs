@@ -145,7 +145,7 @@
     <?php if (is_404()) : ?>
         <section class="header_secciones">
             <header class="header_secciones_header">
-                <h1 class="wp-block-heading">Página no encontrada</h1>
+                <h1 class="wp-block-heading">¡Ups! No encontramos lo que buscas...</h1>
                 <div class="breadcrumbs_header">
                     <div class="breadcrumbs">
                         <?php
