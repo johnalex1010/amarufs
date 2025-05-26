@@ -1,17 +1,17 @@
 @font-face {
 	font-family: "Titulo";
-	src: url("/fonts/BebasNeue-Regular.ttf") format("truetype");
+	src: url("../../fonts/BebasNeue-Regular.woff") format("woff");
 	font-display: swap;
 }
 @font-face {
 	font-family: "Texto";
-	src: url("/fonts/Outfit-Regular.ttf") format("truetype");
+	src: url("../../fonts/Outfit-Regular.woff") format("woff");
 	font-display: swap;
 }
 /* RESET */
 :root {
-	--font-text: "Texto";
-	--font-title: "Titulo";
+	--font-text: "Texto", sans-serif;
+	--font-title: "Titulo", sans-serif;
 	--color-primary: #1a3b89;
 	--color-secondary: #00e1ad;
 	--color-text: #183153;
