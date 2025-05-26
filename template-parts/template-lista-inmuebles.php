@@ -20,12 +20,12 @@
 
         if ($subpaginas->have_posts()) :
             while ($subpaginas->have_posts()) : $subpaginas->the_post();
-                // Obtener la imagen destacada (thumbnail) de tamaño personalizado (300x300)
-                $imagen_destacada = get_the_post_thumbnail(get_the_ID(), array(300, 300), array(
-                    'title' => get_the_title(), // Título del post como title
-                    'alt'   => get_the_title(), // Título del post como alt
-                    'loading' => 'lazy', // Carga diferida
+                $imagen_destacada = get_the_post_thumbnail(get_the_ID(), 'medium', array(
+                    'title'   => get_the_title(),
+                    'alt'     => get_the_title(),
+                    'loading' => 'lazy',
                 ));
+
                 // Obtener todas las categorías y etiquetas
                 $categorias = get_the_category();
                 $tags = get_the_tags();
