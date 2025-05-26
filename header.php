@@ -17,7 +17,7 @@
 
 
     <!-- Google Tag Manager -->
-    <script>
+    <script async>
         (function(w, d, s, l, i) {
             w[l] = w[l] || [];
             w[l].push({

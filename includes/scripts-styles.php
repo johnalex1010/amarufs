@@ -19,12 +19,16 @@ function ama_theme_styles()
 
     // Registrando estilos
     wp_enqueue_style('ama_styles_fontawesome', get_template_directory_uri() . '/assets/fontawesome/css/all.min.css', false, $theme_version);
-    wp_enqueue_style('ama_styles', get_template_directory_uri() . '/assets/styles/base/general.min.css', false, $theme_version);
-    wp_enqueue_style('ama_styles_header', get_template_directory_uri() . '/assets/styles/layout/header.min.css', false, $theme_version);
-    wp_enqueue_style('ama_styles_breadcrumb', get_template_directory_uri() . '/assets/styles/components/breadcrumb.min.css', false, $theme_version);
-    wp_enqueue_style('ama_styles_menu', get_template_directory_uri() . '/assets/styles/layout/menu.min.css', false, $theme_version);
-    wp_enqueue_style('ama_styles_buscador', get_template_directory_uri() . '/assets/styles/components/buscador.min.css', false, $theme_version);
-    wp_enqueue_style('ama_styles_footer', get_template_directory_uri() . '/assets/styles/layout/footer.min.css', false, $theme_version);
+
+    if (!is_admin()) {
+        $version = defined('WP_DEBUG') && WP_DEBUG ? time() : wp_get_theme()->get('Version');
+
+        // Un solo archivo si ya hiciste la fusión
+        wp_enqueue_style('ama_styles', get_template_directory_uri() . '/assets/styles/amaru.min.css', [], $version);
+    }
+
+    // wp_enqueue_style('ama_styles', get_template_directory_uri() . '/assets/styles/amaru.min.css', false, $theme_version);
+
 
     if (is_front_page()) {
         wp_enqueue_style('inicio_style', get_template_directory_uri() . '/assets/styles/pages/inicio.min.css', false, $theme_version);
