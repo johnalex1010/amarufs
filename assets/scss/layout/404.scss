@@ -16,6 +16,10 @@
 .error_404 > div {
 	flex: 1;
 }
+.error_404_image {
+	aspect-ratio: 1 / 1;
+	max-width: 490px;
+}
 .error_404_text {
 	display: flex;
 	flex-direction: column;
@@ -41,4 +45,12 @@
 	min-width: 150px;
 	max-width: 100%;
 	flex: 1 1 151px;
+}
+@media screen and (max-width: 850px) {
+	.error_404 {
+		flex-direction: column;
+	}
+	.error_404_image {
+		max-width: 200px;
+	}
 }
