@@ -61,7 +61,7 @@
     <header id="header" class="header">
         <div class="row container_header">
             <!-- LOOG  -->
-            <a href="<?php home_url() ?>" class="logo" id="logo">
+            <a href="<?php echo home_url() ?>" class="logo" id="logo">
                 <img loading="lazy" src="<?php echo IMAGES ?>/logo.webp" alt="Logo Amaru FS Inmobiliaria" title="Logo Amaru FS Inmobiliaria">
             </a>
 
