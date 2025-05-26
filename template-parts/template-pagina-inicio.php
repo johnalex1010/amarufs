@@ -95,8 +95,11 @@
 
         if ($subpaginas->have_posts()) :
             while ($subpaginas->have_posts()) : $subpaginas->the_post();
-                $imagen_destacada = get_the_post_thumbnail(get_the_ID(), "medium");
-
+                $imagen_destacada = get_the_post_thumbnail(get_the_ID(), 'medium', array(
+                    'title'   => get_the_title(),
+                    'alt'     => get_the_title(),
+                    'loading' => 'lazy',
+                ));
                 if (have_rows('grupo_detalle')) :
                     while (have_rows('grupo_detalle')) : the_row();
 
