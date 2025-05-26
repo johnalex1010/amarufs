@@ -1,10 +1,12 @@
 @font-face {
 	font-family: "Titulo";
-	src: url(../../fonts/BebasNeue-Regular.ttf);
+	src: url(../../fonts/BebasNeue-Regular.ttf) format("truetype");
+	font-display: swap;
 }
 @font-face {
 	font-family: "Texto";
-	src: url(../../fonts/Outfit-Regular.ttf);
+	src: url(../../fonts/Outfit-Regular.ttf) format("truetype");
+	font-display: swap;
 }
 /* RESET */
 :root {
