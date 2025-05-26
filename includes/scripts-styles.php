@@ -183,3 +183,21 @@ add_action('wp_enqueue_scripts', 'infinite_scroll_params');
 //------------------------
 // FIN SCROLL INFINITE
 //------------------------
+
+
+function optimizar_estilos_wordpress_frontend()
+{
+    // Solo en el frontend (no en wp-admin)
+    if (!is_admin()) {
+        // Desactivar Dashicons para usuarios no administradores
+        if (!current_user_can('update_core')) {
+            wp_deregister_style('dashicons');
+        }
+
+        // Desactivar estilos de bloques (Gutenberg)
+        wp_dequeue_style('wp-block-library');
+        wp_dequeue_style('wp-block-library-theme');
+        wp_dequeue_style('wc-block-style'); // Solo si usas WooCommerce
+    }
+}
+add_action('wp_enqueue_scripts', 'optimizar_estilos_wordpress_frontend', 100);
