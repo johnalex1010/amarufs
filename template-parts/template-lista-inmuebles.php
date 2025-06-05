@@ -64,30 +64,30 @@
                                     <?php endforeach;
                                     endif; ?>
                                 </div>
-                                <h3><?php echo get_the_title(); ?></h3>
-                                <p><?php echo get_the_excerpt(); ?></p>
+                                <h2 class="propiedad_titulo"><?php echo get_the_title(); ?></h3>
+                                    <p><?php echo get_the_excerpt(); ?></p>
 
-                                <ul>
-                                    <li>
-                                        <span class="<?php the_sub_field('acordeon_detalle_icon_1'); ?>"></span>
-                                        <p><?php the_sub_field('acordeon_detalle_item_texto_1'); ?></p>
-                                    </li>
-                                    <li>
-                                        <span class="<?php the_sub_field('acordeon_detalle_icon_2'); ?>"></span>
-                                        <p><?php the_sub_field('acordeon_detalle_item_texto_2'); ?></p>
-                                    </li>
-                                    <li>
-                                        <span class="<?php the_sub_field('acordeon_detalle_icon_3'); ?>"></span>
-                                        <p><?php the_sub_field('acordeon_detalle_item_texto_3'); ?></p>
-                                    </li>
+                                    <ul>
+                                        <li>
+                                            <span class="<?php the_sub_field('acordeon_detalle_icon_1'); ?>"></span>
+                                            <p><?php the_sub_field('acordeon_detalle_item_texto_1'); ?></p>
+                                        </li>
+                                        <li>
+                                            <span class="<?php the_sub_field('acordeon_detalle_icon_2'); ?>"></span>
+                                            <p><?php the_sub_field('acordeon_detalle_item_texto_2'); ?></p>
+                                        </li>
+                                        <li>
+                                            <span class="<?php the_sub_field('acordeon_detalle_icon_3'); ?>"></span>
+                                            <p><?php the_sub_field('acordeon_detalle_item_texto_3'); ?></p>
+                                        </li>
 
-                                    <li>
-                                        <span class="<?php the_sub_field('acordeon_detalle_icon_4'); ?>"></span>
-                                        <p><?php the_sub_field('acordeon_detalle_item_texto_4'); ?></p>
-                                    </li>
-                                </ul>
+                                        <li>
+                                            <span class="<?php the_sub_field('acordeon_detalle_icon_4'); ?>"></span>
+                                            <p><?php the_sub_field('acordeon_detalle_item_texto_4'); ?></p>
+                                        </li>
+                                    </ul>
 
-                                <a class="propiedad_cta" href="<?php echo get_permalink(); ?>" title="<?php echo get_the_title(); ?>">Mirar propiedad <span class="fa-solid fa-house"></span></a>
+                                    <a class="propiedad_cta" href="<?php echo get_permalink(); ?>" title="<?php echo get_the_title(); ?>">Mirar propiedad <span class="fa-solid fa-house"></span></a>
                             </div>
                         </article>
         <?php
