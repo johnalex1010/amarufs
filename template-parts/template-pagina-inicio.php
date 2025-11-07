@@ -22,15 +22,15 @@
 </script>
 
 <!-- inicio -->
-<h1 class="hide">Amaru FS Inmobiliaria - Gestión de Propiedades, Ventas y Arriendos</h1>
+<h1 class="hide">Amaru FS Inmobiliaria - Compra tu apartamento o casa en Bogotá</h1>
 <section class="inicio" role="banner" aria-label="Banner principal">
     <?php
     // Obtiene la URL de la imagen destacada del areas-practica
     $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
     ?>
     <header style="background-image: url('<?php echo IMAGES ?>/banner.avif');">
-        <h2>El proceso de arrendamiento <strong>es fácil y sin estrés</strong></h2>
-        <p>¡Ven y descubre las opciones que tenemos para ti!</p>
+        <h2>Compra tu apartamento o casa en Bogotá</h2>
+        <p>Nos encargamos de todo el proceso para que tomes decisiones seguras.</p>
         <a href="inmuebles/" class="boton" title="Ver todos los tipos de vivienda disponibles" aria-label="Conoce nuestros tipos de vivienda">¡Conoce nuestros tipos de vivienda!</a>
     </header>
 
@@ -46,8 +46,8 @@
             "@type": "ItemList",
             "itemListElement": [{
                     "@type": "Service",
-                    "name": "Gestión de Propiedades",
-                    "description": "Servicio completo de gestión de propiedades que garantiza tranquilidad y rentabilidad a los propietarios",
+                    "name": "Administración de propiedades",
+                    "description": "Tu propiedad en manos expertas, con seguimiento, mantenimiento y control de rentas.",
                     "provider": {
                         "@type": "RealEstateAgent",
                         "name": "<?php echo esc_js(get_bloginfo('name')); ?>"
@@ -57,7 +57,7 @@
                 {
                     "@type": "Service",
                     "name": "Ventas de Inmuebles",
-                    "description": "Conectamos vendedores con compradores potenciales de manera eficiente y transparente",
+                    "description": "Nos encargamos del proceso completo, desde la promoción hasta la firma.",
                     "provider": {
                         "@type": "RealEstateAgent",
                         "name": "<?php echo esc_js(get_bloginfo('name')); ?>"
@@ -67,7 +67,7 @@
                 {
                     "@type": "Service",
                     "name": "Servicios de Arriendo",
-                    "description": "Servicio integral de arriendo desde la promoción del inmueble hasta la selección de arrendatarios confiables",
+                    "description": "Nos encargamos de todo el proceso: promoción, selección de inquilinos y administración.",
                     "provider": {
                         "@type": "RealEstateAgent",
                         "name": "<?php echo esc_js(get_bloginfo('name')); ?>"
@@ -80,18 +80,18 @@
 
     <article class="item" itemscope itemtype="https://schema.org/Service">
         <span class="fa-solid fa-user-tie icon" aria-hidden="true"></span>
-        <h2 itemprop="name">GESTIÓN DE PROPIEDADES</h2>
-        <p itemprop="description">En nuestra inmobiliaria ofrecemos un servicio completo de gestión de propiedades que garantiza tranquilidad y rentabilidad a los propietarios.</p>
+        <h2 itemprop="name">Administración de propiedades</h2>
+        <p itemprop="description">Tu propiedad en manos expertas, con seguimiento, mantenimiento y control de rentas.</p>
     </article>
     <article class="item" itemscope itemtype="https://schema.org/Service">
         <span class="fa-solid fa-building icon" aria-hidden="true"></span>
         <h2 itemprop="name">VENTAS DE INMUEBLES</h2>
-        <p itemprop="description">Nos dedicamos a conectar vendedores con compradores potenciales de manera eficiente y transparente.</p>
+        <p itemprop="description">Nos encargamos del proceso completo, desde la promoción hasta la firma.</p>
     </article>
     <article class="item" itemscope itemtype="https://schema.org/Service">
         <span class="fa-solid fa-house-circle-check icon" aria-hidden="true"></span>
         <h2 itemprop="name">SERVICIOS DE ARRIENDO</h2>
-        <p itemprop="description">Ofrecemos un servicio integral de arriendo que abarca todo el proceso, desde la promoción del inmueble hasta la selección de arrendatarios confiables.</p>
+        <p itemprop="description">Nos encargamos de todo el proceso: promoción, selección de inquilinos y administración.</p>
     </article>
 </section>
 
@@ -100,15 +100,15 @@
     <article class="info_content">
         <div class="info_text">
             <div class="info_text_title">
-                <h2>Experiencia Local y Conocimiento del Mercado</h2>
+                <h2>Experiencia inmobiliaria local en Bogotá</h2>
             </div>
             <div class="info_text_parrafo">
-                <p>Entendemos las <strong>tendencias del mercado</strong>, los factores económicos y sociales que influyen en los precios de las propiedades y las <strong>preferencias de los clientes</strong> en distintas áreas.</p>
-                <p>Este conocimiento nos permite asesorar a nuestros clientes no solo sobre el valor actual de <strong>sus propiedades</strong>, sino también sobre las perspectivas a largo plazo de sus inversiones, asegurando decisiones bien informadas y rentables.</p>
+                <p>Analizamos de manera continua los movimientos del mercado inmobiliario para identificar los sectores con mayor valorización y las zonas con mejor calidad de vida.</p>
+                <p><strong>Acompañamos</strong> a cada cliente en la toma de decisiones informadas, ayudándolos a elegir propiedades con alto potencial de valorización o a vender en el momento y precio adecuados, garantizando una inversión segura y rentable.</p>
             </div>
         </div>
         <div class="info_image">
-            <img loading="lazy" src="<?php echo IMAGES ?>/item1.svg" alt="Experiencia Local y Conocimiento del Mercado" title="Experiencia Local y Conocimiento del Mercado">
+            <img loading="lazy" src="<?php echo IMAGES ?>/item1.svg" alt="Experiencia inmobiliaria local en Bogotá" title="Experiencia inmobiliaria local en Bogotá">
         </div>
     </article>
 </section>
@@ -121,9 +121,9 @@
                 <h2>Atención Personalizada y Servicios Integrados</h2>
             </div>
             <div class="info_text_parrafo">
-                <p>Nos destacamos por ofrecer una <strong>atención personalizada</strong> a cada uno de nuestros clientes, adaptando nuestros servicios a sus necesidades específicas.</p>
-                <p>Desde la <strong>búsqueda de la propiedad</strong> ideal hasta el cierre de la transacción, proporcionamos un soporte continuo y personalizado.</p>
-                <p>Además, integramos servicios adicionales como <strong>gestión de propiedades</strong> y remodelaciones, lo que nos permite ofrecer una solución completa en un solo lugar, simplificando el proceso y reduciendo el estrés para nuestros clientes.</p>
+                <p>Cada cliente recibe una asesoría adaptada a sus necesidades, con acompañamiento constante desde la búsqueda de la propiedad ideal hasta la firma final.</p>
+                <p>Además, integramos servicios complementarios como <strong>administración de propiedades</strong>, mantenimiento y remodelaciones, para ofrecer una solución completa en un solo lugar.
+                    Así garantizamos procesos más ágiles, decisiones seguras y una experiencia de compra o arriendo totalmente personalizada.</p>
             </div>
         </div>
         <div class="info_image">
