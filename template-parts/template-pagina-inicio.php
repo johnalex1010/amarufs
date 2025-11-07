@@ -131,7 +131,7 @@
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 </div>
-                                <h3><?php echo get_the_title(); ?></h3>
+                                <h3 class="propiedad_titulo"><?php echo get_the_title(); ?></h3>
                                 <p><?php echo get_the_excerpt(); ?></p>
 
                                 <ul>
