@@ -46,16 +46,6 @@
             "@type": "ItemList",
             "itemListElement": [{
                     "@type": "Service",
-                    "name": "Administración de propiedades",
-                    "description": "Tu propiedad en manos expertas, con seguimiento, mantenimiento y control de rentas.",
-                    "provider": {
-                        "@type": "RealEstateAgent",
-                        "name": "<?php echo esc_js(get_bloginfo('name')); ?>"
-                    },
-                    "serviceType": "Property Management"
-                },
-                {
-                    "@type": "Service",
                     "name": "Ventas de Inmuebles",
                     "description": "Nos encargamos del proceso completo, desde la promoción hasta la firma.",
                     "provider": {
@@ -66,33 +56,30 @@
                 },
                 {
                     "@type": "Service",
-                    "name": "Servicios de Arriendo",
-                    "description": "Nos encargamos de todo el proceso: promoción, selección de inquilinos y administración.",
+                    "name": "Administración de propiedades",
+                    "description": "Tu propiedad en manos expertas, con seguimiento, mantenimiento y control de rentas.",
                     "provider": {
                         "@type": "RealEstateAgent",
                         "name": "<?php echo esc_js(get_bloginfo('name')); ?>"
                     },
-                    "serviceType": "Property Rental"
+                    "serviceType": "Property Management"
                 }
             ]
         }
     </script>
 
     <article class="item" itemscope itemtype="https://schema.org/Service">
-        <span class="fa-solid fa-user-tie icon" aria-hidden="true"></span>
-        <h2 itemprop="name">Administración de propiedades</h2>
-        <p itemprop="description">Tu propiedad en manos expertas, con seguimiento, mantenimiento y control de rentas.</p>
-    </article>
-    <article class="item" itemscope itemtype="https://schema.org/Service">
         <span class="fa-solid fa-building icon" aria-hidden="true"></span>
         <h2 itemprop="name">VENTAS DE INMUEBLES</h2>
         <p itemprop="description">Nos encargamos del proceso completo, desde la promoción hasta la firma.</p>
     </article>
+
     <article class="item" itemscope itemtype="https://schema.org/Service">
-        <span class="fa-solid fa-house-circle-check icon" aria-hidden="true"></span>
-        <h2 itemprop="name">SERVICIOS DE ARRIENDO</h2>
-        <p itemprop="description">Nos encargamos de todo el proceso: promoción, selección de inquilinos y administración.</p>
+        <span class="fa-solid fa-user-tie icon" aria-hidden="true"></span>
+        <h2 itemprop="name">Administración de propiedades</h2>
+        <p itemprop="description">Tu propiedad en manos expertas, con seguimiento, mantenimiento y control de rentas.</p>
     </article>
+
 </section>
 
 <!-- Info Left-->
