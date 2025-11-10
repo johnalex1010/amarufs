@@ -58,12 +58,12 @@
         if (has_post_thumbnail()) {
             $page_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
         }
-        
+
         // Obtener keywords de categorías y tags
         $categories = get_the_category();
         $tags = get_the_tags();
         $keywords_array = [];
-        
+
         if ($categories) {
             foreach ($categories as $category) {
                 $keywords_array[] = $category->name;
@@ -74,7 +74,7 @@
                 $keywords_array[] = $tag->name;
             }
         }
-        
+
         $page_keywords = !empty($keywords_array) ? implode(', ', $keywords_array) . ', ' . $base_keywords : $base_keywords;
     } else {
         $page_description = $site_description;
@@ -164,7 +164,7 @@
     <header id="header" class="header">
         <div class="row container_header">
             <!-- LOOG  -->
-            <a href="<?php echo home_url() ?>" class="logo" id="logo">
+            <a href="<?php echo home_url() ?>" class="logo" id="logo" title="Amaru FS Inmobiliaria" aria-label="Amaru FS Inmobiliaria">
                 <img loading="lazy" src="<?php echo IMAGES ?>/logo.webp" alt="Logo Amaru FS Inmobiliaria" title="Logo Amaru FS Inmobiliaria">
             </a>
 
