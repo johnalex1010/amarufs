@@ -22,14 +22,13 @@
 </script>
 
 <!-- inicio -->
-<h1 class="hide">Amaru FS Inmobiliaria - Compra tu apartamento o casa en Bogotá</h1>
 <section class="inicio" role="banner" aria-label="Banner principal">
     <?php
     // Obtiene la URL de la imagen destacada del areas-practica
     $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
     ?>
     <header style="background-image: url('<?php echo IMAGES ?>/banner.avif');">
-        <h2>Compra tu apartamento o casa en Bogotá</h2>
+        <h1>Compra tu apartamento o casa en Bogotá</h1>
         <p>Nos encargamos de todo el proceso para que tomes decisiones seguras.</p>
         <a href="inmuebles/" class="boton" title="Ver todos los tipos de vivienda disponibles" aria-label="Conoce nuestros tipos de vivienda">¡Conoce nuestros tipos de vivienda!</a>
     </header>
