@@ -48,19 +48,43 @@
     $page_title = is_front_page() ? $site_name : wp_get_document_title();
     $page_description = '';
     $page_image = get_template_directory_uri() . '/images/logo.webp';
+    $page_keywords = '';
+
+    // Keywords base para el sitio
+    $base_keywords = 'inmobiliaria, bienes raíces, propiedades, inmuebles, venta, arriendo, Amaru FS';
 
     if (is_singular()) {
         $page_description = has_excerpt() ? get_the_excerpt() : wp_trim_words(get_the_content(), 30, '...');
         if (has_post_thumbnail()) {
             $page_image = get_the_post_thumbnail_url(get_the_ID(), 'large');
         }
+        
+        // Obtener keywords de categorías y tags
+        $categories = get_the_category();
+        $tags = get_the_tags();
+        $keywords_array = [];
+        
+        if ($categories) {
+            foreach ($categories as $category) {
+                $keywords_array[] = $category->name;
+            }
+        }
+        if ($tags) {
+            foreach ($tags as $tag) {
+                $keywords_array[] = $tag->name;
+            }
+        }
+        
+        $page_keywords = !empty($keywords_array) ? implode(', ', $keywords_array) . ', ' . $base_keywords : $base_keywords;
     } else {
         $page_description = $site_description;
+        $page_keywords = $base_keywords;
     }
     ?>
 
     <!-- Meta Description -->
     <meta name="description" content="<?php echo esc_attr($page_description); ?>">
+    <meta name="keywords" content="<?php echo esc_attr($page_keywords); ?>">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     <meta name="theme-color" content="#ffffff">
 
