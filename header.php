@@ -178,6 +178,9 @@
                     'theme_location' => 'main-menu',
                     'menu_class' => 'nav_items', //La clase del menú para css
                     'menu_id' => 'idmenu', //EL ID del menú para css/javascript
+                    'link_before' => '',
+                    'link_after' => '',
+                    'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
                 )); ?>
             </nav>
 

@@ -115,3 +115,14 @@ require_once get_template_directory() . '/includes/personalizador-tema.php';
 
 // === Rich Snippets (SEO estructurado) ===
 require_once get_template_directory() . '/includes/rich-snippets/rich-functions.php';
+
+// Agregar atributo title a los enlaces del menú
+function agregar_title_menu_enlaces($atts, $item, $args)
+{
+    // Si no existe el atributo title o está vacío, usar el título del elemento del menú
+    if (empty($atts['title'])) {
+        $atts['title'] = !empty($item->attr_title) ? $item->attr_title : strip_tags($item->title);
+    }
+    return $atts;
+}
+add_filter('nav_menu_link_attributes', 'agregar_title_menu_enlaces', 10, 3);
