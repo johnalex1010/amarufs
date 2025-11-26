@@ -28,7 +28,7 @@
     $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
     ?>
     <header style="background-image: url('<?php echo IMAGES ?>/banner.avif');">
-        <h1>Compra tu apartamento o casa en Bogotá</h1>
+        <h1>Compra tu CASA en Bogotá</h1>
         <p>Nos encargamos de todo el proceso para que tomes decisiones seguras.</p>
         <a href="inmuebles/" class="boton" title="Ver todos los tipos de vivienda disponibles" aria-label="Conoce nuestros tipos de vivienda">¡Conoce nuestros tipos de vivienda!</a>
     </header>
