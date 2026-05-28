@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.chrome-profile*/
+home-*.png
+props-*.png
+*.log
+
+.env
+.env.*
+!.env.example

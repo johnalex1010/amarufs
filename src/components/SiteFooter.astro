@@ -1,0 +1,182 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer" id="contacto">
+  <div class="footer-brand">
+    <a class="footer-logo" href="/" aria-label="Amaru FS Inmobiliaria">
+      <img
+        src="/images/logo/logo.png"
+        alt="Amaru FS Inmobiliaria"
+        width="240"
+        height="72"
+      />
+    </a>
+    <p>
+      Inmobiliaria enfocada en ayudarte a encontrar el lugar ideal para vivir o
+      invertir, con un servicio cercano y profesional.
+    </p>
+    <div class="social-links" aria-label="Redes sociales">
+      <a href="#" aria-label="Facebook"><Icon name="simple-icons:facebook" size={18} /></a>
+      <a href="#" aria-label="Instagram"><Icon name="simple-icons:instagram" size={18} /></a>
+      <a href="#" aria-label="WhatsApp"><Icon name="simple-icons:whatsapp" size={18} /></a>
+      <a href="#" aria-label="LinkedIn"><Icon name="simple-icons:linkedin" size={18} /></a>
+    </div>
+  </div>
+
+  <nav aria-label="Navegación del footer">
+    <h2>Navegación</h2>
+    <a href="/">Inicio</a>
+    <a href="/propiedades/">Propiedades</a>
+    <a href="/nosotros/">Nosotros</a>
+    <a class="muted-link" href="#" aria-hidden="true">Blog</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <nav aria-label="Tipos de propiedades">
+    <h2>Tipos de propiedades</h2>
+    <a href="/propiedades/">Departamentos</a>
+    <a href="/propiedades/">Casas</a>
+    <a href="/propiedades/">Terrenos</a>
+    <a href="/propiedades/">Oficinas</a>
+    <a href="/propiedades/">Locales comerciales</a>
+  </nav>
+
+  <address>
+    <h2>Contáctanos</h2>
+    <a href="tel:+51987654321"><Icon name="solar:phone-calling-linear" size={18} /> +51 987 654 321</a>
+    <a href="mailto:hola@amarufs.pe"><Icon name="solar:letter-linear" size={18} /> hola@amarufs.pe</a>
+    <span><Icon name="solar:map-point-linear" size={18} /> Lima, Perú</span>
+  </address>
+
+  <div class="footer-bottom">
+    <p>&copy; {currentYear} Amaru FS Inmobiliaria. Todos los derechos reservados.</p>
+    <div>
+      <a href="#">Términos y condiciones</a>
+      <a href="#">Política de privacidad</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    display: grid;
+    grid-template-columns: 1.45fr 0.75fr 0.9fr 0.9fr;
+    gap: 72px;
+    width: min(calc(100% - var(--site-padding-x)), var(--site-max-width));
+    margin-inline: auto;
+    padding: 72px 0 30px;
+  }
+
+  .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-navy);
+  }
+
+  .footer-logo img {
+    display: block;
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .footer-brand p {
+    max-width: 330px;
+    margin: 28px 0;
+    color: rgba(0, 0, 67, 0.72);
+    line-height: 1.6;
+    font-weight: 700;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 14px;
+  }
+
+  .social-links a {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border: 1px solid rgba(0, 0, 67, 0.16);
+    border-radius: 50%;
+    color: var(--color-navy);
+    justify-content: center;
+  }
+
+  .site-footer nav,
+  .site-footer address {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    font-style: normal;
+  }
+
+  .site-footer h2 {
+    margin: 0 0 18px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .site-footer a,
+  .site-footer span {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: rgba(0, 0, 67, 0.78);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .muted-link {
+    opacity: 0.65;
+  }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    padding-top: 34px;
+    border-top: 1px solid rgba(0, 0, 67, 0.12);
+    color: rgba(0, 0, 67, 0.58);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+  }
+
+  .footer-bottom div {
+    display: flex;
+    gap: 58px;
+  }
+
+  @media (max-width: 1180px) {
+    .site-footer {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 760px) {
+    .site-footer {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
+      padding-top: 48px;
+    }
+
+    .footer-bottom,
+    .footer-bottom div {
+      flex-direction: column;
+      gap: 18px;
+    }
+  }
+</style>

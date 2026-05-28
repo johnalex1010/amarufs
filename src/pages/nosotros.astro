@@ -1,0 +1,18 @@
+---
+import SiteHeader from '@/components/SiteHeader.astro';
+import PageHero from '@/components/PageHero.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Nosotros | Amarufs Inmobiliaria">
+  <SiteHeader />
+  <main>
+    <PageHero
+      eyebrow="Nosotros"
+      title="Conocemos el camino hacia tu próxima propiedad"
+      description="Acompañamos decisiones inmobiliarias con cercanía, claridad y una mirada profesional del mercado."
+    />
+  </main>
+  <SiteFooter />
+</BaseLayout>

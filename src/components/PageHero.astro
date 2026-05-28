@@ -1,0 +1,90 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+}
+
+const { eyebrow, title, description } = Astro.props;
+---
+
+<section class="page-hero" aria-labelledby="page-title">
+  <div class="page-hero-inner">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1 id="page-title">{title}</h1>
+    <p>{description}</p>
+  </div>
+</section>
+
+<style>
+  .page-hero {
+    padding: 190px 0 92px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 82% 30%, rgba(0, 123, 255, 0.16), transparent 30%),
+      linear-gradient(180deg, #ffffff 0%, #f6fbff 100%);
+  }
+
+  .page-hero-inner {
+    width: min(calc(100% - var(--site-padding-x)), var(--site-max-width));
+    margin-inline: auto;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 20px;
+    color: var(--color-green-dark);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  h1 {
+    max-width: 780px;
+    margin: 0;
+    color: var(--color-navy);
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 500;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .page-hero-inner > p:last-child {
+    max-width: 660px;
+    margin: 28px 0 0;
+    color: rgba(0, 0, 67, 0.68);
+    font-size: 1.2rem;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 760px) {
+    .page-hero {
+      padding: 128px 0 58px;
+    }
+
+    .page-hero-inner {
+      width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
+    }
+
+    h1 {
+      font-size: clamp(2.45rem, 12vw, 3.3rem);
+    }
+
+    .page-hero-inner > p:last-child {
+      max-width: 34ch;
+      font-size: 1rem;
+    }
+  }
+</style>

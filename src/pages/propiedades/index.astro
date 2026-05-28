@@ -1,0 +1,18 @@
+---
+import SiteHeader from '@/components/SiteHeader.astro';
+import PageHero from '@/components/PageHero.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Propiedades | Amarufs Inmobiliaria">
+  <SiteHeader />
+  <main>
+    <PageHero
+      eyebrow="Propiedades"
+      title="Encuentra propiedades seleccionadas para vivir o invertir"
+      description="Explora oportunidades en venta y alquiler con información clara, filtros útiles y acompañamiento especializado."
+    />
+  </main>
+  <SiteFooter />
+</BaseLayout>
