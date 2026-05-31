@@ -1,8 +1,8 @@
 ---
-import { Icon } from 'astro-icon/components';
-import SiteHeader from '@/components/SiteHeader.astro';
-import SiteFooter from '@/components/SiteFooter.astro';
-import BaseLayout from '@/layouts/BaseLayout.astro';
+import { Icon } from 'astro-icon/components'
+import SiteHeader from '@/components/SiteHeader.astro'
+import SiteFooter from '@/components/SiteFooter.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
 
 const property = {
   slug: 'departamento-moderno-en-surco',
@@ -17,14 +17,26 @@ const property = {
     'Cuenta con excelente iluminación natural, distribución funcional y acabados de primera calidad.',
     'Cerca de parques, colegios, centros comerciales y con fácil acceso a las principales avenidas.',
   ],
-};
+}
 
 const highlights = [
-  { icon: 'solar:buildings-2-linear', label: 'Tipo de propiedad', value: 'Departamento' },
+  {
+    icon: 'solar:buildings-2-linear',
+    label: 'Tipo de propiedad',
+    value: 'Departamento',
+  },
   { icon: 'solar:clock-circle-linear', label: 'Antigüedad', value: '5 años' },
-  { icon: 'solar:hand-money-linear', label: 'Mantenimiento', value: 'S/ 250 mensuales' },
-  { icon: 'solar:check-circle-linear', label: 'Disponibilidad', value: 'Inmediata' },
-];
+  {
+    icon: 'solar:hand-money-linear',
+    label: 'Mantenimiento',
+    value: 'S/ 250 mensuales',
+  },
+  {
+    icon: 'solar:check-circle-linear',
+    label: 'Disponibilidad',
+    value: 'Inmediata',
+  },
+]
 
 const stats = [
   { icon: 'solar:ruler-linear', value: '85 m²', label: 'Área total' },
@@ -32,16 +44,28 @@ const stats = [
   { icon: 'solar:bath-linear', value: '2', label: 'Baños' },
   { icon: 'solar:garage-linear', value: '1', label: 'Estacionamiento' },
   { icon: 'solar:layers-linear', value: 'Piso 5', label: 'Piso ubicado' },
-];
+]
 
 const mainFeatures = [
   { icon: 'solar:sofa-linear', text: 'Sala-comedor amplia e iluminada' },
-  { icon: 'solar:washing-machine-minimalistic-linear', text: 'Área de lavandería independiente' },
-  { icon: 'solar:chef-hat-linear', text: 'Cocina abierta con acabados modernos' },
-  { icon: 'solar:hanger-2-linear', text: 'Walk-in closet en dormitorio principal' },
+  {
+    icon: 'solar:washing-machine-minimalistic-linear',
+    text: 'Área de lavandería independiente',
+  },
+  {
+    icon: 'solar:chef-hat-linear',
+    text: 'Cocina abierta con acabados modernos',
+  },
+  {
+    icon: 'solar:hanger-2-linear',
+    text: 'Walk-in closet en dormitorio principal',
+  },
   { icon: 'solar:buildings-linear', text: 'Balcón con vista a la ciudad' },
-  { icon: 'solar:shield-check-linear', text: 'Edificio con ascensor y seguridad 24/7' },
-];
+  {
+    icon: 'solar:shield-check-linear',
+    text: 'Edificio con ascensor y seguridad 24/7',
+  },
+]
 
 const buildingFeatures = [
   { icon: 'solar:shield-check-linear', text: 'Seguridad 24/7' },
@@ -49,10 +73,10 @@ const buildingFeatures = [
   { icon: 'solar:users-group-rounded-linear', text: 'Lobby moderno' },
   { icon: 'solar:videocamera-record-linear', text: 'Cámaras de vigilancia' },
   { icon: 'solar:garage-linear', text: 'Estacionamientos para visitas' },
-];
+]
 
 export function getStaticPaths() {
-  return [{ params: { slug: 'departamento-moderno-en-surco' } }];
+  return [{ params: { slug: 'departamento-moderno-en-surco' } }]
 }
 ---
 
@@ -108,36 +132,56 @@ export function getStaticPaths() {
               </figcaption>
             </figure>
             <div class="thumb-row" aria-label="Miniaturas de la propiedad">
-              {[1, 2, 3, 4].map((item) => (
-                <button class:list={{ active: item === 1 }} type="button" aria-label={`Ver imagen ${item}`}>
-                  <img src={property.image} alt="" width="150" height="94" loading="lazy" />
-                </button>
-              ))}
+              {
+                [1, 2, 3, 4].map((item) => (
+                  <button
+                    class:list={{ active: item === 1 }}
+                    type="button"
+                    aria-label={`Ver imagen ${item}`}
+                  >
+                    <img
+                      src={property.image}
+                      alt=""
+                      width="150"
+                      height="94"
+                      loading="lazy"
+                    />
+                  </button>
+                ))
+              }
               <button class="more-photos" type="button">+8 fotos</button>
             </div>
           </section>
 
           <section class="highlight-strip" aria-label="Resumen de la propiedad">
-            {highlights.map((item) => (
-              <article>
-                <span><Icon name={item.icon} size={22} /></span>
-                <div>
-                  <p>{item.label}</p>
-                  <strong>{item.value}</strong>
-                </div>
-              </article>
-            ))}
+            {
+              highlights.map((item) => (
+                <article>
+                  <span>
+                    <Icon name={item.icon} size={22} />
+                  </span>
+                  <div>
+                    <p>{item.label}</p>
+                    <strong>{item.value}</strong>
+                  </div>
+                </article>
+              ))
+            }
           </section>
 
           <section class="content-section" aria-labelledby="features-title">
             <h2 id="features-title">Características principales</h2>
             <div class="feature-grid">
-              {mainFeatures.map((item) => (
-                <div class="feature-item">
-                  <span><Icon name={item.icon} size={20} /></span>
-                  <p>{item.text}</p>
-                </div>
-              ))}
+              {
+                mainFeatures.map((item) => (
+                  <div class="feature-item">
+                    <span>
+                      <Icon name={item.icon} size={20} />
+                    </span>
+                    <p>{item.text}</p>
+                  </div>
+                ))
+              }
             </div>
           </section>
 
@@ -146,67 +190,69 @@ export function getStaticPaths() {
             {property.description.map((paragraph) => <p>{paragraph}</p>)}
           </section>
 
-          <section class="content-section location-section" aria-labelledby="location-title">
+          <section
+            class="content-section location-section"
+            aria-labelledby="location-title"
+          >
             <h2 id="location-title">Ubicación</h2>
             <p class="location">
               <Icon name="solar:map-point-linear" size={17} />
               {property.location}
             </p>
-            <div class="map-placeholder" aria-label="Mapa referencial de la zona de Surco, Lima">
-              <span class="map-pin"><Icon name="solar:map-point-bold" size={58} /></span>
+            <div
+              class="map-placeholder"
+              aria-label="Mapa referencial de la zona de Surco, Lima"
+            >
+              <span class="map-pin"
+                ><Icon name="solar:map-point-bold" size={58} /></span
+              >
               <span class="map-label one">Av. Javier Prado Este</span>
               <span class="map-label two">Universidad de Lima</span>
               <span class="map-label three">C.C. El Polo</span>
             </div>
-            <a class="outline-link" href="https://www.google.com/maps/search/Surco,+Lima" target="_blank" rel="noreferrer">
+            <a
+              class="outline-link"
+              href="https://www.google.com/maps/search/Surco,+Lima"
+              target="_blank"
+              rel="noreferrer"
+            >
               Ver en Google Maps
               <Icon name="solar:square-top-down-linear" size={17} />
             </a>
           </section>
         </div>
 
-        <aside class="side-column" aria-label="Información y contacto de la propiedad">
+        <aside
+          class="side-column"
+          aria-label="Información y contacto de la propiedad"
+        >
           <section class="price-card">
             <strong>{property.price}</strong>
             <p>{property.priceLabel}</p>
             <ul>
-              {stats.map((item) => (
-                <li>
-                  <Icon name={item.icon} size={22} />
-                  <span>{item.value}</span>
-                  <small>{item.label}</small>
-                </li>
-              ))}
+              {
+                stats.map((item) => (
+                  <li>
+                    <Icon name={item.icon} size={22} />
+                    <span>{item.value}</span>
+                    <small>{item.label}</small>
+                  </li>
+                ))
+              }
             </ul>
             <a class="primary-action" href="#formulario-contacto">
               <Icon name="solar:calendar-mark-linear" size={20} />
               Agendar visita
             </a>
-            <a class="whatsapp-action" href="https://wa.me/51987654321" target="_blank" rel="noreferrer">
+            <a
+              class="whatsapp-action"
+              href="https://wa.me/51987654321"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Icon name="simple-icons:whatsapp" size={20} />
               Contactar por WhatsApp
             </a>
-          </section>
-
-          <section class="contact-card" id="formulario-contacto">
-            <h2>¿Interesado en esta propiedad?</h2>
-            <p>Déjanos tus datos y te contactaremos para brindarte más información.</p>
-            <form action="#" aria-label="Solicitar información de la propiedad">
-              <label>
-                <span class="sr-only">Tu nombre</span>
-                <input type="text" name="nombre" placeholder="Tu nombre" />
-              </label>
-              <label>
-                <span class="sr-only">Tu correo electrónico</span>
-                <input type="email" name="correo" placeholder="Tu correo electrónico" />
-              </label>
-              <label>
-                <span class="sr-only">Tu número de teléfono</span>
-                <input type="tel" name="telefono" placeholder="Tu número de teléfono" />
-              </label>
-              <button type="submit">Solicitar información</button>
-            </form>
-            <small>No compartimos tu información con terceros.</small>
           </section>
 
           <section class="advisor-card" aria-labelledby="advisor-title">
@@ -224,7 +270,12 @@ export function getStaticPaths() {
               <Icon name="solar:letter-linear" size={18} />
               andrea.silva@amarufs.pe
             </a>
-            <a class="advisor-whatsapp" href="https://wa.me/51987654321" target="_blank" rel="noreferrer">
+            <a
+              class="advisor-whatsapp"
+              href="https://wa.me/51987654321"
+              target="_blank"
+              rel="noreferrer"
+            >
               <Icon name="simple-icons:whatsapp" size={18} />
               Escríbele por WhatsApp
             </a>
@@ -239,12 +290,16 @@ export function getStaticPaths() {
       <section class="building-card" aria-labelledby="building-title">
         <h2 id="building-title">Características del edificio</h2>
         <div>
-          {buildingFeatures.map((item) => (
-            <article>
-              <span><Icon name={item.icon} size={21} /></span>
-              <p>{item.text}</p>
-            </article>
-          ))}
+          {
+            buildingFeatures.map((item) => (
+              <article>
+                <span>
+                  <Icon name={item.icon} size={21} />
+                </span>
+                <p>{item.text}</p>
+              </article>
+            ))
+          }
         </div>
       </section>
     </section>
@@ -523,8 +578,22 @@ export function getStaticPaths() {
     overflow: hidden;
     border-radius: 8px;
     background:
-      linear-gradient(28deg, transparent 47%, rgba(18, 70, 192, 0.12) 48%, rgba(18, 70, 192, 0.12) 51%, transparent 52%) 0 0 / 180px 100px,
-      linear-gradient(112deg, transparent 47%, rgba(0, 185, 143, 0.15) 48%, rgba(0, 185, 143, 0.15) 51%, transparent 52%) 0 0 / 160px 120px,
+      linear-gradient(
+          28deg,
+          transparent 47%,
+          rgba(18, 70, 192, 0.12) 48%,
+          rgba(18, 70, 192, 0.12) 51%,
+          transparent 52%
+        )
+        0 0 / 180px 100px,
+      linear-gradient(
+          112deg,
+          transparent 47%,
+          rgba(0, 185, 143, 0.15) 48%,
+          rgba(0, 185, 143, 0.15) 51%,
+          transparent 52%
+        )
+        0 0 / 160px 120px,
       linear-gradient(rgba(0, 185, 143, 0.08), rgba(0, 185, 143, 0.08)),
       #edf8f5;
   }
@@ -807,7 +876,10 @@ export function getStaticPaths() {
     }
 
     .detail-shell {
-      width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
+      width: min(
+        calc(100% - var(--site-padding-x-mobile)),
+        var(--site-max-width)
+      );
     }
 
     .breadcrumbs {
