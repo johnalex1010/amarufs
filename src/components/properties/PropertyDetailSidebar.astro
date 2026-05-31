@@ -1,0 +1,238 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Stat {
+  icon: string;
+  value: string;
+  label: string;
+}
+
+interface Props {
+  price: string;
+  priceLabel: string;
+  stats: readonly Stat[];
+}
+
+const { price, priceLabel, stats } = Astro.props;
+---
+
+<aside class="side-column" aria-label="Información y contacto de la propiedad">
+  <section class="price-card">
+    <strong>{price}</strong>
+    <p>{priceLabel}</p>
+    <ul>
+      {
+        stats.map((item) => (
+          <li>
+            <Icon name={item.icon} size={22} />
+            <span>{item.value}</span>
+            <small>{item.label}</small>
+          </li>
+        ))
+      }
+    </ul>
+    <a class="primary-action" href="#formulario-contacto">
+      <Icon name="solar:calendar-mark-linear" size={20} />
+      Agendar visita
+    </a>
+    <a class="whatsapp-action" href="https://wa.me/51987654321" target="_blank" rel="noreferrer">
+      <Icon name="simple-icons:whatsapp" size={20} />
+      Contactar por WhatsApp
+    </a>
+  </section>
+
+  <section class="advisor-card" aria-labelledby="advisor-title">
+    <div class="advisor-cover"><Icon name="solar:buildings-2-linear" size={150} /></div>
+    <div class="advisor-avatar" aria-hidden="true">AS</div>
+    <h2 id="advisor-title">Andrea Silva</h2>
+    <p>Asesora inmobiliaria</p>
+    <a href="tel:+51987654321"><Icon name="solar:phone-calling-linear" size={18} />+51 987 654 321</a>
+    <a href="mailto:andrea.silva@amarufs.pe"><Icon name="solar:letter-linear" size={18} />andrea.silva@amarufs.pe</a>
+    <a class="advisor-whatsapp" href="https://wa.me/51987654321" target="_blank" rel="noreferrer">
+      <Icon name="simple-icons:whatsapp" size={18} />
+      Escríbele por WhatsApp
+    </a>
+    <a class="outline-link" href="/propiedades/">
+      Ver más propiedades
+      <Icon name="solar:arrow-right-linear" size={18} />
+    </a>
+  </section>
+</aside>
+
+<style>
+  .side-column {
+    position: sticky;
+    top: 118px;
+    display: grid;
+    gap: 28px;
+  }
+
+  .price-card,
+  .advisor-card {
+    padding: 32px;
+    border: 1px solid rgba(0, 0, 67, 0.1);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 18px 42px rgba(0, 0, 67, 0.06);
+  }
+
+  .price-card > strong {
+    display: block;
+    color: var(--color-green);
+    font-size: 2.65rem;
+    line-height: 1;
+  }
+
+  .price-card > p {
+    margin: 10px 0 28px;
+    color: rgba(0, 0, 67, 0.58);
+    font-weight: 700;
+  }
+
+  ul {
+    display: grid;
+    gap: 18px;
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: grid;
+    grid-template-columns: 30px 72px 1fr;
+    align-items: center;
+    gap: 12px;
+    color: var(--color-green-dark);
+    font-weight: 700;
+  }
+
+  li span {
+    color: var(--color-navy);
+  }
+
+  li small {
+    color: rgba(0, 0, 67, 0.52);
+    font-weight: 700;
+  }
+
+  .primary-action,
+  .whatsapp-action,
+  .outline-link {
+    display: inline-flex;
+    width: 100%;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  .primary-action {
+    border: 0;
+    background: var(--color-green);
+    color: #ffffff;
+    box-shadow: 0 18px 36px rgba(0, 185, 143, 0.2);
+  }
+
+  .whatsapp-action {
+    margin-top: 14px;
+    border: 1.5px solid var(--color-green);
+    color: var(--color-green-dark);
+  }
+
+  .advisor-card {
+    overflow: hidden;
+    padding-top: 0;
+  }
+
+  .advisor-cover {
+    display: grid;
+    min-height: 150px;
+    margin: 0 -32px;
+    place-items: center;
+    background: var(--color-navy);
+    color: rgba(0, 225, 173, 0.38);
+  }
+
+  .advisor-avatar {
+    display: grid;
+    width: 108px;
+    height: 108px;
+    margin: -54px 0 22px 18px;
+    place-items: center;
+    border: 8px solid #ffffff;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-green), var(--color-blue));
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  h2 {
+    margin: 0 0 6px;
+    color: var(--color-navy);
+    font-size: 1.45rem;
+    letter-spacing: 0;
+  }
+
+  .advisor-card p {
+    margin: 0 0 24px;
+    color: rgba(0, 0, 67, 0.58);
+    font-weight: 700;
+  }
+
+  .advisor-card > a:not(.outline-link) {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: rgba(0, 0, 67, 0.76);
+    font-weight: 700;
+  }
+
+  .advisor-card .advisor-whatsapp {
+    color: var(--color-green-dark);
+  }
+
+  .outline-link {
+    margin-top: 18px;
+    border: 1.5px solid rgba(18, 70, 192, 0.55);
+    background: #ffffff;
+    color: var(--color-blue);
+  }
+
+  @media (max-width: 1180px) {
+    .side-column {
+      position: static;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .advisor-card {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .side-column {
+      grid-template-columns: 1fr;
+    }
+
+    .price-card,
+    .advisor-card {
+      padding: 24px;
+    }
+
+    .price-card > strong {
+      font-size: 2.2rem;
+    }
+
+    li {
+      grid-template-columns: 28px 68px 1fr;
+    }
+
+    .advisor-cover {
+      margin: 0 -24px;
+    }
+  }
+</style>

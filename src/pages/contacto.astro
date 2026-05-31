@@ -3,97 +3,11 @@ import { Icon } from 'astro-icon/components';
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-
-const benefits = [
-  {
-    icon: 'solar:bolt-circle-linear',
-    title: 'Respuesta rápida',
-    copy: 'Te respondemos en menos de 24 horas.',
-    tone: 'green',
-  },
-  {
-    icon: 'solar:user-rounded-linear',
-    title: 'Asesoría personalizada',
-    copy: 'Soluciones adaptadas a tus necesidades.',
-    tone: 'blue',
-  },
-  {
-    icon: 'solar:shield-check-linear',
-    title: 'Confidencialidad',
-    copy: 'Manejamos tu información con total seguridad.',
-    tone: 'purple',
-  },
-  {
-    icon: 'solar:document-text-linear',
-    title: 'Información clara',
-    copy: 'Te brindamos datos transparentes para decidir con confianza.',
-    tone: 'orange',
-  },
-];
-
-const contactOptions = [
-  {
-    icon: 'solar:phone-calling-linear',
-    title: 'Llámanos',
-    value: '+51 987 654 321',
-    detail: 'Lun - Vie: 9:00 a.m. - 6:00 p.m.',
-    tone: 'green',
-  },
-  {
-    icon: 'solar:letter-linear',
-    title: 'Escríbenos',
-    value: 'hola@amarufs.pe',
-    detail: 'Te responderemos por correo.',
-    tone: 'blue',
-  },
-  {
-    icon: 'simple-icons:whatsapp',
-    title: 'WhatsApp',
-    value: '+51 987 654 321',
-    detail: 'Atención rápida y directa.',
-    tone: 'green',
-  },
-  {
-    icon: 'solar:map-point-linear',
-    title: 'Visítanos',
-    value: 'Av. Javier Prado Este 1235',
-    detail: 'San Borja, Lima - Perú',
-    tone: 'purple',
-  },
-];
-
-const trustItems = [
-  {
-    icon: 'solar:shield-check-linear',
-    title: 'Experiencia y profesionalismo',
-    copy: 'Años de experiencia en el mercado inmobiliario.',
-    tone: 'green',
-  },
-  {
-    icon: 'solar:users-group-rounded-linear',
-    title: 'Asesoría integral',
-    copy: 'Te acompañamos en todo el proceso, de principio a fin.',
-    tone: 'blue',
-  },
-  {
-    icon: 'solar:check-circle-linear',
-    title: 'Transparencia total',
-    copy: 'Procesos claros, información verificada y sin sorpresas.',
-    tone: 'purple',
-  },
-  {
-    icon: 'solar:star-linear',
-    title: 'Resultados que importan',
-    copy: 'Nuestro objetivo es tu satisfacción y el mejor resultado.',
-    tone: 'orange',
-  },
-  {
-    icon: 'solar:home-2-linear',
-    title: 'Trato cercano y humano',
-    copy: 'Te escuchamos y entendemos tus necesidades.',
-    tone: 'green',
-  },
-];
+import CtaBanner from '@/components/sections/CtaBanner.astro';
+import IconCardGrid from '@/components/sections/IconCardGrid.astro';
+import SectionHeading from '@/components/sections/SectionHeading.astro';
+import SplitHero from '@/components/sections/SplitHero.astro';
+import { contactBenefits, contactOptions, contactTrustItems } from '@/data/siteContent';
 ---
 
 <BaseLayout
@@ -102,281 +16,164 @@ const trustItems = [
 >
   <SiteHeader />
   <main>
-    <section class="contact-hero" aria-labelledby="contact-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="kicker">Contacto</p>
-          <h1 id="contact-title">
-            Hablemos de tu proyecto y encontremos juntos
-            <span>la mejor solución</span>
-          </h1>
-          <p>
-            Estamos aquí para escucharte, responder tus preguntas y ayudarte a tomar
-            la mejor decisión.
-          </p>
+    <div class="page-shell">
+      <SplitHero
+        eyebrow="Contacto"
+        title="Hablemos de tu proyecto y encontremos juntos"
+        accent="la mejor solución"
+        description="Estamos aquí para escucharte, responder tus preguntas y ayudarte a tomar la mejor decisión."
+        labelledBy="contact-title"
+      />
+
+      <section class="benefits-section" aria-label="Beneficios al contactarnos">
+        <IconCardGrid items={contactBenefits} columns={4} />
+      </section>
+
+      <section class="contact-options" aria-labelledby="options-title">
+        <SectionHeading
+          eyebrow="Múltiples formas de contactarnos"
+          title="Elige la opción que prefieras"
+        />
+
+        <div class="option-grid">
+          {
+            contactOptions.map((item) => (
+              <article>
+                <span class:list={['icon-box', item.tone]}>
+                  <Icon name={item.icon} size={28} />
+                </span>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.value}</p>
+                  <small>{item.detail}</small>
+                </div>
+              </article>
+            ))
+          }
         </div>
-        <div class="hero-image-slot" aria-label="Espacio reservado para imagen de contacto"></div>
-      </div>
+      </section>
 
-      <div class="benefit-row" aria-label="Beneficios al contactarnos">
-        {
-          benefits.map((item) => (
-            <article>
-              <span class={`icon-box ${item.tone}`}>
-                <Icon name={item.icon} size={30} />
-              </span>
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.copy}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="contact-options" aria-labelledby="options-title">
-      <div class="section-heading">
-        <p class="kicker">Múltiples formas de contactarnos</p>
-        <h2 id="options-title">Elige la opción que prefieras</h2>
-      </div>
-
-      <div class="option-grid">
-        {
-          contactOptions.map((item) => (
-            <article>
-              <span class={`icon-box ${item.tone}`}>
-                <Icon name={item.icon} size={28} />
-              </span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.value}</p>
-                <small>{item.detail}</small>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="contact-main" aria-label="Formulario y datos de contacto">
-      <div class="message-card">
-        <div class="form-heading">
-          <span class="icon-box green"><Icon name="solar:plain-linear" size={30} /></span>
-          <div>
-            <h2>Envíanos un mensaje</h2>
-            <p>Completa el formulario y nos pondremos en contacto contigo a la brevedad.</p>
-          </div>
-        </div>
-
-        <form action="#" aria-label="Formulario de contacto">
-          <div class="field-grid">
-            <label>
-              Nombre completo
-              <input type="text" name="nombre" placeholder="Tu nombre" />
-            </label>
-            <label>
-              Correo electrónico
-              <input type="email" name="correo" placeholder="tu@correo.com" />
-            </label>
-            <label>
-              Número de celular
-              <input type="tel" name="telefono" placeholder="+51 987 654 321" />
-            </label>
-            <label>
-              Asunto
-              <select name="asunto">
-                <option>Selecciona un asunto</option>
-                <option>Comprar una propiedad</option>
-                <option>Vender una propiedad</option>
-                <option>Administrar una propiedad</option>
-                <option>Asesoría inmobiliaria</option>
-              </select>
-            </label>
+      <section class="contact-main" aria-label="Formulario y datos de contacto">
+        <div class="message-card">
+          <div class="form-heading">
+            <span class="icon-box green"><Icon name="solar:plain-linear" size={30} /></span>
+            <div>
+              <h2>Envíanos un mensaje</h2>
+              <p>Completa el formulario y nos pondremos en contacto contigo a la brevedad.</p>
+            </div>
           </div>
 
-          <label class="message-field">
-            Cuéntanos sobre tu proyecto
-            <textarea name="mensaje" rows="7" maxlength="500" placeholder="Escribe aquí tu mensaje..."></textarea>
-            <small>0/500 caracteres.</small>
-          </label>
+          <form action="#" aria-label="Formulario de contacto">
+            <div class="field-grid">
+              <label>Nombre completo<input type="text" name="nombre" placeholder="Tu nombre" /></label>
+              <label>Correo electrónico<input type="email" name="correo" placeholder="tu@correo.com" /></label>
+              <label>Número de celular<input type="tel" name="telefono" placeholder="+51 987 654 321" /></label>
+              <label>
+                Asunto
+                <select name="asunto">
+                  <option>Selecciona un asunto</option>
+                  <option>Comprar una propiedad</option>
+                  <option>Vender una propiedad</option>
+                  <option>Administrar una propiedad</option>
+                  <option>Asesoría inmobiliaria</option>
+                </select>
+              </label>
+            </div>
 
-          <button type="submit">
-            <Icon name="solar:plain-linear" size={18} />
-            Enviar mensaje
-          </button>
+            <label class="message-field">
+              Cuéntanos sobre tu proyecto
+              <textarea name="mensaje" rows="7" maxlength="500" placeholder="Escribe aquí tu mensaje..."></textarea>
+              <small>0/500 caracteres.</small>
+            </label>
 
-          <p class="privacy-note">
-            <Icon name="solar:lock-keyhole-linear" size={16} />
-            Tus datos solo se usarán para responder tu consulta.
-          </p>
-        </form>
-      </div>
+            <button type="submit">
+              <Icon name="solar:plain-linear" size={18} />
+              Enviar mensaje
+            </button>
 
-      <aside class="whatsapp-panel" aria-labelledby="whatsapp-title">
-        <h2 id="whatsapp-title">¿Prefieres hablar por WhatsApp?</h2>
-        <p>Escríbenos directamente y recibe atención inmediata.</p>
-        <a href="https://wa.me/51987654321" target="_blank" rel="noreferrer">
-          <Icon name="simple-icons:whatsapp" size={21} />
-          Escribir por WhatsApp
-        </a>
+            <p class="privacy-note">
+              <Icon name="solar:lock-keyhole-linear" size={16} />
+              Tus datos solo se usarán para responder tu consulta.
+            </p>
+          </form>
+        </div>
 
-        <div class="panel-divider"></div>
-
-        <h3>Información de contacto</h3>
-        <address>
-          <a href="tel:+51987654321">
-            <Icon name="solar:phone-calling-linear" size={20} />
-            +51 987 654 321
+        <aside class="whatsapp-panel" aria-labelledby="whatsapp-title">
+          <h2 id="whatsapp-title">¿Prefieres hablar por WhatsApp?</h2>
+          <p>Escríbenos directamente y recibe atención inmediata.</p>
+          <a href="https://wa.me/51987654321" target="_blank" rel="noreferrer">
+            <Icon name="simple-icons:whatsapp" size={21} />
+            Escribir por WhatsApp
           </a>
-          <a href="mailto:hola@amarufs.pe">
-            <Icon name="solar:letter-linear" size={20} />
-            hola@amarufs.pe
-          </a>
-          <span>
-            <Icon name="solar:clock-circle-linear" size={20} />
-            Lun - Vie: 9:00 a.m. - 6:00 p.m.
-          </span>
-          <span>
-            <Icon name="solar:map-point-linear" size={20} />
-            Av. Javier Prado Este 1235<br />San Borja, Lima - Perú
-          </span>
-        </address>
-      </aside>
-    </section>
 
-    <section class="trust-section" aria-labelledby="trust-title">
-      <div class="section-heading">
-        <p class="kicker">¿Por qué confiar en nosotros?</p>
-        <h2 id="trust-title">Estamos comprometidos contigo</h2>
-      </div>
-      <div class="trust-grid">
-        {
-          trustItems.map((item) => (
-            <article>
-              <span class={`icon-box ${item.tone}`}>
-                <Icon name={item.icon} size={28} />
-              </span>
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
+          <div class="panel-divider"></div>
 
-    <section class="contact-cta" aria-labelledby="cta-title">
-      <span><Icon name="solar:home-2-linear" size={48} /></span>
-      <div>
-        <h2 id="cta-title">¿Listo para dar el siguiente paso?</h2>
-        <p>
-          Permítenos ayudarte a encontrar la mejor oportunidad o gestionar tu
-          propiedad de la manera más eficiente.
-        </p>
-      </div>
-      <a href="/propiedades/">
-        Ver propiedades
-        <Icon name="solar:arrow-right-linear" size={20} />
-      </a>
-      <Icon class="cta-mark" name="solar:buildings-2-linear" size={230} />
-    </section>
+          <h3>Información de contacto</h3>
+          <address>
+            <a href="tel:+51987654321"><Icon name="solar:phone-calling-linear" size={20} />+51 987 654 321</a>
+            <a href="mailto:hola@amarufs.pe"><Icon name="solar:letter-linear" size={20} />hola@amarufs.pe</a>
+            <span><Icon name="solar:clock-circle-linear" size={20} />Lun - Vie: 9:00 a.m. - 6:00 p.m.</span>
+            <span><Icon name="solar:map-point-linear" size={20} />Av. Javier Prado Este 1235<br />San Borja, Lima - Perú</span>
+          </address>
+        </aside>
+      </section>
+
+      <section class="trust-section" aria-labelledby="trust-title">
+        <SectionHeading
+          eyebrow="¿Por qué confiar en nosotros?"
+          title="Estamos comprometidos contigo"
+        />
+        <IconCardGrid items={contactTrustItems} columns={5} variant="divided" />
+      </section>
+
+      <CtaBanner
+        labelledBy="contact-cta-title"
+        title="¿Listo para dar el siguiente paso?"
+        copy="Permítenos ayudarte a encontrar la mejor oportunidad o gestionar tu propiedad de la manera más eficiente."
+        href="/propiedades/"
+        label="Ver propiedades"
+      />
+    </div>
   </main>
   <SiteFooter />
 </BaseLayout>
 
 <style>
-  .contact-hero {
-    padding: 156px 0 70px;
-  }
-
-  .contact-hero,
-  .contact-options,
-  .contact-main,
-  .trust-section,
-  .contact-cta {
+  .page-shell {
     width: min(calc(100% - var(--site-padding-x)), var(--site-max-width));
     margin-inline: auto;
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(320px, 0.92fr) minmax(440px, 1.08fr);
-    gap: 70px;
-    align-items: center;
+  .benefits-section {
+    padding: 66px 0 18px;
   }
 
-  .kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 18px;
-    color: var(--color-green-dark);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+  .contact-options {
+    padding: 38px 0;
   }
 
-  .kicker::before {
-    content: "";
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--color-teal);
-  }
-
-  h1,
-  h2,
-  h3 {
-    color: var(--color-navy);
-    letter-spacing: 0;
-  }
-
-  h1 {
-    max-width: 760px;
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(3.15rem, 5.2vw, 4.8rem);
-    font-weight: 500;
-    line-height: 1.03;
-  }
-
-  h1 span {
-    display: block;
-    color: var(--color-green);
-  }
-
-  .hero-copy > p:last-child {
-    max-width: 610px;
-    margin: 32px 0 0;
-    color: rgba(0, 0, 67, 0.68);
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.62;
-  }
-
-  .hero-image-slot {
-    min-height: 335px;
-    border-radius: 8px;
-    background:
-      linear-gradient(135deg, rgba(18, 70, 192, 0.08), rgba(0, 225, 173, 0.12)),
-      #f7fbff;
-    box-shadow: 0 24px 54px rgba(0, 0, 67, 0.06);
-  }
-
-  .benefit-row {
+  .option-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 46px;
-    margin-top: 66px;
+    gap: 20px;
   }
 
-  .benefit-row article,
+  .option-grid article,
+  .message-card,
+  .whatsapp-panel {
+    border: 1px solid rgba(0, 0, 67, 0.1);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 18px 42px rgba(0, 0, 67, 0.06);
+  }
+
   .option-grid article {
     display: grid;
     grid-template-columns: 66px 1fr;
     gap: 18px;
     align-items: center;
+    min-height: 154px;
+    padding: 28px;
   }
 
   .icon-box {
@@ -402,70 +199,28 @@ const trustItems = [
     color: var(--color-purple);
   }
 
-  .orange {
-    background: rgba(244, 155, 0, 0.18);
-    color: var(--color-orange);
+  h2,
+  h3 {
+    color: var(--color-navy);
+    letter-spacing: 0;
   }
 
-  .benefit-row h2,
-  .option-grid h3,
-  .trust-grid h3 {
-    margin: 0 0 8px;
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .benefit-row p,
+  h3,
   .option-grid p,
-  .option-grid small,
-  .trust-grid p {
+  .option-grid small {
     margin: 0;
+  }
+
+  h3 {
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
+
+  .option-grid p,
+  .option-grid small {
     color: rgba(0, 0, 67, 0.62);
     font-weight: 700;
     line-height: 1.55;
-  }
-
-  .contact-options {
-    padding: 18px 0 38px;
-  }
-
-  .section-heading {
-    max-width: 760px;
-    margin: 0 auto 34px;
-    text-align: center;
-  }
-
-  .section-heading .kicker {
-    justify-content: center;
-  }
-
-  .section-heading h2 {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(2.35rem, 4vw, 3.25rem);
-    font-weight: 500;
-    line-height: 1.08;
-  }
-
-  .option-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-  }
-
-  .option-grid article,
-  .message-card,
-  .whatsapp-panel {
-    border: 1px solid rgba(0, 0, 67, 0.1);
-    border-radius: 8px;
-    background: #ffffff;
-    box-shadow: 0 18px 42px rgba(0, 0, 67, 0.06);
-  }
-
-  .option-grid article {
-    min-height: 154px;
-    padding: 28px;
   }
 
   .contact-main {
@@ -538,28 +293,24 @@ const trustItems = [
     padding: 18px;
   }
 
-  input::placeholder,
-  textarea::placeholder {
-    color: rgba(0, 0, 67, 0.38);
-  }
-
   .message-field {
     margin-top: 22px;
   }
 
-  .message-field small {
+  .message-field small,
+  .privacy-note {
     color: rgba(0, 0, 67, 0.48);
     font-weight: 700;
   }
 
-  .message-card button {
+  .message-card button,
+  .whatsapp-panel > a {
     display: inline-flex;
     width: 100%;
     min-height: 58px;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-top: 22px;
     border: 0;
     border-radius: 8px;
     background: var(--color-blue);
@@ -569,14 +320,16 @@ const trustItems = [
     box-shadow: var(--shadow-button);
   }
 
+  .message-card button {
+    margin-top: 22px;
+  }
+
   .privacy-note {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     margin: 22px 0 0;
-    color: rgba(0, 0, 67, 0.52);
-    font-weight: 700;
   }
 
   .whatsapp-panel {
@@ -604,17 +357,8 @@ const trustItems = [
   }
 
   .whatsapp-panel > a {
-    display: inline-flex;
-    width: 100%;
-    min-height: 60px;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    border-radius: 8px;
     background: var(--color-green);
-    color: #ffffff;
-    font-weight: 700;
-    text-decoration: none;
+    box-shadow: none;
   }
 
   .panel-divider {
@@ -623,181 +367,44 @@ const trustItems = [
     background: rgba(255, 255, 255, 0.28);
   }
 
-  .whatsapp-panel h3 {
-    margin: 0 0 28px;
-    font-size: 1.35rem;
-  }
-
-  .whatsapp-panel address {
+  address {
     display: grid;
     gap: 20px;
     font-style: normal;
   }
 
-  .whatsapp-panel address a,
-  .whatsapp-panel address span {
+  address a,
+  address span {
     display: flex;
     align-items: start;
     gap: 14px;
     color: rgba(255, 255, 255, 0.9);
     font-weight: 700;
     line-height: 1.45;
-    text-decoration: none;
   }
 
   .trust-section {
     padding: 24px 0 54px;
   }
 
-  .trust-grid {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0;
-  }
-
-  .trust-grid article {
-    display: grid;
-    justify-items: center;
-    gap: 15px;
-    padding: 0 32px;
-    text-align: center;
-  }
-
-  .trust-grid article + article {
-    border-left: 1px solid rgba(0, 0, 67, 0.12);
-  }
-
-  .contact-cta {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 30px;
-    align-items: center;
-    min-height: 148px;
-    margin-bottom: 24px;
-    overflow: hidden;
-    padding: 30px 62px;
-    border-radius: 8px;
-    background: linear-gradient(105deg, var(--color-blue), var(--color-mint));
-    color: #ffffff;
-  }
-
-  .contact-cta > span {
-    display: grid;
-    width: 78px;
-    height: 78px;
-    place-items: center;
-    border-radius: 50%;
-    background: #ffffff;
-    color: var(--color-green);
-  }
-
-  .contact-cta h2 {
-    max-width: 590px;
-    margin: 0;
-    color: #ffffff;
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 1.08;
-  }
-
-  .contact-cta p {
-    max-width: 660px;
-    margin: 10px 0 0;
-    font-weight: 700;
-    line-height: 1.5;
-  }
-
-  .contact-cta a {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-width: 200px;
-    min-height: 56px;
-    border-radius: 8px;
-    background: #ffffff;
-    color: var(--color-blue);
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .cta-mark {
-    position: absolute;
-    right: 160px;
-    bottom: -70px;
-    color: rgba(255, 255, 255, 0.13);
-  }
-
   @media (max-width: 1180px) {
-    .hero-grid,
     .contact-main {
       grid-template-columns: 1fr;
     }
 
-    .benefit-row,
-    .option-grid,
-    .trust-grid {
+    .option-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .trust-grid article {
-      padding: 28px;
-    }
-
-    .trust-grid article + article,
-    .trust-grid article:nth-child(3) {
-      border-left: 0;
-    }
-
-    .contact-cta {
-      grid-template-columns: auto 1fr;
-    }
-
-    .contact-cta a {
-      grid-column: 2;
-      justify-self: start;
     }
   }
 
   @media (max-width: 760px) {
-    .contact-hero {
-      padding-top: 112px;
-    }
-
-    .contact-hero,
-    .contact-options,
-    .contact-main,
-    .trust-section,
-    .contact-cta {
+    .page-shell {
       width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
     }
 
-    h1 {
-      font-size: clamp(2.5rem, 11vw, 3.05rem);
-    }
-
-    .hero-copy > p:last-child {
-      font-size: 1rem;
-    }
-
-    .hero-image-slot {
-      min-height: 260px;
-    }
-
-    .benefit-row,
     .option-grid,
-    .field-grid,
-    .trust-grid,
-    .contact-cta {
+    .field-grid {
       grid-template-columns: 1fr;
-    }
-
-    .benefit-row {
-      gap: 28px;
     }
 
     .message-card,
@@ -811,24 +418,6 @@ const trustItems = [
 
     .whatsapp-panel h2 {
       font-size: 1.9rem;
-    }
-
-    .trust-grid article,
-    .trust-grid article + article {
-      border-left: 0;
-    }
-
-    .contact-cta {
-      padding: 28px;
-    }
-
-    .contact-cta a {
-      grid-column: auto;
-      width: 100%;
-    }
-
-    .cta-mark {
-      right: -70px;
     }
   }
 </style>

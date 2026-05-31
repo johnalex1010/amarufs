@@ -1,0 +1,69 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+}
+
+const { eyebrow, title, description, align = 'center' } = Astro.props;
+---
+
+<header class:list={['section-heading', align]}>
+  {eyebrow && <p class="kicker">{eyebrow}</p>}
+  <h2>{title}</h2>
+  {description && <p class="section-description">{description}</p>}
+</header>
+
+<style>
+  .section-heading {
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+
+  .section-heading.center {
+    text-align: center;
+  }
+
+  .section-heading.left {
+    margin-inline: 0;
+    text-align: left;
+  }
+
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0 0 18px;
+    color: var(--color-green-dark);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .kicker::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-teal);
+  }
+
+  h2 {
+    margin: 0;
+    color: var(--color-navy);
+    font-family: var(--font-display);
+    font-size: clamp(2.35rem, 4vw, 3.35rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: 0;
+  }
+
+  .section-description {
+    margin: 24px auto 0;
+    color: rgba(0, 0, 67, 0.68);
+    font-weight: 700;
+    line-height: 1.6;
+  }
+</style>

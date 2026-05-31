@@ -1,0 +1,262 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface PropertyMeta {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+interface Props {
+  image: string;
+  property: {
+    status: string;
+    title: string;
+    location: string;
+    price: string;
+    suffix?: string;
+    description: string;
+    meta: readonly PropertyMeta[];
+    tone: string;
+    gallery: string;
+  };
+}
+
+const { image, property } = Astro.props;
+---
+
+<article class="property-card">
+  <div class="property-media">
+    <img
+      src={image}
+      alt={`Imagen referencial de ${property.title}`}
+      width="440"
+      height="272"
+      loading="lazy"
+    />
+    <span class:list={['status', property.tone]}>{property.status}</span>
+    <button type="button" aria-label={`Guardar ${property.title}`}>
+      <Icon name="solar:heart-linear" size={28} />
+    </button>
+    <span class="gallery-count">
+      <Icon name="solar:camera-linear" size={14} />
+      {property.gallery}
+    </span>
+  </div>
+
+  <div class="property-content">
+    <h3>{property.title}</h3>
+    <p class="location">
+      <Icon name="solar:map-point-linear" size={16} />
+      {property.location}
+    </p>
+    <ul aria-label={`Características de ${property.title}`}>
+      {
+        property.meta.map((item) => (
+          <li title={item.label}>
+            <Icon name={item.icon} size={17} />
+            {item.value}
+          </li>
+        ))
+      }
+    </ul>
+    <p class="description">{property.description}</p>
+    <div class="card-footer">
+      <strong>
+        {property.price}
+        {property.suffix && <small>{property.suffix}</small>}
+      </strong>
+      <a href="/propiedades/departamento-moderno-en-surco/">
+        Ver detalles
+        <Icon name="solar:arrow-right-linear" size={18} />
+      </a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .property-card {
+    display: grid;
+    grid-template-columns: minmax(260px, 440px) minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 67, 0.09);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 16px 38px rgba(0, 0, 67, 0.05);
+  }
+
+  .property-media {
+    position: relative;
+    min-height: 272px;
+    overflow: hidden;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  button {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    color: rgba(0, 0, 67, 0.58);
+    cursor: pointer;
+  }
+
+  .status {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    display: inline-flex;
+    min-height: 34px;
+    align-items: center;
+    padding: 0 18px;
+    border-radius: 999px;
+    color: #ffffff;
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .status.green {
+    background: var(--color-mint);
+  }
+
+  .status.blue {
+    background: var(--color-blue);
+  }
+
+  .gallery-count {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    min-height: 28px;
+    padding: 0 9px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.58);
+    color: #ffffff;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .property-content {
+    display: grid;
+    align-content: start;
+    padding: 28px 32px;
+  }
+
+  h3 {
+    margin: 0 0 10px;
+    color: var(--color-navy);
+    font-size: 1.55rem;
+    line-height: 1.2;
+  }
+
+  .location,
+  .description {
+    color: rgba(0, 0, 67, 0.62);
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .location {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 18px;
+    font-size: 0.95rem;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 26px;
+    margin: 0 0 20px;
+    padding: 0;
+    color: rgba(0, 0, 67, 0.56);
+    list-style: none;
+    font-weight: 700;
+  }
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .description {
+    margin: 0 0 24px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: auto;
+  }
+
+  strong {
+    color: var(--color-green);
+    font-size: 1.45rem;
+  }
+
+  small {
+    margin-left: 4px;
+    color: rgba(0, 0, 67, 0.58);
+    font-size: 0.82rem;
+  }
+
+  a {
+    display: inline-flex;
+    min-width: 156px;
+    min-height: 48px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    border: 1.5px solid var(--color-blue);
+    border-radius: 8px;
+    color: var(--color-blue);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  @media (max-width: 760px) {
+    .property-card {
+      grid-template-columns: 1fr;
+    }
+
+    .property-media {
+      min-height: 220px;
+    }
+
+    .property-content {
+      padding: 24px 20px;
+    }
+
+    h3 {
+      font-size: 1.28rem;
+    }
+
+    .card-footer {
+      display: grid;
+      gap: 18px;
+    }
+
+    a {
+      width: 100%;
+    }
+  }
+</style>

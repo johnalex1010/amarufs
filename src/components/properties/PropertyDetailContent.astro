@@ -1,0 +1,294 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface IconText {
+  icon: string;
+  text: string;
+}
+
+interface Highlight {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+interface Props {
+  highlights: readonly Highlight[];
+  features: readonly IconText[];
+  buildingFeatures: readonly IconText[];
+  description: readonly string[];
+  location: string;
+}
+
+const { highlights, features, buildingFeatures, description, location } = Astro.props;
+---
+
+<section class="highlight-strip" aria-label="Resumen de la propiedad">
+  {
+    highlights.map((item) => (
+      <article>
+        <span><Icon name={item.icon} size={22} /></span>
+        <div>
+          <p>{item.label}</p>
+          <strong>{item.value}</strong>
+        </div>
+      </article>
+    ))
+  }
+</section>
+
+<section class="content-section" aria-labelledby="features-title">
+  <h2 id="features-title">Características principales</h2>
+  <div class="feature-grid">
+    {
+      features.map((item) => (
+        <div class="feature-item">
+          <span><Icon name={item.icon} size={20} /></span>
+          <p>{item.text}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<section class="content-section" aria-labelledby="description-title">
+  <h2 id="description-title">Descripción</h2>
+  {description.map((paragraph) => <p>{paragraph}</p>)}
+</section>
+
+<section class="content-section location-section" aria-labelledby="location-title">
+  <h2 id="location-title">Ubicación</h2>
+  <p class="location"><Icon name="solar:map-point-linear" size={17} />{location}</p>
+  <div class="map-placeholder" aria-label="Mapa referencial de la zona de Surco, Lima">
+    <span class="map-pin"><Icon name="solar:map-point-bold" size={58} /></span>
+    <span class="map-label one">Av. Javier Prado Este</span>
+    <span class="map-label two">Universidad de Lima</span>
+    <span class="map-label three">C.C. El Polo</span>
+  </div>
+  <a class="outline-link" href="https://www.google.com/maps/search/Surco,+Lima" target="_blank" rel="noreferrer">
+    Ver en Google Maps
+    <Icon name="solar:square-top-down-linear" size={17} />
+  </a>
+</section>
+
+<section class="building-card" aria-labelledby="building-title">
+  <h2 id="building-title">Características del edificio</h2>
+  <div>
+    {
+      buildingFeatures.map((item) => (
+        <article>
+          <span><Icon name={item.icon} size={21} /></span>
+          <p>{item.text}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .highlight-strip,
+  .building-card {
+    border: 1px solid rgba(0, 0, 67, 0.1);
+    border-radius: 8px;
+    background: #ffffff;
+    box-shadow: 0 18px 42px rgba(0, 0, 67, 0.06);
+  }
+
+  .highlight-strip {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0;
+    padding: 24px 18px;
+  }
+
+  .highlight-strip article {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    padding: 0 18px;
+  }
+
+  .highlight-strip article + article {
+    border-left: 1px solid rgba(0, 0, 67, 0.1);
+  }
+
+  .highlight-strip span,
+  .feature-item span,
+  .building-card span {
+    display: grid;
+    flex: 0 0 auto;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(0, 225, 173, 0.16);
+    color: var(--color-green-dark);
+  }
+
+  .highlight-strip p,
+  .highlight-strip strong {
+    display: block;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .highlight-strip p {
+    margin-bottom: 4px;
+    color: rgba(0, 0, 67, 0.55);
+    font-size: 0.82rem;
+  }
+
+  .content-section {
+    padding: 24px 0 28px;
+    border-bottom: 1px solid rgba(0, 0, 67, 0.14);
+  }
+
+  h2 {
+    margin: 0 0 24px;
+    color: var(--color-navy);
+    font-size: 1.55rem;
+    line-height: 1.25;
+    letter-spacing: 0;
+  }
+
+  .content-section p {
+    max-width: 860px;
+    margin: 0 0 18px;
+    color: rgba(0, 0, 67, 0.7);
+    font-weight: 700;
+    line-height: 1.7;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 48px;
+  }
+
+  .feature-item,
+  .building-card article {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .feature-item p,
+  .building-card p {
+    margin: 0;
+    color: rgba(0, 0, 67, 0.76);
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .location {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .map-placeholder {
+    position: relative;
+    min-height: 250px;
+    margin: 20px 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background:
+      linear-gradient(28deg, transparent 47%, rgba(18, 70, 192, 0.12) 48%, rgba(18, 70, 192, 0.12) 51%, transparent 52%) 0 0 / 180px 100px,
+      linear-gradient(112deg, transparent 47%, rgba(0, 185, 143, 0.15) 48%, rgba(0, 185, 143, 0.15) 51%, transparent 52%) 0 0 / 160px 120px,
+      linear-gradient(rgba(0, 185, 143, 0.08), rgba(0, 185, 143, 0.08)),
+      #edf8f5;
+  }
+
+  .map-pin {
+    position: absolute;
+    top: 45%;
+    left: 46%;
+    color: var(--color-green);
+    transform: translate(-50%, -50%);
+    filter: drop-shadow(0 12px 18px rgba(0, 185, 143, 0.28));
+  }
+
+  .map-label {
+    position: absolute;
+    color: rgba(0, 0, 67, 0.48);
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .map-label.one {
+    left: 10%;
+    top: 38%;
+  }
+
+  .map-label.two {
+    right: 18%;
+    top: 20%;
+  }
+
+  .map-label.three {
+    right: 14%;
+    bottom: 22%;
+  }
+
+  .outline-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 48px;
+    padding: 0 22px;
+    border: 1.5px solid rgba(18, 70, 192, 0.55);
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--color-blue);
+    font-weight: 700;
+  }
+
+  .building-card {
+    margin-top: 32px;
+    padding: 28px 34px;
+  }
+
+  .building-card > div {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  @media (max-width: 1180px) {
+    .building-card > div,
+    .highlight-strip {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .highlight-strip article:nth-child(3) {
+      border-left: 0;
+    }
+
+    .highlight-strip article {
+      padding: 18px;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .highlight-strip,
+    .feature-grid,
+    .building-card > div {
+      grid-template-columns: 1fr;
+    }
+
+    .highlight-strip {
+      padding: 12px;
+    }
+
+    .highlight-strip article,
+    .highlight-strip article + article,
+    .highlight-strip article:nth-child(3) {
+      border-left: 0;
+    }
+
+    .building-card {
+      padding: 24px;
+    }
+  }
+</style>

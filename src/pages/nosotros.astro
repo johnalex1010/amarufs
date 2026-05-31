@@ -3,105 +3,16 @@ import { Icon } from 'astro-icon/components';
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-
-const values = [
-  {
-    icon: 'solar:shield-check-linear',
-    title: 'Transparencia',
-    copy: 'Procesos claros y sin letras pequeñas.',
-    tone: 'green',
-  },
-  {
-    icon: 'solar:users-group-rounded-linear',
-    title: 'Compromiso',
-    copy: 'Te acompañamos en cada paso del camino.',
-    tone: 'blue',
-  },
-  {
-    icon: 'solar:check-circle-linear',
-    title: 'Confianza',
-    copy: 'Construimos relaciones duraderas.',
-    tone: 'purple',
-  },
-  {
-    icon: 'solar:home-2-linear',
-    title: 'Enfoque en ti',
-    copy: 'Entendemos tus necesidades y te damos soluciones.',
-    tone: 'orange',
-  },
-];
-
-const services = [
-  {
-    icon: 'solar:home-2-linear',
-    eyebrow: 'Venta',
-    title: 'Venta de propiedades',
-    copy: 'Te ayudamos a vender tu propiedad al mejor precio y en el menor tiempo posible.',
-    bullets: [
-      'Valoración profesional',
-      'Estrategia de marketing efectiva',
-      'Difusión en portales líderes',
-      'Acompañamiento en todo el proceso',
-      'Negociación segura',
-    ],
-    tone: 'green',
-  },
-  {
-    icon: 'solar:buildings-2-linear',
-    eyebrow: 'Administración',
-    title: 'Administración de propiedades',
-    copy: 'Nos encargamos de gestionar tu propiedad para que tú no tengas que preocuparte por nada.',
-    bullets: [
-      'Búsqueda y selección de inquilinos',
-      'Cobranza y gestión de pagos',
-      'Mantenimiento y reparaciones',
-      'Reportes periódicos y transparentes',
-      'Atención personalizada',
-    ],
-    tone: 'blue',
-  },
-];
-
-const trustItems = [
-  {
-    icon: 'solar:shield-check-linear',
-    title: 'Información verificada',
-    copy: 'Todas nuestras propiedades pasan por un filtro legal y técnico.',
-    tone: 'green',
-  },
-  {
-    icon: 'solar:document-text-linear',
-    title: 'Asesoría legal',
-    copy: 'Te brindamos asesoría legal en cada etapa del proceso.',
-    tone: 'blue',
-  },
-  {
-    icon: 'solar:lock-keyhole-linear',
-    title: 'Transacciones seguras',
-    copy: 'Manejamos procesos seguros y confiables para tu protección.',
-    tone: 'purple',
-  },
-  {
-    icon: 'solar:star-linear',
-    title: 'Experiencia local',
-    copy: 'Conocemos el mercado y te asesoramos con información real.',
-    tone: 'orange',
-  },
-  {
-    icon: 'solar:users-group-rounded-linear',
-    title: 'Atención personalizada',
-    copy: 'Un asesor dedicado para acompañarte en todo momento.',
-    tone: 'green',
-  },
-];
-
-const benefits = [
-  { icon: 'solar:chart-linear', title: 'Mejores oportunidades de inversión' },
-  { icon: 'solar:clock-circle-linear', title: 'Ahorro de tiempo y esfuerzo' },
-  { icon: 'solar:dollar-linear', title: 'Máxima rentabilidad y seguridad' },
-  { icon: 'solar:home-2-linear', title: 'Acompañamiento continuo' },
-  { icon: 'solar:smile-circle-linear', title: 'Trato cercano y humano' },
-];
+import CtaBanner from '@/components/sections/CtaBanner.astro';
+import IconCardGrid from '@/components/sections/IconCardGrid.astro';
+import SectionHeading from '@/components/sections/SectionHeading.astro';
+import SplitHero from '@/components/sections/SplitHero.astro';
+import {
+  aboutBenefits,
+  aboutServices,
+  aboutTrustItems,
+  aboutValues,
+} from '@/data/siteContent';
 ---
 
 <BaseLayout
@@ -110,303 +21,101 @@ const benefits = [
 >
   <SiteHeader />
   <main>
-    <section class="about-hero" aria-labelledby="about-title">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="kicker">Sobre Amaru FS</p>
-          <h1 id="about-title">Más que una inmobiliaria, <span>somos tu aliado.</span></h1>
-          <p>
-            En Amaru FS ayudamos a personas y empresas a encontrar el lugar ideal
-            para vivir o invertir, con un servicio cercano, profesional y transparente.
-          </p>
+    <div class="page-shell">
+      <SplitHero
+        eyebrow="Sobre Amaru FS"
+        title="Más que una inmobiliaria,"
+        accent="somos tu aliado."
+        description="En Amaru FS ayudamos a personas y empresas a encontrar el lugar ideal para vivir o invertir, con un servicio cercano, profesional y transparente."
+        labelledBy="about-title"
+      />
+
+      <section class="values-section" aria-label="Valores de Amaru FS">
+        <IconCardGrid items={aboutValues} columns={4} />
+      </section>
+
+      <section class="services-section" aria-labelledby="services-title">
+        <SectionHeading
+          eyebrow="Nuestros servicios"
+          title="Soluciones inmobiliarias integrales para ti"
+          description="Ofrecemos servicios especializados para que tomes las mejores decisiones con respaldo profesional en cada etapa."
+        />
+
+        <div class="service-grid">
+          {
+            aboutServices.map((service) => (
+              <article class="service-card">
+                <div class="service-content">
+                  <span class:list={['icon-box', service.tone]}>
+                    <Icon name={service.icon} size={34} />
+                  </span>
+                  <p class:list={['service-eyebrow', service.tone]}>{service.eyebrow}</p>
+                  <h3>{service.title}</h3>
+                  <p>{service.copy}</p>
+                  <ul>
+                    {
+                      service.bullets.map((bullet) => (
+                        <li>
+                          <Icon name="solar:check-circle-linear" size={17} />
+                          {bullet}
+                        </li>
+                      ))
+                    }
+                  </ul>
+                  <a href="/propiedades/">
+                    Conocer más
+                    <Icon name="solar:arrow-right-linear" size={18} />
+                  </a>
+                </div>
+                <div class="service-image-slot" aria-label={`Imagen de apoyo para ${service.title}`}></div>
+              </article>
+            ))
+          }
         </div>
-        <div class="hero-image-slot" aria-label="Espacio reservado para imagen institucional"></div>
-      </div>
-
-      <div class="value-grid" aria-label="Valores de Amaru FS">
-        {
-          values.map((item) => (
-            <article>
-              <span class={`icon-box ${item.tone}`}>
-                <Icon name={item.icon} size={34} />
-              </span>
-              <div>
-                <h2>{item.title}</h2>
-                <p>{item.copy}</p>
-              </div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="services-section" aria-labelledby="services-title">
-      <div class="section-heading">
-        <p class="kicker">Nuestros servicios</p>
-        <h2 id="services-title">Soluciones inmobiliarias integrales para ti</h2>
-        <p>
-          Ofrecemos servicios especializados para que tomes las mejores decisiones
-          con respaldo profesional en cada etapa.
-        </p>
-      </div>
-
-      <div class="service-grid">
-        {
-          services.map((service) => (
-            <article class="service-card">
-              <div class="service-content">
-                <span class={`icon-box ${service.tone}`}>
-                  <Icon name={service.icon} size={34} />
-                </span>
-                <p class={`service-eyebrow ${service.tone}`}>{service.eyebrow}</p>
-                <h3>{service.title}</h3>
-                <p>{service.copy}</p>
-                <ul>
-                  {
-                    service.bullets.map((bullet) => (
-                      <li>
-                        <Icon name="solar:check-circle-linear" size={17} />
-                        {bullet}
-                      </li>
-                    ))
-                  }
-                </ul>
-                <a href="/propiedades/">
-                  Conocer más
-                  <Icon name="solar:arrow-right-linear" size={18} />
-                </a>
-              </div>
-              <div class="service-image-slot" aria-label={`Espacio reservado para imagen de ${service.title}`}></div>
-            </article>
-          ))
-        }
-      </div>
-    </section>
+      </section>
+    </div>
 
     <section class="trust-section" aria-labelledby="trust-title">
-      <div class="section-heading">
-        <p class="kicker">Confiabilidad que nos respalda</p>
-        <h2 id="trust-title">Tu tranquilidad es nuestra prioridad</h2>
-      </div>
-      <div class="trust-grid">
-        {
-          trustItems.map((item) => (
-            <article>
-              <span class={`icon-box ${item.tone}`}>
-                <Icon name={item.icon} size={28} />
-              </span>
-              <h3>{item.title}</h3>
-              <p>{item.copy}</p>
-            </article>
-          ))
-        }
-      </div>
+      <SectionHeading
+        eyebrow="Confiabilidad que nos respalda"
+        title="Tu tranquilidad es nuestra prioridad"
+      />
+      <IconCardGrid items={aboutTrustItems} columns={5} variant="divided" />
     </section>
 
-    <section class="benefits-section" aria-labelledby="benefits-title">
-      <div class="section-heading">
-        <p class="kicker">¿Por qué elegirnos?</p>
-        <h2 id="benefits-title">Beneficios de estar con Amaru FS</h2>
-      </div>
-      <div class="benefit-grid">
-        {
-          benefits.map((item) => (
-            <article>
-              <span><Icon name={item.icon} size={34} /></span>
-              <h3>{item.title}</h3>
-            </article>
-          ))
-        }
-      </div>
-    </section>
+    <div class="page-shell">
+      <section class="benefits-section" aria-labelledby="benefits-title">
+        <SectionHeading
+          eyebrow="¿Por qué elegirnos?"
+          title="Beneficios de estar con Amaru FS"
+        />
+        <IconCardGrid items={aboutBenefits} columns={5} variant="divided" />
+      </section>
 
-    <section class="about-cta" aria-labelledby="cta-title">
-      <span><Icon name="solar:home-2-linear" size={48} /></span>
-      <div>
-        <h2 id="cta-title">¿Tienes una propiedad o buscas una oportunidad?</h2>
-        <p>Hablemos y te ayudaremos a lograrlo.</p>
-      </div>
-      <a href="/contacto/">
-        Contáctanos
-        <Icon name="solar:arrow-right-linear" size={20} />
-      </a>
-      <Icon class="cta-mark" name="solar:buildings-2-linear" size={230} />
-    </section>
+      <CtaBanner
+        labelledBy="about-cta-title"
+        title="¿Tienes una propiedad o buscas una oportunidad?"
+        copy="Hablemos y te ayudaremos a lograrlo."
+        href="/contacto/"
+        label="Contáctanos"
+      />
+    </div>
   </main>
   <SiteFooter />
 </BaseLayout>
 
 <style>
-  .about-hero {
-    padding: 156px 0 72px;
-  }
-
-  .about-hero,
-  .services-section,
-  .trust-section,
-  .benefits-section,
-  .about-cta {
+  .page-shell {
     width: min(calc(100% - var(--site-padding-x)), var(--site-max-width));
     margin-inline: auto;
   }
 
-  .hero-grid {
-    display: grid;
-    grid-template-columns: minmax(320px, 0.96fr) minmax(440px, 1fr);
-    gap: 72px;
-    align-items: center;
-  }
-
-  .kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 18px;
-    color: var(--color-green-dark);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .kicker::before {
-    content: "";
-    width: 9px;
-    height: 9px;
-    border-radius: 50%;
-    background: var(--color-teal);
-  }
-
-  h1,
-  h2,
-  h3 {
-    color: var(--color-navy);
-    letter-spacing: 0;
-  }
-
-  h1 {
-    max-width: 720px;
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(3.2rem, 5.4vw, 4.75rem);
-    font-weight: 500;
-    line-height: 1.06;
-  }
-
-  h1 span {
-    display: block;
-    color: var(--color-green);
-  }
-
-  .hero-copy > p:last-child {
-    max-width: 650px;
-    margin: 32px 0 0;
-    color: rgba(0, 0, 67, 0.68);
-    font-size: 1.28rem;
-    font-weight: 700;
-    line-height: 1.62;
-  }
-
-  .hero-image-slot,
-  .service-image-slot {
-    overflow: hidden;
-    border-radius: 8px;
-    background:
-      linear-gradient(135deg, rgba(18, 70, 192, 0.08), rgba(0, 225, 173, 0.12)),
-      #f7fbff;
-  }
-
-  .hero-image-slot {
-    min-height: 310px;
-    box-shadow: 0 24px 54px rgba(0, 0, 67, 0.06);
-  }
-
-  .value-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 44px;
-    margin-top: 72px;
-  }
-
-  .value-grid article {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 18px;
-    align-items: center;
-  }
-
-  .icon-box {
-    display: grid;
-    width: 64px;
-    height: 64px;
-    place-items: center;
-    border-radius: 8px;
-  }
-
-  .green {
-    background: rgba(0, 225, 173, 0.18);
-    color: var(--color-green-dark);
-  }
-
-  .blue {
-    background: rgba(18, 70, 192, 0.13);
-    color: var(--color-blue);
-  }
-
-  .purple {
-    background: rgba(89, 91, 255, 0.14);
-    color: var(--color-purple);
-  }
-
-  .orange {
-    background: rgba(244, 155, 0, 0.18);
-    color: var(--color-orange);
-  }
-
-  .value-grid h2,
-  .trust-grid h3,
-  .benefit-grid h3 {
-    margin: 0 0 8px;
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    font-weight: 700;
-  }
-
-  .value-grid p,
-  .trust-grid p {
-    margin: 0;
-    color: rgba(0, 0, 67, 0.62);
-    font-weight: 700;
-    line-height: 1.55;
+  .values-section {
+    padding: 72px 0 0;
   }
 
   .services-section {
     padding: 72px 0 36px;
-  }
-
-  .section-heading {
-    max-width: 720px;
-    margin: 0 auto 48px;
-    text-align: center;
-  }
-
-  .section-heading .kicker {
-    justify-content: center;
-  }
-
-  .section-heading h2 {
-    margin: 0;
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 4vw, 3.35rem);
-    font-weight: 500;
-    line-height: 1.08;
-  }
-
-  .section-heading > p:last-child {
-    margin: 24px auto 0;
-    color: rgba(0, 0, 67, 0.68);
-    font-weight: 700;
-    line-height: 1.6;
   }
 
   .service-grid {
@@ -432,6 +141,24 @@ const benefits = [
     padding: 44px 38px;
   }
 
+  .icon-box {
+    display: grid;
+    width: 64px;
+    height: 64px;
+    place-items: center;
+    border-radius: 8px;
+  }
+
+  .green {
+    background: rgba(0, 225, 173, 0.18);
+    color: var(--color-green-dark);
+  }
+
+  .blue {
+    background: rgba(18, 70, 192, 0.13);
+    color: var(--color-blue);
+  }
+
   .service-eyebrow {
     margin: 28px 0 24px;
     background: transparent;
@@ -441,13 +168,15 @@ const benefits = [
     text-transform: uppercase;
   }
 
-  .service-content h3 {
+  h3 {
     max-width: 300px;
     margin: 0;
+    color: var(--color-navy);
     font-family: var(--font-display);
     font-size: 2.15rem;
     font-weight: 500;
     line-height: 1.1;
+    letter-spacing: 0;
   }
 
   .service-content > p:not(.service-eyebrow) {
@@ -457,7 +186,7 @@ const benefits = [
     line-height: 1.58;
   }
 
-  .service-content ul {
+  ul {
     display: grid;
     gap: 12px;
     margin: 0;
@@ -465,7 +194,7 @@ const benefits = [
     list-style: none;
   }
 
-  .service-content li {
+  li {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -473,7 +202,7 @@ const benefits = [
     font-weight: 700;
   }
 
-  .service-content li svg {
+  li svg {
     color: var(--color-green);
   }
 
@@ -485,178 +214,39 @@ const benefits = [
     margin-top: 34px;
     color: var(--color-blue);
     font-weight: 700;
-    text-decoration: none;
   }
 
   .service-image-slot {
     min-height: 100%;
+    overflow: hidden;
     border-radius: 0;
+    background:
+      linear-gradient(135deg, rgba(18, 70, 192, 0.08), rgba(0, 225, 173, 0.12)),
+      #f7fbff;
   }
 
   .trust-section {
     width: 100%;
-    max-width: none;
     padding: 70px max(var(--site-padding-x), calc((100% - var(--site-max-width)) / 2));
     background: linear-gradient(180deg, rgba(0, 225, 173, 0.1), rgba(255, 255, 255, 0.92));
-  }
-
-  .trust-grid,
-  .benefit-grid {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0;
-    width: min(100%, var(--site-max-width));
-    margin-inline: auto;
-  }
-
-  .trust-grid article,
-  .benefit-grid article {
-    display: grid;
-    justify-items: center;
-    gap: 16px;
-    padding: 0 34px;
-    text-align: center;
-  }
-
-  .trust-grid article + article,
-  .benefit-grid article + article {
-    border-left: 1px solid rgba(0, 0, 67, 0.12);
   }
 
   .benefits-section {
     padding: 70px 0 52px;
   }
 
-  .benefit-grid span {
-    display: grid;
-    width: 58px;
-    height: 58px;
-    place-items: center;
-    border: 1.5px solid rgba(18, 70, 192, 0.25);
-    border-radius: 50%;
-    color: var(--color-blue);
-  }
-
-  .benefit-grid h3 {
-    max-width: 170px;
-    margin: 0;
-    line-height: 1.4;
-  }
-
-  .about-cta {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 30px;
-    align-items: center;
-    min-height: 148px;
-    margin-bottom: 24px;
-    overflow: hidden;
-    padding: 30px 62px;
-    border-radius: 8px;
-    background: linear-gradient(105deg, var(--color-blue), var(--color-mint));
-    color: #ffffff;
-  }
-
-  .about-cta > span {
-    display: grid;
-    width: 78px;
-    height: 78px;
-    place-items: center;
-    border-radius: 50%;
-    background: #ffffff;
-    color: var(--color-green);
-  }
-
-  .about-cta h2 {
-    max-width: 590px;
-    margin: 0;
-    color: #ffffff;
-    font-family: var(--font-display);
-    font-size: 2rem;
-    font-weight: 500;
-    line-height: 1.08;
-  }
-
-  .about-cta p {
-    margin: 10px 0 0;
-    font-weight: 700;
-  }
-
-  .about-cta a {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    min-width: 180px;
-    min-height: 56px;
-    border-radius: 8px;
-    background: #ffffff;
-    color: var(--color-blue);
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .cta-mark {
-    position: absolute;
-    right: 160px;
-    bottom: -70px;
-    color: rgba(255, 255, 255, 0.13);
-  }
-
   @media (max-width: 1180px) {
-    .hero-grid,
     .service-grid {
       grid-template-columns: 1fr;
-    }
-
-    .hero-image-slot {
-      min-height: 260px;
-    }
-
-    .value-grid,
-    .trust-grid,
-    .benefit-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .trust-grid article,
-    .benefit-grid article {
-      padding: 28px;
-    }
-
-    .trust-grid article + article,
-    .benefit-grid article + article,
-    .trust-grid article:nth-child(3),
-    .benefit-grid article:nth-child(3) {
-      border-left: 0;
     }
 
     .service-card {
       grid-template-columns: 1fr 0.8fr;
     }
-
-    .about-cta {
-      grid-template-columns: auto 1fr;
-    }
-
-    .about-cta a {
-      grid-column: 2;
-      justify-self: start;
-    }
   }
 
   @media (max-width: 760px) {
-    .about-hero {
-      padding-top: 112px;
-    }
-
-    .about-hero,
-    .services-section,
-    .benefits-section,
-    .about-cta {
+    .page-shell {
       width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
     }
 
@@ -664,28 +254,8 @@ const benefits = [
       padding-inline: var(--site-padding-x-mobile);
     }
 
-    h1 {
-      font-size: clamp(2.55rem, 12vw, 3.1rem);
-    }
-
-    .hero-copy > p:last-child {
-      font-size: 1rem;
-    }
-
-    .value-grid,
-    .trust-grid,
-    .benefit-grid,
-    .service-card,
-    .about-cta {
-      grid-template-columns: 1fr;
-    }
-
-    .value-grid {
-      gap: 28px;
-      margin-top: 48px;
-    }
-
     .service-card {
+      grid-template-columns: 1fr;
       min-height: auto;
     }
 
@@ -693,32 +263,12 @@ const benefits = [
       padding: 32px 24px;
     }
 
-    .service-content h3 {
+    h3 {
       font-size: 1.85rem;
     }
 
     .service-image-slot {
       min-height: 260px;
-    }
-
-    .trust-grid article,
-    .benefit-grid article,
-    .trust-grid article + article,
-    .benefit-grid article + article {
-      border-left: 0;
-    }
-
-    .about-cta {
-      padding: 28px;
-    }
-
-    .about-cta a {
-      grid-column: auto;
-      width: 100%;
-    }
-
-    .cta-mark {
-      right: -70px;
     }
   }
 </style>

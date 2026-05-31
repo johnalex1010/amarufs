@@ -57,12 +57,17 @@ src/
     SiteHeader.astro          — header de navegación (logo, nav desktop, nav móvil)
     PageHero.astro            — hero reutilizable para páginas internas
     SiteFooter.astro          — footer del sitio
+    sections/                 — secciones compartidas: hero dividido, headings, grids y CTAs
+    properties/               — tarjetas y módulos de propiedades reutilizables
+  data/
+    siteContent.ts            — contenido estático tipado para páginas y componentes
   pages/
     index.astro               — página de inicio
     nosotros.astro            — página de nosotros
+    contacto.astro            — página de contacto
     propiedades/
       index.astro             — listado de propiedades
-      [slug].astro            — detalle de propiedad (sin rutas hasta conectar fuente de datos)
+      [slug].astro            — detalle de propiedad con ruta estática actual
   styles/
     global.css                — reset, CSS custom properties de design tokens y layout
     fonts.css                 — @font-face y variables --font-sans / --font-display
@@ -74,6 +79,20 @@ package.json
 tsconfig.json
 ```
 
+## Convenciones de imágenes de propiedades
+
+Las imágenes de cada propiedad deben vivir en una carpeta propia dentro de `public/images/properties/`, usando el `slug` de la propiedad como nombre de carpeta.
+
+Ejemplo:
+
+```text
+public/images/properties/departamento-moderno-en-surco/
+  propiedad.jpg
+  imagen-secundaria.webp
+```
+
+La página de detalle `/propiedades/[slug]` lee durante el build las imágenes reales de `public/images/properties/{slug}/` y arma la galería con esos archivos. `propertyDetail.image` en `src/data/siteContent.ts` define la imagen inicial cuando existe dentro de esa carpeta.
+
 ## Convenciones de código limpio
 
 El proyecto debe mantenerse con código limpio, mantenible y escalable:
@@ -83,6 +102,9 @@ El proyecto debe mantenerse con código limpio, mantenible y escalable:
 - Evitar lógica críptica, abreviaturas innecesarias y condicionales difíciles de seguir.
 - No duplicar lógica; extraer utilidades o componentes solo cuando exista una repetición real.
 - Separar contenido, presentación y lógica sin crear abstracciones innecesarias.
+- Mantener las páginas como composición de secciones y componentes; evitar páginas monolíticas con datos, HTML y CSS repetidos.
+- Ubicar datos estáticos reutilizados en `src/data/siteContent.ts` y mantenerlos tipados e inmutables cuando aplique.
+- Crear componentes de sección en `src/components/sections/` y componentes del dominio inmobiliario en `src/components/properties/`.
 - Comentar solo decisiones, restricciones o contexto que no sea evidente en el código.
 - Manejar errores, estados vacíos y datos faltantes de forma explícita.
 - Mantener imports y carpetas organizados por responsabilidad.
@@ -142,10 +164,11 @@ No usar `font-weight` fuera de los valores declarados. El navegador sintetiza ne
 ## Rutas actuales
 
 - `/nosotros`
+- `/contacto`
 - `/propiedades`
-- `/propiedades/[slug]`
+- `/propiedades/departamento-moderno-en-surco`
 
-La ruta dinámica de propiedades existe, pero actualmente `getStaticPaths()` retorna una lista vacía. No se generan detalles de propiedades hasta conectar una fuente de datos y definir los slugs.
+La ruta dinámica de propiedades existe y actualmente genera el detalle estático de `departamento-moderno-en-surco`. Cualquier nueva propiedad debe agregarse desde una fuente de datos o contrato documentado antes de ampliar `getStaticPaths()`.
 
 ## Alias
 
@@ -214,7 +237,7 @@ No se debe editar `dist/` manualmente; cualquier cambio debe venir desde `src/`,
 ## Riesgos conocidos
 
 - El proyecto está dentro de una ruta de tema WordPress, pero la integración activa con WordPress no está asumida ni documentada.
-- La ruta `/propiedades/[slug]` existe, pero no genera páginas hasta conectar una fuente de datos.
+- La ruta `/propiedades/[slug]` existe y genera un detalle estático de referencia; escalarla requiere contrato de datos antes de ampliar slugs.
 - Cualquier integración futura con WordPress, APIs, formularios o datos de propiedades requiere contrato documentado antes de implementarse.
 
 ## Rollback

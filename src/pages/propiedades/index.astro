@@ -1,99 +1,13 @@
 ---
-import { Icon } from 'astro-icon/components'
-import SiteHeader from '@/components/SiteHeader.astro'
-import SiteFooter from '@/components/SiteFooter.astro'
-import BaseLayout from '@/layouts/BaseLayout.astro'
+import { Icon } from 'astro-icon/components';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CtaBanner from '@/components/sections/CtaBanner.astro';
+import PropertyListCard from '@/components/properties/PropertyListCard.astro';
+import { listedProperties, propertyTypes } from '@/data/siteContent';
 
-const propertyImage = '/images/properties/propiedad.jpg'
-
-const propertyTypes = [
-  'Departamentos (12)',
-  'Casas (8)',
-  'Terrenos (4)',
-  'Oficinas (2)',
-  'Locales comerciales (1)',
-]
-
-const properties = [
-  {
-    status: 'En venta',
-    title: 'Departamento moderno',
-    location: 'Surco, Lima',
-    price: 'S/ 520,000',
-    description:
-      'Departamento con excelente iluminación natural, acabados de primera y áreas comunes.',
-    meta: [
-      { icon: 'solar:bed-linear', label: '2 habitaciones', value: '2' },
-      { icon: 'solar:bath-linear', label: '2 baños', value: '2' },
-      {
-        icon: 'solar:ruler-linear',
-        label: '85 metros cuadrados',
-        value: '85 m²',
-      },
-      { icon: 'solar:layers-linear', label: 'Piso 5', value: 'Piso 5' },
-    ],
-    tone: 'green',
-    gallery: '1 / 12',
-  },
-  {
-    status: 'En alquiler',
-    title: 'Casa familiar',
-    location: 'La Molina, Lima',
-    price: 'S/ 4,500',
-    suffix: '/mes',
-    description:
-      'Amplia casa en zona residencial tranquila, ideal para familias.',
-    meta: [
-      { icon: 'solar:bed-linear', label: '4 habitaciones', value: '4' },
-      { icon: 'solar:bath-linear', label: '3 baños', value: '3' },
-      {
-        icon: 'solar:ruler-linear',
-        label: '160 metros cuadrados',
-        value: '160 m²',
-      },
-      { icon: 'solar:home-2-linear', label: '2 pisos', value: '2 pisos' },
-    ],
-    tone: 'blue',
-    gallery: '1 / 10',
-  },
-  {
-    status: 'En venta',
-    title: 'Casa minimalista',
-    location: 'Cieneguilla, Lima',
-    price: 'S/ 750,000',
-    description:
-      'Diseño moderno con jardín amplio, terraza y piscina. Perfecta para disfrutar en familia.',
-    meta: [
-      { icon: 'solar:bed-linear', label: '3 habitaciones', value: '3' },
-      { icon: 'solar:bath-linear', label: '3 baños', value: '3' },
-      {
-        icon: 'solar:ruler-linear',
-        label: '120 metros cuadrados',
-        value: '120 m²',
-      },
-      { icon: 'solar:home-2-linear', label: '2 pisos', value: '2 pisos' },
-    ],
-    tone: 'green',
-    gallery: '1 / 14',
-  },
-  {
-    status: 'En venta',
-    title: 'Terreno en venta',
-    location: 'Pachacamac, Lima',
-    price: 'S/ 350,000',
-    description:
-      'Terreno plano ideal para proyecto de casa de campo o inversión.',
-    meta: [
-      {
-        icon: 'solar:ruler-angular-linear',
-        label: '1,000 metros cuadrados',
-        value: '1,000 m²',
-      },
-    ],
-    tone: 'green',
-    gallery: '1 / 6',
-  },
-]
+const propertyImage = '/images/properties/departamento-moderno-en-surco/propiedad.jpg';
 ---
 
 <BaseLayout
@@ -107,37 +21,24 @@ const properties = [
         <div class="hero-copy">
           <p class="kicker">Propiedades</p>
           <h1 id="properties-title">Propiedades</h1>
-          <p>
-            Encuentra la propiedad ideal con la guía y el respaldo de expertos.
-          </p>
+          <p>Encuentra la propiedad ideal con la guía y el respaldo de expertos.</p>
         </div>
-        <div
-          class="hero-media"
-          aria-label="Espacio reservado para imagen principal"
-        >
+        <div class="hero-media" aria-label="Imagen principal de propiedades">
           <img
             src="/images/properties/hero-propiedades.png"
-            alt="Propiedades"
+            alt="Propiedades disponibles con Amaru FS Inmobiliaria"
             loading="eager"
+            width="720"
+            height="360"
           />
         </div>
       </div>
 
-      <form
-        class="search-panel"
-        action="/propiedades/"
-        aria-label="Buscar propiedades"
-      >
+      <form class="search-panel" action="/propiedades/" aria-label="Buscar propiedades">
         <label class="search-keyword">
           <Icon name="solar:magnifer-linear" size={22} />
-          <span class="sr-only"
-            >Buscar por ubicación, propiedad o palabra clave</span
-          >
-          <input
-            type="search"
-            name="q"
-            placeholder="Buscar por ubicación, propiedad o palabra clave"
-          />
+          <span class="sr-only">Buscar por ubicación, propiedad o palabra clave</span>
+          <input type="search" name="q" placeholder="Ubicación o palabra clave" />
         </label>
 
         <label class="select-field">
@@ -190,37 +91,21 @@ const properties = [
         </div>
 
         <div class="filter-group">
-          <h3>
-            <Icon name="solar:home-2-linear" size={18} /> Tipo de propiedad
-          </h3>
-          <label class="check-row"
-            ><input type="checkbox" checked /> Todos los tipos</label
-          >
-          {
-            propertyTypes.map((type) => (
-              <label class="check-row">
-                <input type="checkbox" /> {type}
-              </label>
-            ))
-          }
+          <h3><Icon name="solar:home-2-linear" size={18} /> Tipo de propiedad</h3>
+          <label class="check-row"><input type="checkbox" checked /> Todos los tipos</label>
+          {propertyTypes.map((type) => <label class="check-row"><input type="checkbox" /> {type}</label>)}
         </div>
 
         <div class="filter-group">
           <h3><Icon name="solar:tag-linear" size={18} /> Estado</h3>
-          <label class="check-row"
-            ><input type="checkbox" checked /> En venta</label
-          >
+          <label class="check-row"><input type="checkbox" checked /> En venta</label>
           <label class="check-row"><input type="checkbox" /> En alquiler</label>
         </div>
 
         <div class="filter-group">
-          <h3>
-            <Icon name="solar:home-smile-angle-linear" size={18} /> Rango de precio
-          </h3>
+          <h3><Icon name="solar:home-smile-angle-linear" size={18} /> Rango de precio</h3>
           <div class="range-track" aria-hidden="true"><span></span></div>
-          <div class="range-labels">
-            <span>S/ 0</span><span>S/ 2,000,000+</span>
-          </div>
+          <div class="range-labels"><span>S/ 0</span><span>S/ 2,000,000+</span></div>
         </div>
 
         <div class="filter-group">
@@ -247,9 +132,7 @@ const properties = [
 
       <div class="results-area">
         <div class="results-toolbar">
-          <h2 id="results-title">
-            <strong>18</strong> propiedades encontradas
-          </h2>
+          <h2 id="results-title"><strong>18</strong> propiedades encontradas</h2>
           <label>
             <span>Ordenar por:</span>
             <select name="orden">
@@ -261,93 +144,28 @@ const properties = [
         </div>
 
         <div class="property-list">
-          {
-            properties.map((property) => (
-              <article class="property-card">
-                <div class="property-media">
-                  <img
-                    src={propertyImage}
-                    alt={`Imagen referencial de ${property.title}`}
-                    width="440"
-                    height="272"
-                    loading="lazy"
-                  />
-                  <span class={`status ${property.tone}`}>
-                    {property.status}
-                  </span>
-                  <button
-                    type="button"
-                    aria-label={`Guardar ${property.title}`}
-                  >
-                    <Icon name="solar:heart-linear" size={28} />
-                  </button>
-                  <span class="gallery-count">
-                    <Icon name="solar:camera-linear" size={14} />
-                    {property.gallery}
-                  </span>
-                </div>
-
-                <div class="property-content">
-                  <h3>{property.title}</h3>
-                  <p class="location">
-                    <Icon name="solar:map-point-linear" size={16} />
-                    {property.location}
-                  </p>
-                  <ul aria-label={`Características de ${property.title}`}>
-                    {property.meta.map((item) => (
-                      <li title={item.label}>
-                        <Icon name={item.icon} size={17} />
-                        {item.value}
-                      </li>
-                    ))}
-                  </ul>
-                  <p class="description">{property.description}</p>
-                  <div class="card-footer">
-                    <strong>
-                      {property.price}
-                      {property.suffix && <small>{property.suffix}</small>}
-                    </strong>
-                    <a href="/propiedades/departamento-moderno-en-surco/">
-                      Ver detalles
-                      <Icon name="solar:arrow-right-linear" size={18} />
-                    </a>
-                  </div>
-                </div>
-              </article>
-            ))
-          }
+          {listedProperties.map((property) => <PropertyListCard image={propertyImage} property={property} />)}
         </div>
 
         <nav class="pagination" aria-label="Paginación de propiedades">
-          <a href="/propiedades/" aria-label="Página anterior"
-            ><Icon name="solar:alt-arrow-left-linear" size={18} /></a
-          >
+          <a href="/propiedades/" aria-label="Página anterior"><Icon name="solar:alt-arrow-left-linear" size={18} /></a>
           <a class="active" href="/propiedades/" aria-current="page">1</a>
           <a href="/propiedades/">2</a>
           <a href="/propiedades/">3</a>
-          <a href="/propiedades/" aria-label="Página siguiente"
-            ><Icon name="solar:alt-arrow-right-linear" size={18} /></a
-          >
+          <a href="/propiedades/" aria-label="Página siguiente"><Icon name="solar:alt-arrow-right-linear" size={18} /></a>
         </nav>
       </div>
     </section>
 
-    <section class="support-banner" aria-labelledby="support-title">
-      <span class="support-icon"
-        ><Icon name="solar:home-2-linear" size={44} /></span
-      >
-      <div>
-        <h2 id="support-title">¿No encuentras lo que buscas?</h2>
-        <p>
-          Cuéntanos qué necesitas y te ayudamos a encontrar la propiedad ideal.
-        </p>
-      </div>
-      <a href="/contacto/">
-        Contáctanos
-        <Icon name="solar:arrow-right-linear" size={20} />
-      </a>
-      <Icon class="support-mark" name="solar:buildings-2-linear" size={220} />
-    </section>
+    <div class="support-shell">
+      <CtaBanner
+        labelledBy="support-title"
+        title="¿No encuentras lo que buscas?"
+        copy="Cuéntanos qué necesitas y te ayudamos a encontrar la propiedad ideal."
+        href="/contacto/"
+        label="Contáctanos"
+      />
+    </div>
   </main>
   <SiteFooter />
 </BaseLayout>
@@ -362,7 +180,7 @@ const properties = [
   .hero-inner,
   .search-panel,
   .properties-shell,
-  .support-banner {
+  .support-shell {
     width: min(calc(100% - var(--site-padding-x)), var(--site-max-width));
     margin-inline: auto;
   }
@@ -390,7 +208,7 @@ const properties = [
   }
 
   .kicker::before {
-    content: '';
+    content: "";
     width: 12px;
     height: 12px;
     border-radius: 50%;
@@ -416,19 +234,18 @@ const properties = [
     line-height: 1.5;
   }
 
-  .hero-media {
-    min-height: 280px;
+  .hero-media img {
+    display: block;
+    width: 100%;
+    height: auto;
     border-radius: 8px;
-    margin: 0 auto 0;
   }
 
   .search-panel {
     position: relative;
     z-index: 2;
     display: grid;
-    grid-template-columns:
-      minmax(260px, 1.45fr) minmax(190px, 0.7fr) minmax(190px, 0.7fr)
-      auto;
+    grid-template-columns: minmax(260px, 1.45fr) minmax(190px, 0.7fr) minmax(190px, 0.7fr) auto;
     gap: 18px;
     margin-top: -24px;
     padding: 28px;
@@ -456,20 +273,16 @@ const properties = [
     color: var(--color-navy);
   }
 
-  .search-keyword input,
-  .select-field select,
-  .results-toolbar select {
+  input,
+  select {
     width: 100%;
     min-width: 0;
     border: 0;
     background: transparent;
     color: var(--color-navy);
+    font: inherit;
     font-weight: 700;
     outline: none;
-  }
-
-  .search-keyword input::placeholder {
-    color: rgba(0, 0, 67, 0.44);
   }
 
   .select-field {
@@ -486,9 +299,7 @@ const properties = [
   }
 
   .search-button,
-  .apply-button,
-  .support-banner a,
-  .card-footer a {
+  .apply-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -496,7 +307,7 @@ const properties = [
     min-height: 58px;
     border-radius: 8px;
     font-weight: 700;
-    text-decoration: none;
+    cursor: pointer;
   }
 
   .search-button {
@@ -504,7 +315,6 @@ const properties = [
     border: 0;
     background: var(--color-blue);
     color: #ffffff;
-    cursor: pointer;
     box-shadow: var(--shadow-button);
   }
 
@@ -515,22 +325,17 @@ const properties = [
     padding: 34px 0 0;
   }
 
-  .filters-panel,
-  .property-card {
+  .filters-panel {
+    align-self: start;
+    padding: 28px 24px;
     border: 1px solid rgba(0, 0, 67, 0.09);
     border-radius: 8px;
     background: #ffffff;
     box-shadow: 0 16px 38px rgba(0, 0, 67, 0.05);
   }
 
-  .filters-panel {
-    align-self: start;
-    padding: 28px 24px;
-  }
-
   .filters-heading,
-  .results-toolbar,
-  .card-footer {
+  .results-toolbar {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -538,17 +343,11 @@ const properties = [
   }
 
   .filters-heading h2,
-  .results-toolbar h2,
-  .support-banner h2 {
+  .results-toolbar h2 {
     margin: 0;
-    font-family: var(--font-display);
-    font-weight: 500;
-    letter-spacing: 0;
-  }
-
-  .filters-heading h2 {
+    color: rgba(0, 0, 67, 0.66);
     font-family: var(--font-sans);
-    font-size: 1.08rem;
+    font-size: 1.18rem;
     font-weight: 700;
   }
 
@@ -605,7 +404,7 @@ const properties = [
 
   .range-track::before,
   .range-track span {
-    content: '';
+    content: "";
     position: absolute;
     top: 7px;
     left: 0;
@@ -620,27 +419,6 @@ const properties = [
 
   .range-track span {
     background: var(--color-teal);
-  }
-
-  .range-track span::before,
-  .range-track span::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--color-teal);
-    border-radius: 50%;
-    background: #ffffff;
-    transform: translateY(-50%);
-  }
-
-  .range-track span::before {
-    left: 0;
-  }
-
-  .range-track span::after {
-    right: 0;
   }
 
   .range-labels {
@@ -674,19 +452,11 @@ const properties = [
     border: 1.5px solid var(--color-teal);
     background: #ffffff;
     color: var(--color-green-dark);
-    cursor: pointer;
   }
 
   .results-toolbar {
     min-height: 64px;
     margin-bottom: 28px;
-  }
-
-  .results-toolbar h2 {
-    color: rgba(0, 0, 67, 0.66);
-    font-family: var(--font-sans);
-    font-size: 1.18rem;
-    font-weight: 700;
   }
 
   .results-toolbar h2 strong {
@@ -704,149 +474,6 @@ const properties = [
   .property-list {
     display: grid;
     gap: 22px;
-  }
-
-  .property-card {
-    display: grid;
-    grid-template-columns: minmax(260px, 440px) minmax(0, 1fr);
-    overflow: hidden;
-  }
-
-  .property-media {
-    position: relative;
-    min-height: 272px;
-    overflow: hidden;
-  }
-
-  .property-media img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .property-media button {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    display: grid;
-    width: 46px;
-    height: 46px;
-    place-items: center;
-    border: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.95);
-    color: rgba(0, 0, 67, 0.58);
-    cursor: pointer;
-  }
-
-  .status {
-    position: absolute;
-    top: 24px;
-    left: 24px;
-    display: inline-flex;
-    min-height: 34px;
-    align-items: center;
-    padding: 0 18px;
-    border-radius: 999px;
-    color: #ffffff;
-    font-size: 0.86rem;
-    font-weight: 700;
-  }
-
-  .status.green {
-    background: var(--color-mint);
-  }
-
-  .status.blue {
-    background: var(--color-blue);
-  }
-
-  .gallery-count {
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    min-height: 28px;
-    padding: 0 9px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.58);
-    color: #ffffff;
-    font-size: 0.82rem;
-    font-weight: 700;
-  }
-
-  .property-content {
-    display: grid;
-    align-content: start;
-    padding: 28px 32px;
-  }
-
-  .property-content h3 {
-    margin: 0 0 10px;
-    color: var(--color-navy);
-    font-size: 1.55rem;
-    line-height: 1.2;
-  }
-
-  .location,
-  .description {
-    color: rgba(0, 0, 67, 0.62);
-    font-weight: 700;
-    line-height: 1.55;
-  }
-
-  .location {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0 0 18px;
-    font-size: 0.95rem;
-  }
-
-  .property-content ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px 26px;
-    margin: 0 0 20px;
-    padding: 0;
-    list-style: none;
-    color: rgba(0, 0, 67, 0.56);
-    font-weight: 700;
-  }
-
-  .property-content li {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .description {
-    margin: 0 0 24px;
-  }
-
-  .card-footer {
-    margin-top: auto;
-  }
-
-  .card-footer strong {
-    color: var(--color-green);
-    font-size: 1.45rem;
-  }
-
-  .card-footer small {
-    margin-left: 4px;
-    color: rgba(0, 0, 67, 0.58);
-    font-size: 0.82rem;
-  }
-
-  .card-footer a {
-    min-width: 156px;
-    min-height: 48px;
-    border: 1.5px solid var(--color-blue);
-    color: var(--color-blue);
   }
 
   .pagination {
@@ -873,56 +500,8 @@ const properties = [
     color: #ffffff;
   }
 
-  .support-banner {
-    position: relative;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 28px;
-    align-items: center;
-    min-height: 150px;
+  .support-shell {
     margin-top: 52px;
-    overflow: hidden;
-    padding: 30px 62px;
-    border-radius: 8px;
-    background: linear-gradient(105deg, var(--color-blue), var(--color-mint));
-    color: #ffffff;
-  }
-
-  .support-icon {
-    display: grid;
-    width: 76px;
-    height: 76px;
-    place-items: center;
-    border-radius: 50%;
-    background: #ffffff;
-    color: var(--color-green);
-  }
-
-  .support-banner h2 {
-    color: #ffffff;
-    font-size: 2rem;
-  }
-
-  .support-banner p {
-    margin: 10px 0 0;
-    max-width: 500px;
-    font-weight: 700;
-    line-height: 1.5;
-  }
-
-  .support-banner a {
-    position: relative;
-    z-index: 1;
-    min-width: 180px;
-    background: #ffffff;
-    color: var(--color-blue);
-  }
-
-  .support-mark {
-    position: absolute;
-    right: 150px;
-    bottom: -64px;
-    color: rgba(255, 255, 255, 0.12);
   }
 
   .sr-only {
@@ -937,17 +516,13 @@ const properties = [
   }
 
   @media (max-width: 1180px) {
-    .hero-inner {
+    .hero-inner,
+    .properties-shell {
       grid-template-columns: 1fr;
-      gap: 26px;
     }
 
     .hero-copy {
       padding-bottom: 0;
-    }
-
-    .hero-media {
-      min-height: 220px;
     }
 
     .search-panel {
@@ -958,10 +533,6 @@ const properties = [
     .search-keyword,
     .search-button {
       grid-column: 1 / -1;
-    }
-
-    .properties-shell {
-      grid-template-columns: 1fr;
     }
 
     .filters-panel {
@@ -978,15 +549,6 @@ const properties = [
     .filter-group {
       border-bottom: 0;
     }
-
-    .support-banner {
-      grid-template-columns: auto 1fr;
-    }
-
-    .support-banner a {
-      grid-column: 2;
-      justify-self: start;
-    }
   }
 
   @media (max-width: 760px) {
@@ -997,11 +559,8 @@ const properties = [
     .hero-inner,
     .search-panel,
     .properties-shell,
-    .support-banner {
-      width: min(
-        calc(100% - var(--site-padding-x-mobile)),
-        var(--site-max-width)
-      );
+    .support-shell {
+      width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
     }
 
     h1 {
@@ -1030,49 +589,16 @@ const properties = [
       align-items: stretch;
     }
 
+    .filters-heading {
+      display: grid;
+      justify-content: start;
+      gap: 10px;
+    }
+
     .results-toolbar label {
       grid-template-columns: 1fr;
       gap: 4px;
       padding: 9px 14px;
-    }
-
-    .property-card {
-      grid-template-columns: 1fr;
-    }
-
-    .property-media {
-      min-height: 220px;
-    }
-
-    .property-content {
-      padding: 24px 20px;
-    }
-
-    .property-content h3 {
-      font-size: 1.28rem;
-    }
-
-    .card-footer {
-      display: grid;
-      gap: 18px;
-    }
-
-    .card-footer a {
-      width: 100%;
-    }
-
-    .support-banner {
-      grid-template-columns: 1fr;
-      padding: 28px;
-    }
-
-    .support-banner a {
-      grid-column: auto;
-      width: 100%;
-    }
-
-    .support-mark {
-      right: -50px;
     }
   }
 </style>

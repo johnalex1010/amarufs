@@ -1,87 +1,54 @@
 ---
-import { Icon } from 'astro-icon/components'
-import SiteHeader from '@/components/SiteHeader.astro'
-import SiteFooter from '@/components/SiteFooter.astro'
-import BaseLayout from '@/layouts/BaseLayout.astro'
-
-const property = {
-  slug: 'departamento-moderno-en-surco',
-  status: 'En venta',
-  title: 'Departamento moderno en Surco',
-  location: 'Surco, Lima',
-  price: 'S/ 520,000',
-  priceLabel: 'Precio de venta',
-  image: '/images/properties/propiedad.jpg',
-  description: [
-    'Hermoso departamento ubicado en una de las zonas más exclusivas y residenciales de Surco.',
-    'Cuenta con excelente iluminación natural, distribución funcional y acabados de primera calidad.',
-    'Cerca de parques, colegios, centros comerciales y con fácil acceso a las principales avenidas.',
-  ],
-}
-
-const highlights = [
-  {
-    icon: 'solar:buildings-2-linear',
-    label: 'Tipo de propiedad',
-    value: 'Departamento',
-  },
-  { icon: 'solar:clock-circle-linear', label: 'Antigüedad', value: '5 años' },
-  {
-    icon: 'solar:hand-money-linear',
-    label: 'Mantenimiento',
-    value: 'S/ 250 mensuales',
-  },
-  {
-    icon: 'solar:check-circle-linear',
-    label: 'Disponibilidad',
-    value: 'Inmediata',
-  },
-]
-
-const stats = [
-  { icon: 'solar:ruler-linear', value: '85 m²', label: 'Área total' },
-  { icon: 'solar:bed-linear', value: '2', label: 'Dormitorios' },
-  { icon: 'solar:bath-linear', value: '2', label: 'Baños' },
-  { icon: 'solar:garage-linear', value: '1', label: 'Estacionamiento' },
-  { icon: 'solar:layers-linear', value: 'Piso 5', label: 'Piso ubicado' },
-]
-
-const mainFeatures = [
-  { icon: 'solar:sofa-linear', text: 'Sala-comedor amplia e iluminada' },
-  {
-    icon: 'solar:washing-machine-minimalistic-linear',
-    text: 'Área de lavandería independiente',
-  },
-  {
-    icon: 'solar:chef-hat-linear',
-    text: 'Cocina abierta con acabados modernos',
-  },
-  {
-    icon: 'solar:hanger-2-linear',
-    text: 'Walk-in closet en dormitorio principal',
-  },
-  { icon: 'solar:buildings-linear', text: 'Balcón con vista a la ciudad' },
-  {
-    icon: 'solar:shield-check-linear',
-    text: 'Edificio con ascensor y seguridad 24/7',
-  },
-]
-
-const buildingFeatures = [
-  { icon: 'solar:shield-check-linear', text: 'Seguridad 24/7' },
-  { icon: 'solar:round-alt-arrow-up-linear', text: 'Ascensor' },
-  { icon: 'solar:users-group-rounded-linear', text: 'Lobby moderno' },
-  { icon: 'solar:videocamera-record-linear', text: 'Cámaras de vigilancia' },
-  { icon: 'solar:garage-linear', text: 'Estacionamientos para visitas' },
-]
+import { existsSync, readdirSync } from 'node:fs';
+import { join } from 'node:path';
+import { Icon } from 'astro-icon/components';
+import SiteHeader from '@/components/SiteHeader.astro';
+import SiteFooter from '@/components/SiteFooter.astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PropertyDetailContent from '@/components/properties/PropertyDetailContent.astro';
+import PropertyDetailGallery from '@/components/properties/PropertyDetailGallery.astro';
+import PropertyDetailSidebar from '@/components/properties/PropertyDetailSidebar.astro';
+import {
+  propertyBuildingFeatures,
+  propertyDetail,
+  propertyHighlights,
+  propertyMainFeatures,
+  propertyStats,
+} from '@/data/siteContent';
 
 export function getStaticPaths() {
-  return [{ params: { slug: 'departamento-moderno-en-surco' } }]
+  return [{ params: { slug: propertyDetail.slug } }];
 }
+
+const imageExtensions = new Set(['.avif', '.jpg', '.jpeg', '.png', '.webp']);
+const propertyImagesDirectory = join(
+  process.cwd(),
+  'public',
+  'images',
+  'properties',
+  propertyDetail.slug
+);
+
+const propertyGalleryImages = existsSync(propertyImagesDirectory)
+  ? readdirSync(propertyImagesDirectory, { withFileTypes: true })
+      .filter((entry) => {
+        const extension = entry.name.slice(entry.name.lastIndexOf('.')).toLowerCase();
+        return entry.isFile() && imageExtensions.has(extension);
+      })
+      .map((entry) => `/images/properties/${propertyDetail.slug}/${entry.name}`)
+      .sort((currentImage, nextImage) => currentImage.localeCompare(nextImage, 'es'))
+  : [];
+
+const galleryImages = propertyGalleryImages.includes(propertyDetail.image)
+  ? [
+      propertyDetail.image,
+      ...propertyGalleryImages.filter((galleryImage) => galleryImage !== propertyDetail.image),
+    ]
+  : propertyGalleryImages;
 ---
 
 <BaseLayout
-  title={`${property.title} | Amaru FS Inmobiliaria`}
+  title={`${propertyDetail.title} | Amaru FS Inmobiliaria`}
   description="Detalle de departamento moderno en venta en Surco, Lima, con características, ubicación y opciones de contacto de Amaru FS Inmobiliaria."
 >
   <SiteHeader />
@@ -92,216 +59,46 @@ export function getStaticPaths() {
         <Icon name="solar:alt-arrow-right-linear" size={14} />
         <a href="/propiedades/">Propiedades</a>
         <Icon name="solar:alt-arrow-right-linear" size={14} />
-        <span>{property.title}</span>
+        <span>{propertyDetail.title}</span>
       </nav>
 
       <div class="title-row">
         <div>
-          <span class="status">{property.status}</span>
-          <h1 id="property-title">{property.title}</h1>
+          <span class="status">{propertyDetail.status}</span>
+          <h1 id="property-title">{propertyDetail.title}</h1>
           <p class="location">
             <Icon name="solar:map-point-linear" size={18} />
-            {property.location}
+            {propertyDetail.location}
           </p>
         </div>
         <div class="title-actions" aria-label="Acciones de propiedad">
-          <button type="button">
-            <Icon name="solar:heart-linear" size={19} />
-            Guardar
-          </button>
-          <button type="button">
-            <Icon name="solar:share-linear" size={19} />
-            Compartir
-          </button>
+          <button type="button"><Icon name="solar:heart-linear" size={19} />Guardar</button>
+          <button type="button"><Icon name="solar:share-linear" size={19} />Compartir</button>
         </div>
       </div>
 
       <div class="detail-grid">
         <div class="main-column">
-          <section class="gallery" aria-label="Galería de la propiedad">
-            <figure class="main-photo">
-              <img
-                src={property.image}
-                alt={`Imagen principal de ${property.title}`}
-                width="860"
-                height="540"
-              />
-              <figcaption>
-                <Icon name="solar:camera-linear" size={16} />
-                1 / 12
-              </figcaption>
-            </figure>
-            <div class="thumb-row" aria-label="Miniaturas de la propiedad">
-              {
-                [1, 2, 3, 4].map((item) => (
-                  <button
-                    class:list={{ active: item === 1 }}
-                    type="button"
-                    aria-label={`Ver imagen ${item}`}
-                  >
-                    <img
-                      src={property.image}
-                      alt=""
-                      width="150"
-                      height="94"
-                      loading="lazy"
-                    />
-                  </button>
-                ))
-              }
-              <button class="more-photos" type="button">+8 fotos</button>
-            </div>
-          </section>
-
-          <section class="highlight-strip" aria-label="Resumen de la propiedad">
-            {
-              highlights.map((item) => (
-                <article>
-                  <span>
-                    <Icon name={item.icon} size={22} />
-                  </span>
-                  <div>
-                    <p>{item.label}</p>
-                    <strong>{item.value}</strong>
-                  </div>
-                </article>
-              ))
-            }
-          </section>
-
-          <section class="content-section" aria-labelledby="features-title">
-            <h2 id="features-title">Características principales</h2>
-            <div class="feature-grid">
-              {
-                mainFeatures.map((item) => (
-                  <div class="feature-item">
-                    <span>
-                      <Icon name={item.icon} size={20} />
-                    </span>
-                    <p>{item.text}</p>
-                  </div>
-                ))
-              }
-            </div>
-          </section>
-
-          <section class="content-section" aria-labelledby="description-title">
-            <h2 id="description-title">Descripción</h2>
-            {property.description.map((paragraph) => <p>{paragraph}</p>)}
-          </section>
-
-          <section
-            class="content-section location-section"
-            aria-labelledby="location-title"
-          >
-            <h2 id="location-title">Ubicación</h2>
-            <p class="location">
-              <Icon name="solar:map-point-linear" size={17} />
-              {property.location}
-            </p>
-            <div
-              class="map-placeholder"
-              aria-label="Mapa referencial de la zona de Surco, Lima"
-            >
-              <span class="map-pin"
-                ><Icon name="solar:map-point-bold" size={58} /></span
-              >
-              <span class="map-label one">Av. Javier Prado Este</span>
-              <span class="map-label two">Universidad de Lima</span>
-              <span class="map-label three">C.C. El Polo</span>
-            </div>
-            <a
-              class="outline-link"
-              href="https://www.google.com/maps/search/Surco,+Lima"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Ver en Google Maps
-              <Icon name="solar:square-top-down-linear" size={17} />
-            </a>
-          </section>
+          <PropertyDetailGallery
+            image={propertyDetail.image}
+            images={galleryImages}
+            title={propertyDetail.title}
+          />
+          <PropertyDetailContent
+            highlights={propertyHighlights}
+            features={propertyMainFeatures}
+            buildingFeatures={propertyBuildingFeatures}
+            description={propertyDetail.description}
+            location={propertyDetail.location}
+          />
         </div>
 
-        <aside
-          class="side-column"
-          aria-label="Información y contacto de la propiedad"
-        >
-          <section class="price-card">
-            <strong>{property.price}</strong>
-            <p>{property.priceLabel}</p>
-            <ul>
-              {
-                stats.map((item) => (
-                  <li>
-                    <Icon name={item.icon} size={22} />
-                    <span>{item.value}</span>
-                    <small>{item.label}</small>
-                  </li>
-                ))
-              }
-            </ul>
-            <a class="primary-action" href="#formulario-contacto">
-              <Icon name="solar:calendar-mark-linear" size={20} />
-              Agendar visita
-            </a>
-            <a
-              class="whatsapp-action"
-              href="https://wa.me/51987654321"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Icon name="simple-icons:whatsapp" size={20} />
-              Contactar por WhatsApp
-            </a>
-          </section>
-
-          <section class="advisor-card" aria-labelledby="advisor-title">
-            <div class="advisor-cover">
-              <Icon name="solar:buildings-2-linear" size={150} />
-            </div>
-            <div class="advisor-avatar" aria-hidden="true">AS</div>
-            <h2 id="advisor-title">Andrea Silva</h2>
-            <p>Asesora inmobiliaria</p>
-            <a href="tel:+51987654321">
-              <Icon name="solar:phone-calling-linear" size={18} />
-              +51 987 654 321
-            </a>
-            <a href="mailto:andrea.silva@amarufs.pe">
-              <Icon name="solar:letter-linear" size={18} />
-              andrea.silva@amarufs.pe
-            </a>
-            <a
-              class="advisor-whatsapp"
-              href="https://wa.me/51987654321"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Icon name="simple-icons:whatsapp" size={18} />
-              Escríbele por WhatsApp
-            </a>
-            <a class="outline-link" href="/propiedades/">
-              Ver más propiedades
-              <Icon name="solar:arrow-right-linear" size={18} />
-            </a>
-          </section>
-        </aside>
+        <PropertyDetailSidebar
+          price={propertyDetail.price}
+          priceLabel={propertyDetail.priceLabel}
+          stats={propertyStats}
+        />
       </div>
-
-      <section class="building-card" aria-labelledby="building-title">
-        <h2 id="building-title">Características del edificio</h2>
-        <div>
-          {
-            buildingFeatures.map((item) => (
-              <article>
-                <span>
-                  <Icon name={item.icon} size={21} />
-                </span>
-                <p>{item.text}</p>
-              </article>
-            ))
-          }
-        </div>
-      </section>
     </section>
   </main>
   <SiteFooter />
@@ -330,7 +127,6 @@ export function getStaticPaths() {
 
   .breadcrumbs a {
     color: rgba(0, 0, 67, 0.68);
-    text-decoration: none;
   }
 
   .title-row {
@@ -353,22 +149,12 @@ export function getStaticPaths() {
     font-weight: 700;
   }
 
-  h1,
-  h2 {
-    color: var(--color-navy);
-    letter-spacing: 0;
-  }
-
   h1 {
     margin: 22px 0 14px;
+    color: var(--color-navy);
     font-size: clamp(2rem, 3.3vw, 3rem);
     line-height: 1.12;
-  }
-
-  h2 {
-    margin: 0 0 24px;
-    font-size: 1.55rem;
-    line-height: 1.25;
+    letter-spacing: 0;
   }
 
   .location {
@@ -385,8 +171,7 @@ export function getStaticPaths() {
     gap: 14px;
   }
 
-  .title-actions button,
-  .outline-link {
+  .title-actions button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -398,7 +183,6 @@ export function getStaticPaths() {
     background: #ffffff;
     color: var(--color-blue);
     font-weight: 700;
-    text-decoration: none;
     cursor: pointer;
   }
 
@@ -409,464 +193,20 @@ export function getStaticPaths() {
     align-items: start;
   }
 
-  .main-column,
-  .side-column {
+  .main-column {
     display: grid;
     gap: 28px;
-  }
-
-  .main-photo {
-    position: relative;
-    margin: 0;
-    overflow: hidden;
-    border-radius: 8px;
-    background: #f6fbff;
-  }
-
-  .main-photo img,
-  .thumb-row img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .main-photo {
-    aspect-ratio: 860 / 470;
-  }
-
-  .main-photo figcaption {
-    position: absolute;
-    right: 18px;
-    bottom: 18px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    min-height: 34px;
-    padding: 0 12px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.58);
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  .thumb-row {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 18px;
-  }
-
-  .thumb-row button {
-    min-width: 0;
-    min-height: 98px;
-    overflow: hidden;
-    border: 0;
-    border-radius: 8px;
-    background: #f6fbff;
-    cursor: pointer;
-  }
-
-  .thumb-row button.active {
-    border: 3px solid var(--color-teal);
-    padding: 0;
-  }
-
-  .more-photos {
-    position: relative;
-    color: #ffffff;
-    font-size: 1.35rem;
-    font-weight: 700;
-    background:
-      linear-gradient(rgba(0, 0, 67, 0.52), rgba(0, 0, 67, 0.52)),
-      url('/images/properties/propiedad.jpg') center / cover;
-  }
-
-  .highlight-strip,
-  .price-card,
-  .contact-card,
-  .advisor-card,
-  .building-card {
-    border: 1px solid rgba(0, 0, 67, 0.1);
-    border-radius: 8px;
-    background: #ffffff;
-    box-shadow: 0 18px 42px rgba(0, 0, 67, 0.06);
-  }
-
-  .highlight-strip {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
-    padding: 24px 18px;
-  }
-
-  .highlight-strip article {
-    display: flex;
-    gap: 14px;
-    align-items: center;
-    padding: 0 18px;
-  }
-
-  .highlight-strip article + article {
-    border-left: 1px solid rgba(0, 0, 67, 0.1);
-  }
-
-  .highlight-strip span,
-  .feature-item span,
-  .building-card span {
-    display: grid;
-    flex: 0 0 auto;
-    width: 42px;
-    height: 42px;
-    place-items: center;
-    border-radius: 8px;
-    background: rgba(0, 225, 173, 0.16);
-    color: var(--color-green-dark);
-  }
-
-  .highlight-strip p,
-  .highlight-strip strong {
-    display: block;
-    margin: 0;
-    font-weight: 700;
-  }
-
-  .highlight-strip p {
-    margin-bottom: 4px;
-    color: rgba(0, 0, 67, 0.55);
-    font-size: 0.82rem;
-  }
-
-  .content-section {
-    padding: 24px 0 28px;
-    border-bottom: 1px solid rgba(0, 0, 67, 0.14);
-  }
-
-  .content-section p {
-    max-width: 860px;
-    margin: 0 0 18px;
-    color: rgba(0, 0, 67, 0.7);
-    font-weight: 700;
-    line-height: 1.7;
-  }
-
-  .feature-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 22px 48px;
-  }
-
-  .feature-item,
-  .building-card article {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .feature-item p,
-  .building-card p {
-    margin: 0;
-    color: rgba(0, 0, 67, 0.76);
-    font-weight: 700;
-    line-height: 1.45;
-  }
-
-  .map-placeholder {
-    position: relative;
-    min-height: 250px;
-    margin: 20px 0;
-    overflow: hidden;
-    border-radius: 8px;
-    background:
-      linear-gradient(
-          28deg,
-          transparent 47%,
-          rgba(18, 70, 192, 0.12) 48%,
-          rgba(18, 70, 192, 0.12) 51%,
-          transparent 52%
-        )
-        0 0 / 180px 100px,
-      linear-gradient(
-          112deg,
-          transparent 47%,
-          rgba(0, 185, 143, 0.15) 48%,
-          rgba(0, 185, 143, 0.15) 51%,
-          transparent 52%
-        )
-        0 0 / 160px 120px,
-      linear-gradient(rgba(0, 185, 143, 0.08), rgba(0, 185, 143, 0.08)),
-      #edf8f5;
-  }
-
-  .map-pin {
-    position: absolute;
-    top: 45%;
-    left: 46%;
-    color: var(--color-green);
-    transform: translate(-50%, -50%);
-    filter: drop-shadow(0 12px 18px rgba(0, 185, 143, 0.28));
-  }
-
-  .map-label {
-    position: absolute;
-    color: rgba(0, 0, 67, 0.48);
-    font-size: 0.82rem;
-    font-weight: 700;
-  }
-
-  .map-label.one {
-    left: 10%;
-    top: 38%;
-  }
-
-  .map-label.two {
-    right: 18%;
-    top: 20%;
-  }
-
-  .map-label.three {
-    right: 14%;
-    bottom: 22%;
-  }
-
-  .side-column {
-    position: sticky;
-    top: 118px;
-  }
-
-  .price-card,
-  .contact-card,
-  .advisor-card {
-    padding: 32px;
-  }
-
-  .price-card > strong {
-    display: block;
-    color: var(--color-green);
-    font-size: 2.65rem;
-    line-height: 1;
-  }
-
-  .price-card > p {
-    margin: 10px 0 28px;
-    color: rgba(0, 0, 67, 0.58);
-    font-weight: 700;
-  }
-
-  .price-card ul {
-    display: grid;
-    gap: 18px;
-    margin: 0 0 28px;
-    padding: 0;
-    list-style: none;
-  }
-
-  .price-card li {
-    display: grid;
-    grid-template-columns: 30px 72px 1fr;
-    align-items: center;
-    gap: 12px;
-    color: var(--color-green-dark);
-    font-weight: 700;
-  }
-
-  .price-card li span {
-    color: var(--color-navy);
-  }
-
-  .price-card li small {
-    color: rgba(0, 0, 67, 0.52);
-    font-weight: 700;
-  }
-
-  .primary-action,
-  .whatsapp-action,
-  .contact-card button {
-    display: inline-flex;
-    width: 100%;
-    min-height: 56px;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border-radius: 8px;
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .primary-action,
-  .contact-card button {
-    border: 0;
-    background: var(--color-green);
-    color: #ffffff;
-    box-shadow: 0 18px 36px rgba(0, 185, 143, 0.2);
-  }
-
-  .whatsapp-action {
-    margin-top: 14px;
-    border: 1.5px solid var(--color-green);
-    color: var(--color-green-dark);
-  }
-
-  .contact-card h2 {
-    margin-bottom: 12px;
-    font-size: 1.35rem;
-  }
-
-  .contact-card p {
-    margin: 0 0 24px;
-    color: rgba(0, 0, 67, 0.62);
-    font-weight: 700;
-    line-height: 1.55;
-  }
-
-  .contact-card form {
-    display: grid;
-    gap: 14px;
-  }
-
-  .contact-card input {
-    width: 100%;
-    min-height: 54px;
-    padding: 0 18px;
-    border: 1px solid rgba(0, 0, 67, 0.16);
-    border-radius: 8px;
-    color: var(--color-navy);
-    font-weight: 700;
-  }
-
-  .contact-card input::placeholder {
-    color: rgba(0, 0, 67, 0.38);
-  }
-
-  .contact-card button {
-    margin-top: 8px;
-    background: var(--color-blue);
-    cursor: pointer;
-    box-shadow: var(--shadow-button);
-  }
-
-  .contact-card small {
-    display: block;
-    margin-top: 22px;
-    color: rgba(0, 0, 67, 0.48);
-    font-weight: 700;
-    text-align: center;
-  }
-
-  .advisor-card {
-    overflow: hidden;
-    padding-top: 0;
-  }
-
-  .advisor-cover {
-    display: grid;
-    min-height: 150px;
-    margin: 0 -32px;
-    place-items: center;
-    background: var(--color-navy);
-    color: rgba(0, 225, 173, 0.38);
-  }
-
-  .advisor-avatar {
-    display: grid;
-    width: 108px;
-    height: 108px;
-    margin: -54px 0 22px 18px;
-    place-items: center;
-    border: 8px solid #ffffff;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--color-green), var(--color-blue));
-    color: #ffffff;
-    font-size: 2rem;
-    font-weight: 700;
-  }
-
-  .advisor-card h2 {
-    margin-bottom: 6px;
-    font-size: 1.45rem;
-  }
-
-  .advisor-card p {
-    margin: 0 0 24px;
-    color: rgba(0, 0, 67, 0.58);
-    font-weight: 700;
-  }
-
-  .advisor-card > a:not(.outline-link) {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    color: rgba(0, 0, 67, 0.76);
-    font-weight: 700;
-    text-decoration: none;
-  }
-
-  .advisor-card .advisor-whatsapp {
-    color: var(--color-green-dark) !important;
-  }
-
-  .advisor-card .outline-link {
-    width: 100%;
-    margin-top: 18px;
-  }
-
-  .building-card {
-    margin-top: 32px;
-    padding: 28px 34px;
-  }
-
-  .building-card > div {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 24px;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
   }
 
   @media (max-width: 1180px) {
     .title-row,
     .detail-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .title-row {
       display: grid;
+      grid-template-columns: 1fr;
     }
 
     .title-actions {
       justify-content: start;
-    }
-
-    .side-column {
-      position: static;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .advisor-card {
-      grid-column: 1 / -1;
-    }
-
-    .building-card > div,
-    .highlight-strip {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .highlight-strip article:nth-child(3) {
-      border-left: 0;
-    }
-
-    .highlight-strip article {
-      padding: 18px;
     }
   }
 
@@ -876,10 +216,7 @@ export function getStaticPaths() {
     }
 
     .detail-shell {
-      width: min(
-        calc(100% - var(--site-padding-x-mobile)),
-        var(--site-max-width)
-      );
+      width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
     }
 
     .breadcrumbs {
@@ -891,57 +228,9 @@ export function getStaticPaths() {
       font-size: 2rem;
     }
 
-    .title-actions,
-    .side-column,
-    .highlight-strip,
-    .feature-grid,
-    .building-card > div {
-      grid-template-columns: 1fr;
-    }
-
     .title-actions {
       display: grid;
-    }
-
-    .main-photo {
-      aspect-ratio: 1 / 0.78;
-    }
-
-    .thumb-row {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .thumb-row button {
-      min-height: 88px;
-    }
-
-    .highlight-strip {
-      padding: 12px;
-    }
-
-    .highlight-strip article,
-    .highlight-strip article + article,
-    .highlight-strip article:nth-child(3) {
-      border-left: 0;
-    }
-
-    .price-card,
-    .contact-card,
-    .advisor-card,
-    .building-card {
-      padding: 24px;
-    }
-
-    .price-card > strong {
-      font-size: 2.2rem;
-    }
-
-    .price-card li {
-      grid-template-columns: 28px 68px 1fr;
-    }
-
-    .advisor-cover {
-      margin: 0 -24px;
+      grid-template-columns: 1fr;
     }
   }
 </style>

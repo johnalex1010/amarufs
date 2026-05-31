@@ -3,66 +3,10 @@ import { Icon } from 'astro-icon/components';
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
 import BaseLayout from '@/layouts/BaseLayout.astro';
-
-const properties = [
-  {
-    status: 'En venta',
-    title: 'Departamento Moderno',
-    location: 'Surco, Lima',
-    price: 'S/ 520,000',
-    meta: ['2', '2', '85 m²'],
-    tone: 'green',
-    image: 'Imagen propiedad 420 x 260',
-    imageSrc: '/images/properties/propiedad.jpg',
-    imageAlt: 'Departamento moderno en Surco, Lima',
-  },
-  {
-    status: 'En alquiler',
-    title: 'Casa Familiar',
-    location: 'La Molina, Lima',
-    price: 'S/ 4,500',
-    suffix: '/mes',
-    meta: ['4', '3', '160 m²'],
-    tone: 'blue',
-    image: 'Imagen propiedad 420 x 260',
-  },
-  {
-    status: 'En venta',
-    title: 'Casa Minimalista',
-    location: 'Cieneguilla, Lima',
-    price: 'S/ 750,000',
-    meta: ['3', '3', '120 m²'],
-    tone: 'green',
-    image: 'Imagen propiedad 420 x 260',
-  },
-];
-
-const benefits = [
-  {
-    icon: 'solar:users-group-rounded-linear',
-    title: 'Asesoría personalizada',
-    copy: 'Te guiamos según tus necesidades para que tomes la mejor decisión.',
-    tone: 'green',
-  },
-  {
-    icon: 'solar:shield-check-linear',
-    title: 'Confianza y transparencia',
-    copy: 'Información clara, veraz y sin letras pequeñas.',
-    tone: 'blue',
-  },
-  {
-    icon: 'solar:document-linear',
-    title: 'Acompañamiento integral',
-    copy: 'Desde la búsqueda hasta la firma, estamos contigo.',
-    tone: 'purple',
-  },
-  {
-    icon: 'solar:chart-linear',
-    title: 'Conocimiento del mercado',
-    copy: 'Te ayudamos a invertir mejor con análisis actualizados.',
-    tone: 'orange',
-  },
-];
+import IconCardGrid from '@/components/sections/IconCardGrid.astro';
+import SectionHeading from '@/components/sections/SectionHeading.astro';
+import PropertyFeatureCard from '@/components/properties/PropertyFeatureCard.astro';
+import { featuredProperties, homeBenefits } from '@/data/siteContent';
 ---
 
 <BaseLayout
@@ -72,7 +16,7 @@ const benefits = [
   <main>
     <SiteHeader />
 
-    <section class="hero-shell" aria-labelledby="home-title">
+    <section class="home-hero" aria-labelledby="home-title">
       <div class="hero-inner">
         <div class="hero-copy">
           <h1 id="home-title">
@@ -108,15 +52,13 @@ const benefits = [
           </div>
         </div>
 
-        <div class="hero-media" aria-label="Espacio para imagen principal">
-          <div class="image-slot hero-image-slot">
-            <img
-              src="/images/home/hero.png"
-              alt="Casa moderna representativa de Amaru FS Inmobiliaria"
-              width="880"
-              height="760"
-            />
-          </div>
+        <div class="hero-media">
+          <img
+            src="/images/home/hero.png"
+            alt="Casa moderna representativa de Amaru FS Inmobiliaria"
+            width="880"
+            height="760"
+          />
         </div>
       </div>
     </section>
@@ -124,26 +66,17 @@ const benefits = [
     <section class="search-panel container" aria-label="Buscar propiedades">
       <div class="search-field">
         <Icon name="solar:map-point-linear" size={24} />
-        <span>
-          <small>Ubicación</small>
-          <strong>Todas las ubicaciones</strong>
-        </span>
+        <span><small>Ubicación</small><strong>Todas las ubicaciones</strong></span>
         <Icon name="solar:alt-arrow-down-linear" size={18} />
       </div>
       <div class="search-field">
         <Icon name="solar:home-2-linear" size={24} />
-        <span>
-          <small>Tipo de propiedad</small>
-          <strong>Todos los tipos</strong>
-        </span>
+        <span><small>Tipo de propiedad</small><strong>Todos los tipos</strong></span>
         <Icon name="solar:alt-arrow-down-linear" size={18} />
       </div>
       <div class="search-field">
         <Icon name="solar:dollar-linear" size={24} />
-        <span>
-          <small>Rango de precio</small>
-          <strong>Cualquier rango</strong>
-        </span>
+        <span><small>Rango de precio</small><strong>Cualquier rango</strong></span>
         <Icon name="solar:alt-arrow-down-linear" size={18} />
       </div>
       <button class="search-button" type="button">
@@ -153,88 +86,27 @@ const benefits = [
     </section>
 
     <section class="featured container" aria-labelledby="featured-title">
-      <div class="section-heading split">
-        <div>
-          <p class="kicker">Propiedades destacadas</p>
-          <h2 id="featured-title">Propiedades seleccionadas para ti</h2>
-        </div>
+      <div class="split-heading">
+        <SectionHeading
+          align="left"
+          eyebrow="Propiedades destacadas"
+          title="Propiedades seleccionadas para ti"
+        />
         <a href="/propiedades/">Ver todas las propiedades <Icon name="solar:arrow-right-linear" size={18} /></a>
       </div>
 
       <div class="property-grid">
-        {
-          properties.map((property) => (
-            <article class="property-card">
-              <div class="property-media">
-                <span class={`status ${property.tone}`}>{property.status}</span>
-                <div class="image-slot property-image-slot">
-                  {
-                    property.imageSrc ? (
-                      <img
-                        src={property.imageSrc}
-                        alt={property.imageAlt}
-                        width="420"
-                        height="260"
-                        loading="lazy"
-                      />
-                    ) : (
-                      <span>{property.image}</span>
-                    )
-                  }
-                </div>
-              </div>
-              <div class="property-body">
-                <div class="property-title-row">
-                  <h3>{property.title}</h3>
-                  <button type="button" aria-label={`Guardar ${property.title}`}>
-                    <Icon name="solar:heart-linear" size={24} />
-                  </button>
-                </div>
-                <p>{property.location}</p>
-                <ul aria-label="Características de la propiedad">
-                  <li>
-                    <Icon name="solar:bed-linear" size={17} /> {property.meta[0]}
-                  </li>
-                  <li>
-                    <Icon name="solar:bath-linear" size={17} /> {property.meta[1]}
-                  </li>
-                  <li>
-                    <Icon name="solar:ruler-linear" size={17} /> {property.meta[2]}
-                  </li>
-                </ul>
-                <strong class={property.tone === 'blue' ? 'price blue-price' : 'price'}>
-                  {property.price}
-                  {property.suffix && <small>{property.suffix}</small>}
-                </strong>
-              </div>
-            </article>
-          ))
-        }
+        {featuredProperties.map((property) => <PropertyFeatureCard property={property} />)}
       </div>
     </section>
 
     <section class="why-section" id="porque-elegirnos" aria-labelledby="why-title">
       <div class="container">
-        <div class="section-heading centered">
-          <p class="kicker">¿Por qué elegirnos?</p>
-          <h2 id="why-title">Hacemos que todo el proceso sea más simple</h2>
-        </div>
-
-        <div class="benefit-grid">
-          {
-            benefits.map((benefit) => {
-              return (
-                <article class="benefit-card">
-                  <span class={`benefit-icon ${benefit.tone}`}>
-                    <Icon name={benefit.icon} size={30} />
-                  </span>
-                  <h3>{benefit.title}</h3>
-                  <p>{benefit.copy}</p>
-                </article>
-              );
-            })
-          }
-        </div>
+        <SectionHeading
+          eyebrow="¿Por qué elegirnos?"
+          title="Hacemos que todo el proceso sea más simple"
+        />
+        <IconCardGrid items={homeBenefits} columns={4} variant="stacked" />
 
         <aside class="newsletter" aria-labelledby="newsletter-title">
           <div class="newsletter-copy">
@@ -265,20 +137,12 @@ const benefits = [
     margin-inline: auto;
   }
 
-  h2 {
-    font-family: var(--font-display);
-    color: var(--color-navy);
-    font-weight: 500;
-    letter-spacing: 0;
-  }
-
-  .hero-shell {
-    position: relative;
+  .home-hero {
     min-height: 930px;
     padding-top: 108px;
     overflow: hidden;
     background:
-      radial-gradient(circle at 85% 40%, rgba(0, 123, 255, 0.16), transparent 28%),
+      radial-gradient(circle at 85% 40%, rgba(18, 70, 192, 0.16), transparent 28%),
       linear-gradient(180deg, #ffffff 0%, #ffffff 78%, #f6fbff 100%);
   }
 
@@ -300,8 +164,8 @@ const benefits = [
   h1 {
     max-width: 760px;
     margin: 0;
-    font-family: var(--font-display);
     color: var(--color-navy);
+    font-family: var(--font-display);
     font-size: clamp(3.8rem, 5.45vw, 5.35rem);
     font-weight: 500;
     line-height: 0.98;
@@ -313,7 +177,7 @@ const benefits = [
     color: var(--color-green);
   }
 
-  h1 .mobile-break {
+  .mobile-break {
     display: inline;
   }
 
@@ -332,19 +196,23 @@ const benefits = [
     margin-top: 54px;
   }
 
-  .primary-button {
+  .primary-button,
+  .search-button {
     display: inline-flex;
-    min-width: 188px;
-    min-height: 58px;
     align-items: center;
     justify-content: center;
-    padding: 0 26px;
     border: 0;
     border-radius: 8px;
     background: var(--color-blue);
     color: #ffffff;
     font-weight: 700;
     box-shadow: var(--shadow-button);
+  }
+
+  .primary-button {
+    min-width: 188px;
+    min-height: 58px;
+    padding: 0 26px;
   }
 
   .play-link {
@@ -355,11 +223,15 @@ const benefits = [
     font-weight: 700;
   }
 
-  .play-link span {
+  .play-link span,
+  .trust-icon {
     display: grid;
+    place-items: center;
+  }
+
+  .play-link span {
     width: 42px;
     height: 42px;
-    place-items: center;
     border: 1.5px solid var(--color-teal);
     border-radius: 50%;
   }
@@ -387,28 +259,36 @@ const benefits = [
   }
 
   .trust-icon {
-    display: grid;
-    flex: 0 0 auto;
     width: 48px;
     height: 48px;
-    place-items: center;
     border-radius: 8px;
   }
 
+  .green {
+    background: rgba(0, 225, 173, 0.18);
+    color: var(--color-green);
+  }
+
+  .blue {
+    background: rgba(18, 70, 192, 0.13);
+    color: var(--color-blue);
+  }
+
+  .purple {
+    background: rgba(89, 91, 255, 0.14);
+    color: var(--color-purple);
+  }
+
   .hero-media {
-    position: relative;
     min-height: 690px;
   }
 
-  .hero-image-slot {
-    position: absolute;
-    right: -30px;
-    bottom: 17px;
-    z-index: 1;
+  .hero-media img {
+    display: block;
     width: min(100%, 820px);
-    aspect-ratio: 880 / 760;
-    align-content: center;
     min-height: 720px;
+    margin-left: auto;
+    object-fit: cover;
     border-radius: 30px;
   }
 
@@ -439,9 +319,9 @@ const benefits = [
 
   .search-field small {
     display: block;
+    margin-bottom: 4px;
     color: rgba(0, 0, 67, 0.52);
     font-weight: 700;
-    margin-bottom: 4px;
   }
 
   .search-field strong {
@@ -449,82 +329,28 @@ const benefits = [
   }
 
   .search-button {
-    display: inline-flex;
     gap: 12px;
     min-height: 70px;
-    align-items: center;
-    justify-content: center;
-    border: 0;
-    border-radius: 8px;
-    background: var(--color-blue);
-    color: #ffffff;
-    font-weight: 700;
     cursor: pointer;
-    box-shadow: var(--shadow-button);
   }
 
   .featured {
     padding: 108px 0 96px;
   }
 
-  .section-heading {
-    margin-bottom: 48px;
-  }
-
-  .section-heading.split {
+  .split-heading {
     display: flex;
     align-items: end;
     justify-content: space-between;
     gap: 24px;
   }
 
-  .section-heading.centered {
-    max-width: 650px;
-    margin-inline: auto;
-    text-align: center;
-  }
-
-  .kicker {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    margin: 0 0 22px;
-    color: var(--color-green-dark);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .kicker::before {
-    content: "";
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--color-teal);
-  }
-
-  .section-heading h2 {
-    max-width: 540px;
-    margin: 0;
-    font-size: clamp(2.45rem, 4vw, 3.4rem);
-    line-height: 1.08;
-  }
-
-  .section-heading.split > a {
+  .split-heading > a {
     display: inline-flex;
     align-items: center;
     gap: 12px;
     color: var(--color-blue);
     font-weight: 700;
-  }
-
-  .section-heading.split > a svg {
-    width: 28px;
-    height: 28px;
-    padding: 5px;
-    border: 1px solid currentColor;
-    border-radius: 50%;
   }
 
   .property-grid {
@@ -533,200 +359,11 @@ const benefits = [
     gap: 32px;
   }
 
-  .property-card {
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 67, 0.08);
-    border-radius: 8px;
-    background: #ffffff;
-    box-shadow: var(--shadow-card);
-  }
-
-  .property-media {
-    position: relative;
-  }
-
-  .image-slot {
-    display: grid;
-    place-items: center;
-    width: 100%;
-    overflow: hidden;
-    color: rgba(0, 0, 67, 0.48);
-    text-align: center;
-  }
-
-  .image-slot img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .image-slot span {
-    font-weight: 700;
-  }
-
-  .property-image-slot {
-    aspect-ratio: 420 / 260;
-    border-radius: 0;
-    background:
-      linear-gradient(135deg, rgba(0, 123, 255, 0.09), rgba(0, 225, 173, 0.08)),
-      #f8fbff;
-  }
-
-  .status {
-    position: absolute;
-    top: 26px;
-    left: 22px;
-    z-index: 2;
-    display: inline-flex;
-    min-height: 34px;
-    align-items: center;
-    padding: 0 18px;
-    border-radius: 999px;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 0.86rem;
-  }
-
-  .status.green {
-    background: var(--color-mint);
-    color: #ffffff;
-  }
-
-  .status.blue {
-    background: var(--color-blue);
-    color: #ffffff;
-  }
-
-  .property-body {
-    padding: 27px 25px 30px;
-  }
-
-  .property-title-row {
-    display: flex;
-    align-items: start;
-    justify-content: space-between;
-    gap: 18px;
-  }
-
-  .property-title-row h3 {
-    margin: 0;
-    font-size: 1.18rem;
-    line-height: 1.25;
-  }
-
-  .property-title-row button {
-    display: grid;
-    flex: 0 0 auto;
-    place-items: center;
-    width: 36px;
-    height: 36px;
-    border: 0;
-    background: transparent;
-    color: rgba(0, 0, 67, 0.45);
-    cursor: pointer;
-  }
-
-  .property-body p {
-    margin: 10px 0 22px;
-    color: rgba(0, 0, 67, 0.58);
-    font-weight: 700;
-  }
-
-  .property-body ul {
-    display: flex;
-    gap: 22px;
-    margin: 0 0 30px;
-    padding: 0;
-    color: rgba(0, 0, 67, 0.55);
-    list-style: none;
-    font-weight: 700;
-  }
-
-  .property-body li {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .price {
-    display: block;
-    color: var(--color-green);
-    font-size: 1.42rem;
-  }
-
-  .price.blue-price {
-    color: var(--color-blue);
-  }
-
-  .price small {
-    margin-left: 3px;
-    color: rgba(0, 0, 67, 0.6);
-    font-size: 0.78rem;
-  }
-
   .why-section {
     padding: 72px 0 0;
     background:
       linear-gradient(180deg, rgba(0, 225, 173, 0.09), rgba(255, 255, 255, 0.95) 72%),
       #f4fffc;
-  }
-
-  .benefit-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0;
-    margin-top: 66px;
-  }
-
-  .benefit-card {
-    padding: 0 42px;
-    text-align: center;
-  }
-
-  .benefit-card + .benefit-card {
-    border-left: 1px solid rgba(0, 0, 67, 0.14);
-  }
-
-  .benefit-icon {
-    display: grid;
-    width: 66px;
-    height: 66px;
-    margin: 0 auto 28px;
-    place-items: center;
-    border-radius: 8px;
-  }
-
-  .green {
-    background: rgba(0, 225, 173, 0.18);
-    color: var(--color-green);
-  }
-
-  .blue {
-    background: rgba(0, 123, 255, 0.13);
-    color: var(--color-blue);
-  }
-
-  .purple {
-    background: rgba(89, 91, 255, 0.14);
-    color: var(--color-purple);
-  }
-
-  .orange {
-    background: rgba(255, 171, 0, 0.18);
-    color: var(--color-orange);
-  }
-
-  .benefit-card h3 {
-    margin: 0 0 16px;
-    font-size: 1.05rem;
-  }
-
-  .benefit-card p {
-    margin: 0;
-    color: rgba(0, 0, 67, 0.65);
-    line-height: 1.55;
-    font-weight: 700;
   }
 
   .newsletter {
@@ -742,7 +379,7 @@ const benefits = [
     border-radius: 8px;
     background: var(--color-blue);
     color: #ffffff;
-    box-shadow: 0 22px 45px rgba(0, 123, 255, 0.24);
+    box-shadow: 0 22px 45px rgba(18, 70, 192, 0.24);
   }
 
   .newsletter-copy {
@@ -756,9 +393,9 @@ const benefits = [
   .newsletter-copy > span {
     display: grid;
     flex: 0 0 auto;
-    place-items: center;
     width: 70px;
     height: 70px;
+    place-items: center;
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.22);
   }
@@ -767,7 +404,9 @@ const benefits = [
     max-width: 390px;
     margin: 0 0 16px;
     color: #ffffff;
+    font-family: var(--font-display);
     font-size: 2.25rem;
+    font-weight: 500;
     line-height: 1.05;
   }
 
@@ -831,22 +470,17 @@ const benefits = [
   }
 
   @media (max-width: 1180px) {
-    .hero-inner {
+    .hero-inner,
+    .newsletter {
       grid-template-columns: 1fr;
-      margin-top: 36px;
     }
 
     .hero-copy {
       padding-bottom: 0;
     }
 
-    .hero-media {
-      min-height: auto;
-    }
-
-    .hero-image-slot {
-      position: relative;
-      right: auto;
+    .hero-media,
+    .hero-media img {
       min-height: 360px;
     }
 
@@ -859,33 +493,18 @@ const benefits = [
       grid-column: span 2;
     }
 
-    .benefit-grid {
+    .property-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .benefit-card:nth-child(3) {
-      border-left: 0;
-    }
-
-    .benefit-card {
-      padding: 34px;
-    }
-
-    .newsletter {
-      grid-template-columns: 1fr;
     }
   }
 
   @media (max-width: 760px) {
-    .container {
-      width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
-    }
-
+    .container,
     .hero-inner {
       width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
     }
 
-    .hero-shell {
+    .home-hero {
       min-height: auto;
       padding-top: 86px;
       padding-bottom: 24px;
@@ -894,10 +513,9 @@ const benefits = [
     h1 {
       max-width: 100%;
       font-size: clamp(2.35rem, 10vw, 3rem);
-      overflow-wrap: normal;
     }
 
-    h1 .mobile-break {
+    .mobile-break {
       display: block;
     }
 
@@ -911,24 +529,34 @@ const benefits = [
       flex-direction: column;
       align-items: stretch;
       gap: 18px;
+      width: 100%;
+      max-width: 360px;
       margin-top: 34px;
+    }
+
+    .primary-button {
+      align-self: flex-start;
+      width: min(100%, 320px);
+      min-width: 0;
     }
 
     .play-link {
       justify-content: center;
     }
 
-    .trust-list {
+    .trust-list,
+    .search-panel,
+    .property-grid,
+    .newsletter,
+    .newsletter-form {
       grid-template-columns: 1fr;
+    }
+
+    .trust-list {
       margin-top: 38px;
     }
 
-    .hero-image-slot {
-      min-height: 280px;
-    }
-
     .search-panel {
-      grid-template-columns: 1fr;
       gap: 14px;
       padding: 16px;
     }
@@ -941,32 +569,12 @@ const benefits = [
       padding: 62px 0;
     }
 
-    .section-heading.split {
+    .split-heading {
       display: block;
     }
 
-    .section-heading.split > a {
-      margin-top: 24px;
-    }
-
-    .property-grid,
-    .benefit-grid {
-      grid-template-columns: 1fr;
-    }
-
-    .benefit-grid {
-      margin-top: 20px;
-    }
-
-    .benefit-card,
-    .benefit-card + .benefit-card,
-    .benefit-card:nth-child(3) {
-      border-left: 0;
-      border-top: 1px solid rgba(0, 0, 67, 0.12);
-    }
-
-    .benefit-card:first-child {
-      border-top: 0;
+    .split-heading > a {
+      margin: 0 0 32px;
     }
 
     .newsletter {
@@ -987,7 +595,6 @@ const benefits = [
     }
 
     .newsletter-form {
-      grid-template-columns: 1fr;
       gap: 12px;
     }
 
