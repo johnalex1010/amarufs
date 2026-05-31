@@ -5,6 +5,7 @@ const currentPath = Astro.url.pathname;
 const isHome = currentPath === '/';
 const isProperties = currentPath.startsWith('/propiedades');
 const isAbout = currentPath.startsWith('/nosotros');
+const isContact = currentPath.startsWith('/contacto');
 ---
 
 <header class="site-header">
@@ -22,7 +23,7 @@ const isAbout = currentPath.startsWith('/nosotros');
     <a class:list={{ active: isProperties }} href="/propiedades/">Propiedades</a>
     <a class:list={{ active: isAbout }} href="/nosotros/">Nosotros</a>
     <a class="muted-link" href="#" aria-hidden="true">Blog</a>
-    <a href="#contacto">Contacto</a>
+    <a class:list={{ active: isContact }} href="/contacto/">Contacto</a>
   </nav>
 
   <a class="header-cta" href="/propiedades/">Publica tu propiedad</a>
@@ -44,7 +45,7 @@ const isAbout = currentPath.startsWith('/nosotros');
     <a class:list={{ active: isProperties }} href="/propiedades/">Propiedades</a>
     <a class:list={{ active: isAbout }} href="/nosotros/">Nosotros</a>
     <a class="muted-link" href="#" aria-hidden="true">Blog</a>
-    <a href="#contacto">Contacto</a>
+    <a class:list={{ active: isContact }} href="/contacto/">Contacto</a>
     <a class="mobile-nav-cta" href="/propiedades/">Publica tu propiedad</a>
   </nav>
 </header>
