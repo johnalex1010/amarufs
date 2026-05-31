@@ -15,6 +15,13 @@ const galleryImages = gallerySources.map((src, index) => ({
   position: index + 1,
 }))
 const totalImages = galleryImages.length
+const thumbnailSlots = 5
+const visibleThumbnailCount =
+  totalImages > thumbnailSlots ? thumbnailSlots - 1 : totalImages
+const visibleGalleryImages = galleryImages.slice(0, visibleThumbnailCount)
+const hiddenImagesCount = totalImages - visibleThumbnailCount
+const morePhotosPreview =
+  galleryImages[visibleThumbnailCount] ?? galleryImages[totalImages - 1]
 ---
 
 <section
@@ -39,10 +46,10 @@ const totalImages = galleryImages.length
   <div
     class="thumb-row"
     aria-label="Miniaturas de la propiedad"
-    style={`--gallery-columns: ${Math.min(totalImages, 5)}`}
+    style={`--gallery-columns: ${Math.min(totalImages, thumbnailSlots)}`}
   >
     {
-      galleryImages.map((item) => (
+      visibleGalleryImages.map((item) => (
         <button
           class:list={{ active: item.position === 1 }}
           type="button"
@@ -57,7 +64,67 @@ const totalImages = galleryImages.length
         </button>
       ))
     }
+    {
+      hiddenImagesCount > 0 && (
+        <button
+          class="more-photos"
+          type="button"
+          aria-label={`Ver ${hiddenImagesCount} fotos adicionales`}
+          data-gallery-modal-open
+          data-position={morePhotosPreview.position}
+        >
+          <img src={morePhotosPreview.src} alt="" width="150" height="94" loading="lazy" />
+          <span>+{hiddenImagesCount} fotos</span>
+        </button>
+      )
+    }
   </div>
+
+  <dialog class="gallery-modal" aria-label={`Galería completa de ${title}`} data-gallery-modal>
+    <div class="modal-shell">
+      <div class="modal-toolbar">
+        <p data-gallery-modal-counter>1 / {totalImages}</p>
+        <button type="button" aria-label="Cerrar galería" data-gallery-modal-close>
+          <Icon name="solar:close-circle-linear" size={28} />
+        </button>
+      </div>
+
+      <div class="modal-slider">
+        <button class="modal-nav previous" type="button" aria-label="Ver imagen anterior" data-gallery-previous>
+          <Icon name="solar:alt-arrow-left-linear" size={30} />
+        </button>
+        <img
+          src={galleryImages[0].src}
+          alt={galleryImages[0].alt}
+          width="1180"
+          height="760"
+          data-gallery-modal-image
+        />
+        <button class="modal-nav next" type="button" aria-label="Ver imagen siguiente" data-gallery-next>
+          <Icon name="solar:alt-arrow-right-linear" size={30} />
+        </button>
+      </div>
+
+      <div class="modal-thumbs" aria-label="Todas las imágenes de la propiedad">
+        {
+          galleryImages.map((item) => (
+            <button
+              class:list={{ active: item.position === 1 }}
+              type="button"
+              aria-label={`Ver imagen ${item.position} en galería ampliada`}
+              aria-pressed={item.position === 1 ? 'true' : 'false'}
+              data-gallery-modal-thumbnail
+              data-full-src={item.src}
+              data-full-alt={item.alt}
+              data-position={item.position}
+            >
+              <img src={item.src} alt="" width="118" height="76" loading="lazy" />
+            </button>
+          ))
+        }
+      </div>
+    </div>
+  </dialog>
 </section>
 
 <script>
@@ -70,32 +137,136 @@ const totalImages = galleryImages.length
       '[data-gallery-main]'
     )
     const counter = gallery.querySelector<HTMLElement>('[data-gallery-counter]')
+    const modal = gallery.querySelector<HTMLDialogElement>('[data-gallery-modal]')
+    const modalImage = gallery.querySelector<HTMLImageElement>(
+      '[data-gallery-modal-image]'
+    )
+    const modalCounter = gallery.querySelector<HTMLElement>(
+      '[data-gallery-modal-counter]'
+    )
+    const modalOpen = gallery.querySelector<HTMLButtonElement>(
+      '[data-gallery-modal-open]'
+    )
+    const modalClose = gallery.querySelector<HTMLButtonElement>(
+      '[data-gallery-modal-close]'
+    )
+    const previousButton = gallery.querySelector<HTMLButtonElement>(
+      '[data-gallery-previous]'
+    )
+    const nextButton = gallery.querySelector<HTMLButtonElement>(
+      '[data-gallery-next]'
+    )
     const thumbnails = [
       ...gallery.querySelectorAll<HTMLButtonElement>(
         '[data-gallery-thumbnail]'
       ),
     ]
+    const modalThumbnails = [
+      ...gallery.querySelectorAll<HTMLButtonElement>(
+        '[data-gallery-modal-thumbnail]'
+      ),
+    ]
 
-    if (!mainImage || !counter || thumbnails.length === 0) return
+    if (
+      !mainImage ||
+      !counter ||
+      !modal ||
+      !modalImage ||
+      !modalCounter ||
+      modalThumbnails.length === 0
+    )
+      return
+
+    const totalImages = Number(gallery.dataset.galleryTotal || modalThumbnails.length)
+    let activePosition = 1
+
+    const setActiveThumbnail = (
+      items: HTMLButtonElement[],
+      nextPosition: number
+    ) => {
+      items.forEach((item) => {
+        const isActive = Number(item.dataset.position) === nextPosition
+        item.classList.toggle('active', isActive)
+        item.setAttribute('aria-pressed', String(isActive))
+      })
+    }
+
+    const getModalThumbnail = (position: number) =>
+      modalThumbnails.find((item) => Number(item.dataset.position) === position)
+
+    const updateGallery = (position: number) => {
+      const nextThumbnail = getModalThumbnail(position)
+      const nextSrc = nextThumbnail?.dataset.fullSrc
+      const nextAlt = nextThumbnail?.dataset.fullAlt
+
+      if (!nextSrc || !nextAlt) return
+
+      activePosition = position
+      mainImage.src = nextSrc
+      mainImage.alt = nextAlt
+      modalImage.src = nextSrc
+      modalImage.alt = nextAlt
+      counter.textContent = `${position} / ${totalImages}`
+      modalCounter.textContent = `${position} / ${totalImages}`
+      setActiveThumbnail(thumbnails, position)
+      setActiveThumbnail(modalThumbnails, position)
+    }
+
+    const openModal = (position: number) => {
+      updateGallery(position)
+      modal.showModal()
+    }
+
+    const showAdjacentImage = (direction: 1 | -1) => {
+      const nextPosition =
+        ((activePosition - 1 + direction + totalImages) % totalImages) + 1
+
+      updateGallery(nextPosition)
+    }
 
     thumbnails.forEach((thumbnail) => {
       thumbnail.addEventListener('click', () => {
-        const nextSrc = thumbnail.dataset.fullSrc
-        const nextAlt = thumbnail.dataset.fullAlt
         const nextPosition = thumbnail.dataset.position
 
-        if (!nextSrc || !nextAlt || !nextPosition) return
+        if (!nextPosition) return
 
-        mainImage.src = nextSrc
-        mainImage.alt = nextAlt
-        counter.textContent = `${nextPosition} / ${gallery.dataset.galleryTotal}`
-
-        thumbnails.forEach((item) => {
-          const isActive = item === thumbnail
-          item.classList.toggle('active', isActive)
-          item.setAttribute('aria-pressed', String(isActive))
-        })
+        updateGallery(Number(nextPosition))
       })
+    })
+
+    modalThumbnails.forEach((thumbnail) => {
+      thumbnail.addEventListener('click', () => {
+        const nextPosition = thumbnail.dataset.position
+
+        if (!nextPosition) return
+
+        updateGallery(Number(nextPosition))
+      })
+    })
+
+    modalOpen?.addEventListener('click', () => {
+      openModal(Number(modalOpen.dataset.position || activePosition))
+    })
+
+    modalClose?.addEventListener('click', () => {
+      modal.close()
+    })
+
+    previousButton?.addEventListener('click', () => {
+      showAdjacentImage(-1)
+    })
+
+    nextButton?.addEventListener('click', () => {
+      showAdjacentImage(1)
+    })
+
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) modal.close()
+    })
+
+    modal.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') showAdjacentImage(-1)
+      if (event.key === 'ArrowRight') showAdjacentImage(1)
     })
   })
 </script>
@@ -140,6 +311,7 @@ const totalImages = galleryImages.length
   }
 
   .thumb-row button {
+    position: relative;
     min-width: 0;
     min-height: 98px;
     overflow: hidden;
@@ -150,6 +322,140 @@ const totalImages = galleryImages.length
   }
 
   .thumb-row button.active {
+    border: 3px solid var(--color-teal);
+    padding: 0;
+  }
+
+  .more-photos {
+    color: #ffffff;
+    font-size: 1.08rem;
+    font-weight: 700;
+  }
+
+  .more-photos::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .more-photos img {
+    filter: blur(2px);
+    transform: scale(1.04);
+  }
+
+  .more-photos span {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: grid;
+    place-items: center;
+    padding: 10px;
+  }
+
+  .gallery-modal {
+    width: min(calc(100% - 40px), 1180px);
+    max-height: calc(100dvh - 40px);
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: #ffffff;
+    color: var(--color-navy);
+    overflow: hidden;
+  }
+
+  .gallery-modal::backdrop {
+    background: rgba(0, 0, 0, 0.72);
+  }
+
+  .modal-shell {
+    display: grid;
+    gap: 18px;
+    padding: 18px;
+  }
+
+  .modal-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .modal-toolbar p {
+    margin: 0;
+    color: rgba(0, 0, 67, 0.7);
+    font-weight: 700;
+  }
+
+  .modal-toolbar button,
+  .modal-nav {
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .modal-toolbar button {
+    width: 44px;
+    height: 44px;
+    color: var(--color-navy);
+  }
+
+  .modal-slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    background: #f6fbff;
+    aspect-ratio: 1180 / 680;
+  }
+
+  .modal-slider > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .modal-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    color: var(--color-blue);
+    transform: translateY(-50%);
+    box-shadow: var(--shadow-card);
+  }
+
+  .modal-nav.previous {
+    left: 16px;
+  }
+
+  .modal-nav.next {
+    right: 16px;
+  }
+
+  .modal-thumbs {
+    display: grid;
+    grid-auto-columns: minmax(96px, 118px);
+    grid-auto-flow: column;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+
+  .modal-thumbs button {
+    min-height: 76px;
+    overflow: hidden;
+    border: 0;
+    border-radius: 8px;
+    background: #f6fbff;
+    cursor: pointer;
+  }
+
+  .modal-thumbs button.active {
     border: 3px solid var(--color-teal);
     padding: 0;
   }
@@ -165,6 +471,32 @@ const totalImages = galleryImages.length
 
     .thumb-row button {
       min-height: 88px;
+    }
+
+    .gallery-modal {
+      width: min(calc(100% - var(--site-padding-x-mobile)), var(--site-max-width));
+      max-height: calc(100dvh - var(--site-padding-x-mobile));
+    }
+
+    .modal-shell {
+      padding: 12px;
+    }
+
+    .modal-slider {
+      aspect-ratio: 1 / 0.78;
+    }
+
+    .modal-nav {
+      width: 42px;
+      height: 42px;
+    }
+
+    .modal-nav.previous {
+      left: 10px;
+    }
+
+    .modal-nav.next {
+      right: 10px;
     }
   }
 </style>
