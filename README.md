@@ -59,6 +59,9 @@ src/
     layout.tsx
     page.tsx
     globals.css
+  components/
+    layout/
+    ui/
   features/
     landing/
       components/
@@ -76,6 +79,8 @@ docs/
 - Los espacios de imagen quedan como placeholders hasta recibir assets finales.
 - Las fuentes se importan desde `@fontsource/bebas-neue` y `@fontsource/outfit`.
 - La iconografía debe mantenerse en Font Awesome Free.
+- Los componentes reutilizables para futuras páginas viven en `src/components`.
+- Las secciones específicas de la home viven en `src/features/landing/components`.
 - No modificar manualmente archivos generados como `.next/` o `node_modules/`.
 
 ## Ejecución de pruebas

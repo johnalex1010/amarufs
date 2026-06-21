@@ -21,6 +21,10 @@ export type ProcessStep = {
   description: string;
 };
 
+export const navItems = ["Inicio", "Propiedades", "Servicios", "Capta tu inmueble", "Referidos", "Blog", "Nosotros", "Contacto"];
+
+export const heroChecks = ["Asesoría personalizada", "Acompañamiento legal", "Publicación en múltiples portales", "Atención rápida"];
+
 export const trustStats = [
   { icon: "fa-building", value: "1.250+", label: "Propiedades administradas" },
   { icon: "fa-city", value: "680+", label: "Inmuebles vendidos" },
@@ -123,6 +127,24 @@ export const processSteps: ProcessStep[] = [
   { icon: "fa-handshake", label: "Negociación", description: "Te acompañamos en las negociaciones para lograr el mejor acuerdo." },
   { icon: "fa-circle-check", label: "Cierre exitoso", description: "Gestionamos todo el proceso hasta la firma final." }
 ];
+
+export const publishBenefits = [
+  "Fotografía profesional",
+  "Difusión en múltiples portales",
+  "Gestión de visitas",
+  "Estudio de clientes",
+  "Acompañamiento legal"
+];
+
+export const resultStats = [
+  { eyebrow: "Resultados que generan confianza", value: "3.500+", label: "Propiedades gestionadas" },
+  { eyebrow: "Clientes satisfechos", value: "2.300+", label: "Historias acompañadas" },
+  { eyebrow: "Tasa de ocupación", value: "97%", label: "Gestión comercial efectiva" }
+];
+
+export const testimonials = ["María Fernanda G.", "Carlos A. Rojas", "Juliana Patiño"];
+
+export const referralSteps = ["Recomiendas", "Validamos", "Cerramos negocio", "Recibes beneficio"];
 
 export const articles = [
   {

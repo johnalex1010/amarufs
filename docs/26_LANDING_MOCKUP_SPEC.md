@@ -15,7 +15,8 @@ Debe mantenerse como mockup: no consume APIs, no guarda datos, no inventa imáge
 Incluye:
 
 - Scaffold mínimo de Next.js con App Router.
-- Componentes de landing en `src/features/landing`.
+- Componentes transversales en `src/components`.
+- Secciones específicas de la landing en `src/features/landing/components`.
 - Datos estáticos tipados en un archivo separado.
 - Estilos responsivos con tokens globales.
 - Font Awesome Free como librería de iconografía.
@@ -54,6 +55,7 @@ No incluye:
 - Sí/No: los espacios de imagen están claramente reservados.
 - Sí/No: los iconos provienen de Font Awesome Free.
 - Sí/No: la estructura separa app, feature, datos y estilos.
+- Sí/No: header, footer, marca, iconos y placeholders quedan reutilizables para futuras páginas.
 - Sí/No: la página responde en mobile, tablet y desktop.
 - Sí/No: la documentación indica cómo instalar, ejecutar, validar y revertir.
 
