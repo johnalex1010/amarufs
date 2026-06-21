@@ -2,6 +2,8 @@
 
 Esta carpeta define una guía general, pero suficientemente específica, para construir proyectos Next.js mantenibles, seguros, rápidos y listos para crecer. Debe adaptarse a cada producto real antes de implementar funcionalidad.
 
+> Estado actual: el proyecto ya cuenta con un mockup inicial de landing inmobiliaria documentado en `26_LANDING_MOCKUP_SPEC.md` y con README operativo en la raíz del repositorio.
+
 ## Objetivo
 
 Establecer criterios comunes para:
@@ -41,6 +43,7 @@ Establecer criterios comunes para:
 6. `05_FEATURE_BASED_STRUCTURE.md`
 7. `06_CODING_STANDARDS.md`
 8. Guías específicas según el área a implementar.
+9. `26_LANDING_MOCKUP_SPEC.md`
 
 ## Regla de adaptación
 

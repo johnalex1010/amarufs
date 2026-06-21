@@ -1,0 +1,6 @@
+node_modules/
+.next/
+.chrome-profile*/
+qa-*.png
+dev-server*.log
+*.tsbuildinfo
